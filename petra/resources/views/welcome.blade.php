@@ -85,7 +85,7 @@
                 <p>Prueba rama</p>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">The best web ever</a>
+                    <a href="http://www.tamagachi.cat">The best web ever</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
