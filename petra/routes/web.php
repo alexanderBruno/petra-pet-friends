@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/users', 'usersbbdd@select');
 
+Route::get('/mapa', 'Mapa@mostra');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
