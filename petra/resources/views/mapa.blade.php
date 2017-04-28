@@ -27,11 +27,25 @@
       <div id="map"></div>
       <script>
         var map;
-        function initMap() {
+
+        //codigo de geolocalización
+        function getLocalization () {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(initMap);
+          } else { 
+              x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+
+        function initMap(position) {
+          //variables donde se guardan la latitud y la longitud
+          var lat = position.coords.latitude;
+          var lon = position.coords.longitude;
+          //reproduccion del mapa
           map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 2,
-            center: new google.maps.LatLng(2.8,-187.3),
-            mapTypeId: 'terrain'
+            zoom: 15,
+            center: new google.maps.LatLng(lat,lon),
+            
           });
 
           // Create a <script> tag and set the USGS URL as the source.
@@ -56,7 +70,7 @@
         }
       </script>
       <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDlGndNUTLX0ZKoCcBq-YyvrhS7YQjyX8&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDlGndNUTLX0ZKoCcBq-YyvrhS7YQjyX8&callback=getLocalization">
       </script>
 
     </body>
