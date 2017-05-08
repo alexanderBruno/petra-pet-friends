@@ -14,6 +14,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/editprofile_view.css') }}" rel="stylesheet">
+
 
     <!-- Scripts -->
     <script>
@@ -62,6 +64,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                  <li><a href="{{ url('/editprofile') }}">Editar perfil</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

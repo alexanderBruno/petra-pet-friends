@@ -26,3 +26,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/profile', 'ProfileController@index');
+
+Route::get('/editprofile', 'EditprofileController@index');
