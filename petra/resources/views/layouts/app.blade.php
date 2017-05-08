@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/profile_view.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -61,7 +62,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                  <li><a href="{{ url('/profile') }}">Perfil</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
