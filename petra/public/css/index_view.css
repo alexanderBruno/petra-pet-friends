@@ -4,12 +4,20 @@ body {
 
 .logo {
   text-align: center;
-  margin-top: 10%;
+  margin-top: 5%;
+  line-height: 20px;
 }
 
-i.fa-paw {
+.fa-paw {
   color: black;
   font-size: 1000%;
+}
+
+.title {
+  /*font-family: 'Bree Serif', serif;*/
+  font-family: 'Baloo';
+  font-size: 500%;
+  color: black;
 }
 
 .links {
@@ -33,7 +41,7 @@ i.fa-paw {
   min-height: 22px;
   border-radius: 0;
   height: 22px;
-  width: 50%;
+  width: 54%;
   margin: auto;
 }
 .navbar-xs .navbar-brand {

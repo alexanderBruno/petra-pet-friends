@@ -41,13 +41,19 @@
           <li><a href="#"><i class="glyphicon glyphicon-adjust"></i></a></li>
           <li><a href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
           <li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-cd"></i></a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-flag"></i></a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-picture"></i></a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-leaf"></i></a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
       </nav>
     </div>
 
     <div class="logo">
-      <i class="fa fa-paw" aria-hidden="true"></i>
+      <p class="fa fa-paw" aria-hidden="true"></p>
+      <p class="title">Petra</p>
     </div>
 
     <div class="links">
