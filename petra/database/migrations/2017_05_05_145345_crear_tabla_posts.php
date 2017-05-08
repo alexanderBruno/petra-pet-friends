@@ -18,7 +18,7 @@ class CrearTablaPosts extends Migration
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade');
             $table->string('content');
-            $table->integer('likes');
+            $table->integer('likes')->default(0);
             $table->string('photo');
             $table->timestamps();
         });

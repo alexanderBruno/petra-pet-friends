@@ -20,7 +20,7 @@ class CrearTablaComments extends Migration
             $table->integer('id_point')->unsigned();
             $table->foreign('id_point')->references('id')->on('points')->onUpdate('cascade');
             $table->string('content');
-            $table->float('score', 5, 1);
+            $table->float('score', 5, 1)->default(0);;
             $table->timestamps();
         });
     }

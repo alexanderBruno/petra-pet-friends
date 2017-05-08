@@ -17,10 +17,11 @@ class CrearTablaPuntsInteres extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('description');
-            $table->string('services');
-            $table->float('score', 5, 1);
-            $table->string('location');
-            $table->string('avatar');
+            $table->string('services_list');
+            $table->float('score', 5, 1)->default(0);
+            $table->float('latitude');
+            $table->float('longitude');
+            $table->string('avatar')->default("defecte_pi.png");;
             $table->timestamps();
         });
     }
