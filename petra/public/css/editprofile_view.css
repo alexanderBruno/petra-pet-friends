@@ -1,25 +1,21 @@
 body {
   background-color:#ffe0e0;
 }
-.profile_name_description {
+
+.editprofile.panel-body {
   font-family: 'Bree Serif', serif;
-  margin-left: 50px;
-}
-.profile_name {
-  color: black;
-  margin-bottom: 5%;
 }
 
 .editprofile_avatarimg {
-  width: 150px;
-  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
-.profile_avatarimg_post {
-  width: 50px;
-  height: 50px;
+.editprofile_submit {
+  margin-top: 5%;
 }
 
-.profile_post {
-  padding: 1%;
+.editprofile_confirmation {
+  color: green;
+  font-weight: bold;
 }

@@ -28,3 +28,5 @@ Route::get('/home', 'HomeController@index');
 Route::get('/profile', 'ProfileController@index');
 
 Route::get('/editprofile', 'EditprofileController@index');
+
+Route::post('/editprofile', 'EditprofileController@save');
