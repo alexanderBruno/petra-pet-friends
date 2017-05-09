@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth, DB, Image, Input;
+use Auth, DB, Image, Input, Carbon\Carbon;
 
 class EditprofileController extends Controller
 {
@@ -43,7 +43,6 @@ class EditprofileController extends Controller
           }
           return $randomString;
       }
-      $aaa = $request->all();
       $email = Auth::user()->email;
       $user = DB::table('users')->where('email', $email)->first();
       if ($request->input('editprofile_name')) {
@@ -62,7 +61,13 @@ class EditprofileController extends Controller
         Image::make(Input::file('editprofile_avatar'))->widen(150)->save('images/avatars/'.$avatar);
         DB::table('users')->where('email', $email)->update(['avatar' => $avatar]);
       }
+      if ($request->input('editprofile_type_pet')) {
+        DB::table('users')->where('email', $email)->update(['type_pet' => $request->input('editprofile_type_pet')]);
+      }
+
+      DB::table('users')->where('email', $email)->update(['updated_at' => Carbon::now()]);
+
       $user = DB::table('users')->where('email', $email)->first();
-      return view('editprofile', ['aaa' => $aaa, 'user' => $user]);
+      return view('editprofile', ['user' => $user]);
     }
 }
