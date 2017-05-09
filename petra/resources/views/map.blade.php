@@ -1,41 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Mapa Petra</title>
-        <style>
-          /* Always set the map height explicitly to define the size of the div
-           * element that contains the map. */
-          #map {
-            height: 70%;
-            width: 70%;
-          }
-          /* Optional: Makes the sample page fill the window. */
-          html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-          }
-        </style>
-    </head>
-    <body>
-      <h1>Provant el mapa</h1>
+@extends('layouts.mapapp')
 
-      <!--Mapa  Google-->
-    <div id="map"></div>
+@section('content')
+
+    <div id="map_map"></div>
+
     <script>
         var map;
         //https://developers.google.com/maps/documentation/javascript/examples/map-geolocation?hl=es-419
         function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
+            map = new google.maps.Map(document.getElementById('map_map'), {
                 zoom: 15,
                 center: new google.maps.LatLng(41.394,2.167),
-                
+
             });
 
-            
+
 
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
@@ -47,7 +26,7 @@
                 map.setCenter(pos);
             });
             }
-        
+
 
           // Create a <script> tag and set the USGS URL as the source.
         var script = document.createElement('script');
@@ -84,17 +63,17 @@
             });
 
             marker.addListener('click', function() {
-              infowindow.open(marker.get('map'), marker);
+              infowindow.open(marker.get('map_map'), marker);
             });
           }
         }
 
-       
+
 
       </script>
+
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDlGndNUTLX0ZKoCcBq-YyvrhS7YQjyX8&callback=initMap">
       </script>
 
-    </body>
-</html>
+@endsection

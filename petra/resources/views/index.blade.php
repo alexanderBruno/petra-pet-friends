@@ -57,7 +57,7 @@
     </div>
 
     <div class="links">
-      <a class="btn btn-default" href="{{ url('/mapa') }}">Mapa</a>
+      <a class="btn btn-default" href="{{ url('/map') }}">Mapa</a>
         @if (Auth::check())
             <a class="btn btn-default" href="{{ url('/home') }}">Home</a>
         @else

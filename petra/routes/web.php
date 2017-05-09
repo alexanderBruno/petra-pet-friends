@@ -19,7 +19,7 @@ Route::get('/', 'IndexController@index');
 
 Route::get('/users', 'usersbbdd@select');
 
-Route::get('/mapa', 'Mapa@mostra');
+Route::get('/map', 'MapController@mostra');
 
 Auth::routes();
 

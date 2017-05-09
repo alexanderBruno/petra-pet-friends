@@ -13,8 +13,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/profile_view.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/editprofile_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/map_view.css') }}" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -85,35 +84,10 @@
                 </div>
             </div>
         </nav>
+      </div>
 
-        @yield('content')
-
-    </div>
-
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-    <script>
-      $('body').on('mouseover', '[editprofile-data-editable]', function(){
-        var $el = $(this);
-        if ($el.hasClass('editprofile_description')) {
-          var $input = $('<textarea class="form-control"/>').val( $el.text() );
-        } else {
-          var $input = $('<input class="form-control"/>').val( $el.text() );
-        }
-        $el.replaceWith( $input );
-        var save = function(){
-          if ($el.hasClass('editprofile_description')) {
-            var $p = $('<p editprofile-data-editable class="editprofile_description"/>').text( $input.val() );
-          } else {
-            var $p = $('<p editprofile-data-editable />').text( $input.val() );
-          }
-          $input.replaceWith( $p );
-        };
-        $input.one('blur', save).focus();
-      });
-    </script>
+      @yield('content')
+  <script src="{{ asset('js/app.js') }}"></script>
+  
 </body>
 </html>

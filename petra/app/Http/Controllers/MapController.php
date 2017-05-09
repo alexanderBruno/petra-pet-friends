@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Mapa extends Controller
+class MapController extends Controller
 {
   public function mostra(){
-    return view('mapa');
+    return view('map');
   }
 }
