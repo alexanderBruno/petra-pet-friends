@@ -14,7 +14,7 @@ class AddTypepetToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('type_pet');
+            $table->string('type_pet')->nullable();
             $table->text('description')->change();
         });
     }
