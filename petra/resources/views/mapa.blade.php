@@ -24,23 +24,42 @@
       <h1>Provant el mapa</h1>
 
       <!--Mapa  Google-->
-      <div id="map"></div>
-      <script>
+    <div id="map"></div>
+    <script>
         var map;
         //https://developers.google.com/maps/documentation/javascript/examples/map-geolocation?hl=es-419
         function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 2,
-            center: new google.maps.LatLng(2.8,-187.3),
-            mapTypeId: 'terrain'
-          });
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: new google.maps.LatLng(41.394,2.167),
+                
+            });
+
+            var infoWindow = new google.maps.InfoWindow({map: map});
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                map.setCenter(pos);
+            },function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+            }else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        
 
           // Create a <script> tag and set the USGS URL as the source.
-          var script = document.createElement('script');
+        var script = document.createElement('script');
           // This example uses a local copy of the GeoJSON stored at
           // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-          script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-          document.getElementsByTagName('head')[0].appendChild(script);
+        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
         }
 
         // Loop through the results array and place a marker for each
@@ -74,6 +93,10 @@
             });
           }
         }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    
+}
 
       </script>
       <script async defer
