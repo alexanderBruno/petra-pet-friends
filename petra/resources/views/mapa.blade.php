@@ -27,25 +27,12 @@
       <div id="map"></div>
       <script>
         var map;
-
-        //codigo de geolocalización
-        function getLocalization () {
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(initMap);
-          } else { 
-              x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-        }
-
-        function initMap(position) {
-          //variables donde se guardan la latitud y la longitud
-          var lat = position.coords.latitude;
-          var lon = position.coords.longitude;
-          //reproduccion del mapa
+        //https://developers.google.com/maps/documentation/javascript/examples/map-geolocation?hl=es-419
+        function initMap() {
           map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-            center: new google.maps.LatLng(lat,lon),
-            
+            zoom: 2,
+            center: new google.maps.LatLng(2.8,-187.3),
+            mapTypeId: 'terrain'
           });
 
           // Create a <script> tag and set the USGS URL as the source.
@@ -66,11 +53,31 @@
               position: latLng,
               map: map
             });
+
+            var contentString = '<div id="content">'+'<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+            '<div id="bodyContent">'+
+            'Contingut de prova = '+String(i)
+            '</div>'+
+            '</div>';
+
+            afegirFinestra(marker, contentString);
+          }
+          function afegirFinestra(marker, contingutFinestra) {
+            var infowindow = new google.maps.InfoWindow({
+              content: contingutFinestra
+            });
+
+            marker.addListener('click', function() {
+              infowindow.open(marker.get('map'), marker);
+            });
           }
         }
+
       </script>
       <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDlGndNUTLX0ZKoCcBq-YyvrhS7YQjyX8&callback=getLocalization">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDlGndNUTLX0ZKoCcBq-YyvrhS7YQjyX8&callback=initMap">
       </script>
 
     </body>
