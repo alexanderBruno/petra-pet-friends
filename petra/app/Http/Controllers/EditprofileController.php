@@ -59,7 +59,7 @@ class EditprofileController extends Controller
         } else {
           $avatar = $user->avatar;
         }
-        Image::make(Input::file('editprofile_avatar'))->heighten(150)->resizeCanvas(150, 150)->save('images/avatars/'.$avatar);
+        Image::make(Input::file('editprofile_avatar'))->widen(150)->save('images/avatars/'.$avatar);
         DB::table('users')->where('email', $email)->update(['avatar' => $avatar]);
       }
       $user = DB::table('users')->where('email', $email)->first();
