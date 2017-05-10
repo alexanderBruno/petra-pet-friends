@@ -66,6 +66,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                  <li><a href="{{ url('/profile') }}">Veure perfil</a></li>
                                   <li><a href="{{ url('/editprofile') }}">Editar perfil</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
