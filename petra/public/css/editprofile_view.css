@@ -12,10 +12,25 @@ body {
 }
 
 .editprofile_submit {
-  margin-top: 5%;
+  margin-top: 2%;
+  float: right;
 }
 
 .editprofile_confirmation {
   color: green;
   font-weight: bold;
+}
+
+.editprofile_description {
+  resize: none;
+}
+
+input.editprofile_avatar[type="file"] {
+    display: none;
+}
+.editprofile_custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 6px;
+    cursor: pointer;
 }

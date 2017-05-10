@@ -12,8 +12,16 @@
                   @if(isset($_POST['submit']))
                     <p class="editprofile_confirmation">Canvis realitzats correctament.</p>
                   @endif
-                  <form action="" method="POST" class="editprofile_form" enctype="multipart/form-data">
+                  <form action="#" method="POST" class="editprofile_form" enctype="multipart/form-data">
                     {!! csrf_field() !!}
+                    <div class="form-group">
+                      <label>Avatar:</label><br/>
+                      <img src="images/avatars/{{$user->avatar}}" class="editprofile_avatarimg" alt="avatarimg"/><br/><br/>
+                      <label for="editprofile_file-upload" class="editprofile_custom-file-upload">
+                          <i class="glyphicon glyphicon-refresh"></i> Canviar avatar...
+                      </label>
+                      <input id="editprofile_file-upload" name="editprofile_avatar" type="file" class="file editprofile_avatar">
+                    </div>
                     <div class="form-group">
                       <label>Nom:</label>
                       <input type="text" name="editprofile_name" class="form-control" value="{{$user->name}}">
@@ -22,9 +30,9 @@
                     <div class="form-group">
                      <label>Descripció:</label>
                      @if ($user->description=="")
-                        <textarea name="editprofile_description" class="form-control" placeholder="Encara sense descripció"></textarea>
+                        <textarea name="editprofile_description" class="form-control editprofile_description" placeholder="Encara sense descripció"></textarea>
                      @else
-                        <textarea name="editprofile_description" class="form-control">{{$user->description}}</textarea>
+                        <textarea name="editprofile_description" class="form-control editprofile_description">{{$user->description}}</textarea>
                      @endif
                        <!-- <p name="editprofile_description" editprofile-data-editable class="editprofile_description">Encara sense descripció</p> -->
 
@@ -40,12 +48,6 @@
                         <option value="fura" <?php if ($user->type_pet=="fura") echo "selected"; ?>>Fura</option>
                       </select>
                     </div>
-                    <div class="form-group">
-                      <label>Avatar:</label><br/>
-                      <img src="images/avatars/{{$user->avatar}}" class="editprofile_avatarimg" alt="avatarimg"/>
-                      <br/><br/><input name="editprofile_avatar" type="file" class="file">
-                    </div>
-
 
                     <button type="submit" name="submit" class="btn btn-primary editprofile_submit">Guardar canvis</button>
                   </form>
