@@ -33,3 +33,7 @@ Route::get('/profile', 'ProfileController@index');
 Route::get('/editprofile', 'EditprofileController@index');
 
 Route::post('/editprofile', 'EditprofileController@save');
+
+Route::get('/points','PointController@getList');//provisional 
+ 
+Route::get('/points/{id}','PointController@profile'); 

@@ -16,6 +16,7 @@
     <link href="{{ asset('css/profile_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/editprofile_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/point_view.css') }}" rel="stylesheet"> 
 
 
     <!-- Scripts -->
