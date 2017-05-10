@@ -25,10 +25,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-      $email = Auth::user()->email;
-      $user = DB::table('users')->where('email', $email)->first();
+      $id = Auth::id();
+      $user = DB::table('users')->where('id', $id)->first();
 
-      $id = Auth::user()->id;
       $posts = DB::table('posts')
             ->leftJoin('users', 'posts.id_user', '=', 'users.id')
             ->select('posts.*', 'users.name', 'users.avatar')

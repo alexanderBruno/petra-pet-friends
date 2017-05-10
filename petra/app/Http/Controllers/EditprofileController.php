@@ -24,8 +24,8 @@ class EditprofileController extends Controller
      */
     public function index()
     {
-      $email = Auth::user()->email;
-      $user = DB::table('users')->where('email', $email)->first();
+      $id = Auth::id();
+      $user = DB::table('users')->where('id', $id)->first();
       return view('editprofile', ['user' => $user]);
     }
 
@@ -43,13 +43,13 @@ class EditprofileController extends Controller
           }
           return $randomString;
       }
-      $email = Auth::user()->email;
-      $user = DB::table('users')->where('email', $email)->first();
+      $id = Auth::id();
+      $user = DB::table('users')->where('id', $id)->first();
       if ($request->input('editprofile_name')) {
-        DB::table('users')->where('email', $email)->update(['name' => $request->input('editprofile_name')]);
+        DB::table('users')->where('id', $id)->update(['name' => $request->input('editprofile_name')]);
       }
       if ($request->input('editprofile_description')) {
-        DB::table('users')->where('email', $email)->update(['description' => $request->input('editprofile_description')]);
+        DB::table('users')->where('id', $id)->update(['description' => $request->input('editprofile_description')]);
       }
       if (Input::hasFile('editprofile_avatar'))
       {
@@ -59,15 +59,15 @@ class EditprofileController extends Controller
           $avatar = $user->avatar;
         }
         Image::make(Input::file('editprofile_avatar'))->widen(150)->save('images/avatars/'.$avatar);
-        DB::table('users')->where('email', $email)->update(['avatar' => $avatar]);
+        DB::table('users')->where('id', $id)->update(['avatar' => $avatar]);
       }
       if ($request->input('editprofile_type_pet')) {
-        DB::table('users')->where('email', $email)->update(['type_pet' => $request->input('editprofile_type_pet')]);
+        DB::table('users')->where('id', $id)->update(['type_pet' => $request->input('editprofile_type_pet')]);
       }
 
-      DB::table('users')->where('email', $email)->update(['updated_at' => Carbon::now()]);
+      DB::table('users')->where('id', $id)->update(['updated_at' => Carbon::now()]);
 
-      $user = DB::table('users')->where('email', $email)->first();
+      $user = DB::table('users')->where('id', $id)->first();
       return view('editprofile', ['user' => $user]);
     }
 }
