@@ -1,0 +1,31 @@
+body {
+  background-color:#ffe0e0;
+}
+
+.home.panel-body {
+  font-family: 'Bree Serif', serif;
+}
+
+.home_submit {
+  float: right;
+}
+
+.home_confirmation {
+  color: green;
+  font-weight: bold;
+}
+
+.home_post {
+  margin-top: 1%;
+  resize: none;
+}
+
+input.home_post_photo[type="file"] {
+    display: none;
+}
+.home_custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 6px;
+    cursor: pointer;
+}
