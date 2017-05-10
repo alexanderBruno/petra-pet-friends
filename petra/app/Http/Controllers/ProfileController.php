@@ -32,6 +32,7 @@ class ProfileController extends Controller
             ->leftJoin('users', 'posts.id_user', '=', 'users.id')
             ->select('posts.*', 'users.name', 'users.avatar')
             ->where('posts.id_user', $id)
+            ->orderBy('posts.id', 'desc')
             ->get();
 
       return view('profile', ['user' => $user, 'posts' => $posts]);
