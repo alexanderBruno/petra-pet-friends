@@ -117,5 +117,20 @@
         $input.one('blur', save).focus();
       });
     </script>
+    <script>
+      for (i = 0; i < document.getElementsByClassName('profile_post_photo').length; i++) {
+        var modal = document.getElementsByClassName('profile_modal')[i];
+        var img = document.getElementsByClassName('profile_post_photo')[i];
+        var modalImg = document.getElementsByClassName("profile_modal-content")[i];
+        img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+        var span = document.getElementsByClassName("profile_close")[i];
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+      }
+    </script>
 </body>
 </html>

@@ -30,14 +30,21 @@
                       <img src="images/avatars/{{$post->avatar}}" class="profile_avatarimg_post" alt="avatarimg_post"/>
                     </div>
                     <div class="profile_name_content_post media-body">
-                      <h3 class="profile_name_post media-heading">{{$post->name}}</h3>
+                      <h4 class="profile_name_post media-heading">{{$post->name}}</h4>
                       {{ $post->content }}
+                      @if ($post->photo!=NULL)
+                        <img src="images/posts/{{$post->photo}}" class="profile_post_photo" alt="post_photo"/>
+                        <div class="profile_modal">
+                          <span class="profile_close">&times;</span>
+                          <img class="profile_modal-content">
+                        </div>
+                      @endif
                     </div>
                   </div>
                   @endforeach
 
 
-
+                  </div>
             </div>
         </div>
     </div>
