@@ -5,6 +5,26 @@
 @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);
 @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css);
 
+.logo {
+  text-align: center;
+  line-height: 15px;
+  margin-top: -10%;
+}
+
+.fa-paw {
+  color: black;
+}
+
+.title {
+  font-family: 'Baloo';
+  color: black;
+  font-size: 70%;
+}
+
+.navbar_avatarimg {
+  max-width: 22px;
+  max-height: 22px;
+}
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

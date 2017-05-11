@@ -40,7 +40,10 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                      <div class="logo">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                        <p class="title">{{ config('app.name', 'Laravel') }}</p>
+                      </div>
                     </a>
                 </div>
 
@@ -48,16 +51,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{ url('/map') }}">Map</a></li>
-                        <li><a href="{{ url('/home') }}">Home</a></li>
+                        <li><a href="{{ url('/map') }}"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i> Map</a></li>
+                        <li><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                            <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -65,7 +68,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                  <li><a href="{{ url('/profile') }}">Veure perfil</a></li>
+                                  <li><a href="{{ url('/profile/'.Auth::user()->id) }}">El meu perfil</a></li>
                                   <li><a href="{{ url('/editprofile') }}">Editar perfil</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -89,6 +92,6 @@
 
       @yield('content')
   <script src="{{ asset('js/app.js') }}"></script>
-  
+
 </body>
 </html>
