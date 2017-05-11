@@ -8,12 +8,12 @@ use App\Points;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use DB, Auth, Carbon\Carbon;
 
 
 class PointController extends Controller
 {
-    
+
 	/**
 	 * Provisional
 	 * el objetivo es poder acceder a los perfiles de los puntos de interes.
@@ -33,14 +33,33 @@ class PointController extends Controller
 
     	$point = Points::find($id);
 
-    	$comments = DB::table('comments')
-            ->leftJoin('users', 'comments.id_user', '=', 'users.id')
-            ->select('comments.*', 'users.name', 'users.avatar')
-            ->where('comments.id_user', $id)
+    	$reviews = DB::table('reviews')
+            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+            ->select('reviews.*', 'users.name', 'users.avatar')
+            ->where('reviews.id_point', $id)
             ->get();
 
 
-    	return view('point', ['point' => $point, 'comments'=>$comments]);
-    	
+    	return view('point', ['point' => $point, 'reviews' => $reviews]);
+
+    }
+
+    public function review($id, Request $request)
+    {
+      $confirmation = False;
+      if ($request->input('point_review')) {
+          DB::table('reviews')->insert(['id_user' => Auth::id(), 'id_point' => $request->input('point_review_id'), 'content' => $request->input('point_review'), 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+          $confirmation = True;
+      }
+
+      $point = Points::find($id);
+
+    	$reviews = DB::table('reviews')
+            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+            ->select('reviews.*', 'users.name', 'users.avatar')
+            ->where('reviews.id_point', $id)
+            ->get();
+
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation]);
     }
 }

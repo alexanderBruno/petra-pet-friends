@@ -3,7 +3,7 @@
     <ul>
         @foreach ($points as $point)
         <li>
-            <a href="{{ url('points/'.$point->id ) }}">{{ $point->name }}</a>{{ $point->id }}
+            <a href="{{ url('point/'.$point->id ) }}">{{ $point->name }}</a>{{ $point->id }}
         </li>
         @endforeach
     </ul>
