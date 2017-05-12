@@ -16,7 +16,8 @@
     <link href="{{ asset('css/profile_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/editprofile_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home_view.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/point_view.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/point_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/paw_style.css') }}" rel="stylesheet">  
 
 
     <!-- Scripts -->
@@ -25,6 +26,8 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('js/point_score_script.js') }}"></script>
 
 </head>
 <body>

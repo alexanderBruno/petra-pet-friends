@@ -25,7 +25,20 @@
 
                     <div>
                     	<p>Serveis: {{ $point->services_list }}</p>
-                    	<p>Puntuació: {{ $point->score }}</p>
+                      
+                    	<p>Puntuació:</p>
+                      
+
+                      <script type="text/javascript">
+                        var score = '{{ $score }}';
+                      </script>
+                      <div class="valoration">
+                        <label class = "full" id="p1"></label> 
+                        <label class = "full" id="p2"></label> 
+                        <label class = "full" id="p3"></label> 
+                        <label class = "full" id="p4"></label> 
+                        <label class = "full" id="p5"></label> 
+                      </div>
                     </div>
                   </div>
 
@@ -47,6 +60,15 @@
                     </label>
                     <input id="point_file-upload" name="point_review_photo" type="file" class="file point_review_photo">
                     <input type="hidden" name="point_review_id" value="{{$point->id}}">
+
+                    <fieldset class="rating">
+                      <input type="radio" id="paw5" name="rating" value="5" /><label for="paw5" title="Extelent!"></label>
+                      <input type="radio" id="paw4" name="rating" value="4" /><label for="paw4" title="Molt Bé!"></label>
+                      <input type="radio" id="paw3" name="rating" value="3" /><label for="paw3" title="Meh"></label>
+                      <input type="radio" id="paw2" name="rating" value="2" /><label for="paw2" title="Dolent"></label>
+                      <input type="radio" id="paw1" name="rating" value="1" /><label for="paw1" title="Molt dolent"></label> 
+                    </fieldset>
+
                     <button type="submit" name="submit" class="btn btn-primary point_submit">Publicar</button>
                   </form>
 
