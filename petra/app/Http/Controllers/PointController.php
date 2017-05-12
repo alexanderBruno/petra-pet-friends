@@ -48,6 +48,11 @@ class PointController extends Controller
 
       $score = $score_addition/sizeof($valoration);
 
+      DB::table('points')
+            ->where('id', $id)
+            ->update(['score' => $score]);
+
+
     	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score]);
 
     }
