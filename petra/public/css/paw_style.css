@@ -8,7 +8,10 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .rating { 
   border: none;
-  float: left;
+  width: 30%;
+  float:auto;
+  display: inline-block;
+  margin-right:10px;
 }
 
 .rating > input { display: none; } 
@@ -16,7 +19,7 @@ h1 { font-size: 1.5em; margin: 10px; }
   margin: 5px;
   font-size: 1.75em;
   font-family: FontAwesome;
-  display: inline-block;
+  display: inline;
   content: "\f1b0";
 }
 

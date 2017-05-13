@@ -30,7 +30,7 @@ class PointController extends Controller
      */
     public function profile($id)
     {
-
+      $reviewPermission = False;
     	$point = Points::find($id);
 
     	$reviews = DB::table('reviews')
@@ -39,38 +39,45 @@ class PointController extends Controller
             ->where('reviews.id_point', $id)
             ->get();
 
-      $valoration = DB::table('scores_list')->select('scores_list.score')->where('id_point', $id)->get();
-      $score_addition = 0;
-
-      for ($i=0; $i < sizeof($valoration); $i++) { 
-        $score_addition = $score_addition + $valoration[$i]->score;
+      for ($i=0; $i < sizeof($reviews); $i++) { 
+        if ($reviews[$i]->id_user == Auth::id()) {
+          $reviewPermission = True;
+        }
       }
 
-      $score = $score_addition/sizeof($valoration);
+      $score = $this -> getScore($id);
 
       DB::table('points')
             ->where('id', $id)
             ->update(['score' => $score]);
 
-
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score]);
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score,'reviewPermission'=> $reviewPermission, 'loged' => Auth::id()]);
 
     }
 
     public function review($id, Request $request)
     {
       $confirmation = False;
-      if ($request->input('point_review')) {
-          DB::table('reviews')->insert(['id_user' => Auth::id(), 'id_point' => $request->input('point_review_id'), 'content' => $request->input('point_review') ,'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+      //DD($request->input('rating'));
+      if ($request->input('point_review') || $request->input('rating')) {
+        $content = "";
+        
+        if ($request->input('point_review')) {
+          $content = $request->input('point_review');
+        }
 
+          DB::table('reviews')->insert(['id_user' => Auth::id(), 'id_point' => $request->input('point_review_id'), 'content' => $content ,'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
 
           $last_review = DB::table('reviews')->orderBy('id', 'desc')->first();
 
-          DB::table('scores_list')->insert(['id_user' => Auth::id(), 
+          if ($request->input('rating')) {
+            DB::table('scores_list')->insert(['id_user' => Auth::id(), 
             'id_point' => $request->input('point_review_id'),'id_review' =>
             $last_review->id, 'score'=>$request->input('rating'), 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
-
+          }
+          
           $confirmation = True;
+
       }
 
       $point = Points::find($id);
@@ -81,6 +88,21 @@ class PointController extends Controller
             ->where('reviews.id_point', $id)
             ->get();
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation]);
+      $score = $this -> getScore($id);
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id()]);
     }
+
+    public function getScore($id)
+    {
+      $valoration = DB::table('scores_list')->select('scores_list.score')->where('id_point', $id)->get();
+      $score_addition = 0;
+
+      for ($i=0; $i < sizeof($valoration); $i++) { 
+        $score_addition = $score_addition + $valoration[$i]->score;
+      }
+
+      $score = $score_addition/sizeof($valoration);
+      return $score;
+    }
+
 }
