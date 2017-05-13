@@ -25,7 +25,6 @@
                     <div class="form-group">
                       <label>Nom:</label>
                       <input type="text" name="editprofile_name" class="form-control" value="{{$user->name}}">
-                      <!-- <p name="editprofile_name" editprofile-data-editable>{{$user->name}}</p> -->
                     </div>
                     <div class="form-group">
                      <label>Descripció:</label>
@@ -34,9 +33,6 @@
                      @else
                         <textarea name="editprofile_description" class="form-control editprofile_description">{{$user->description}}</textarea>
                      @endif
-                       <!-- <p name="editprofile_description" editprofile-data-editable class="editprofile_description">Encara sense descripció</p> -->
-
-                       <!-- <p name="editprofile_description" editprofile-data-editable class="editprofile_description">{{$user->description}}</p> -->
                     </div>
                     <div class="form-group">
                       <label>Tipus de mascota:</label>
@@ -48,7 +44,7 @@
                         <option value="fura" <?php if ($user->type_pet=="fura") echo "selected"; ?>>Fura</option>
                       </select>
                     </div>
-
+                    <a href="{{url()->previous()}}"><button type="button" class="btn btn-primary editpost_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Tornar enrere</button></a>
                     <button type="submit" name="submit" class="btn btn-primary editprofile_submit">Guardar canvis</button>
                   </form>
 

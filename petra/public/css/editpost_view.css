@@ -2,38 +2,42 @@ body {
   background-color:#ffe0e0;
 }
 
-.editprofile.panel-body {
+.editpost.panel-body {
   font-family: 'Bree Serif', serif;
 }
 
-.editprofile_avatarimg {
+.editpost_photoimg {
   max-width: 150px;
   max-height: 150px;
 }
 
-.editprofile_submit {
+.editpost_submit {
   margin-top: 2%;
   float: right;
 }
 
-.editprofile_back {
+.editpost_back {
   margin-top: 2%;
   float: left;
 }
 
-.editprofile_confirmation {
+
+.editpost_options {
+  display: block;
+}
+.editpost_confirmation {
   color: green;
   font-weight: bold;
 }
 
-.editprofile_description {
+.editpost_content {
   resize: none;
 }
 
-input.editprofile_avatar[type="file"] {
+input.editpost_photo[type="file"] {
     display: none;
 }
-.editprofile_custom-file-upload {
+.editpost_custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
     padding: 6px 6px;

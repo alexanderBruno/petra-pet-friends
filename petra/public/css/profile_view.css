@@ -1,19 +1,37 @@
 body {
   background-color:#ffe0e0;
 }
-.profile_name_description {
+
+.profile.panel-body {
   font-family: 'Bree Serif', serif;
-  margin-left: 50px;
 }
+
 .profile_name {
   color: black;
   margin-bottom: 5%;
 }
 
+.profile_description {
+  margin-left: 1.8%;
+}
+
 .profile_avatarimg {
   max-width: 150px;
   max-height: 150px;
+  border: 1px solid black;
 }
+
+.profile_confirmation_true {
+  color: green;
+  font-weight: bold;
+}
+
+.profile_confirmation_false {
+  color: red;
+  font-weight: bold;
+}
+
+/* #################### POSTS #################### */
 
 .profile_avatarimg_post {
   max-width: 50px;
@@ -30,13 +48,75 @@ body {
   margin-bottom: 2%;
 }
 
-.profile_post_photo {
+.profile_lastpost_photo {
   max-width: 100px;
   max-height: 100px;
   display: block;
   margin-top: 3%;
 }
 
+.profile_iduser_post {
+  color: inherit;
+}
+
+.profile_iduser_post:hover, .profile_iduser_post:active  {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.profile_iduser_post:active  {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.profile_date_post {
+  float: right;
+}
+
+.profile_post_options {
+  float: right;
+  margin-right: 3%;
+  color: #3097d1;
+}
+
+.profile_post_options:hover {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.profile_message_edited {
+  color: #3097d1;
+  float: right;
+  margin-top: -3%;
+}
+
+.profile_post_likes {
+  color: #3097d1;
+  margin-left: 1.5%;
+  cursor: pointer;
+}
+
+.profile_post_likes:hover, .profile_post_likes_clicked:hover {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.profile_post_likes_clicked {
+  margin-left: 1.5%;
+  color: #ff6868;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile_post_likes_num {
+  cursor: pointer;
+}
+
+.btn-danger {
+  background-color: #cc0000;
+}
+
+/* #################### POSTS #################### */
 
 
 
@@ -96,7 +176,7 @@ body {
 /* The Close Button */
 .profile_close {
     position: absolute;
-    top: 15px;
+    top: 50px;
     right: 35px;
     color: #f1f1f1;
     font-size: 40px;

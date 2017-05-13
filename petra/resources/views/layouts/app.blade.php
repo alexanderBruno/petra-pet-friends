@@ -17,7 +17,8 @@
     <link href="{{ asset('css/editprofile_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/point_view.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/paw_style.css') }}" rel="stylesheet">  
+    <link href="{{ asset('css/paw_style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/editpost_view.css') }}" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -26,13 +27,15 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/point_score_script.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -57,16 +60,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{ url('/map') }}"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i> Map</a></li>
-                        <li><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                        <li><a href="{{ url('/map') }}"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i> Mapa</a></li>
+                        <li><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Inici</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                            <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                            <li><a href="{{ route('login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Accedir</a></li>
+                            <li><a href="{{ route('register') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Registrar-se</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -95,49 +98,11 @@
             </div>
         </nav>
 
-        @yield('content')
+
 
     </div>
 
+    @yield('content')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-    <script>
-      $('body').on('mouseover', '[editprofile-data-editable]', function(){
-        var $el = $(this);
-        if ($el.hasClass('editprofile_description')) {
-          var $input = $('<textarea class="form-control"/>').val( $el.text() );
-        } else {
-          var $input = $('<input class="form-control"/>').val( $el.text() );
-        }
-        $el.replaceWith( $input );
-        var save = function(){
-          if ($el.hasClass('editprofile_description')) {
-            var $p = $('<p editprofile-data-editable class="editprofile_description"/>').text( $input.val() );
-          } else {
-            var $p = $('<p editprofile-data-editable />').text( $input.val() );
-          }
-          $input.replaceWith( $p );
-        };
-        $input.one('blur', save).focus();
-      });
-    </script>
-    <script>
-      for (i = 0; i < document.getElementsByClassName('profile_post_photo').length; i++) {
-        var modal = document.getElementsByClassName('profile_modal')[i];
-        var img = document.getElementsByClassName('profile_post_photo')[i];
-        var modalImg = document.getElementsByClassName("profile_modal-content")[i];
-        img.onclick = function(){
-            modal.style.display = "block";
-            modalImg.src = this.src;
-        }
-        var span = document.getElementsByClassName("profile_close")[i];
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-      }
-    </script>
 </body>
 </html>
