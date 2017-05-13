@@ -16,6 +16,11 @@ body {
   float: right;
 }
 
+.editprofile_back {
+  margin-top: 2%;
+  float: left;
+}
+
 .editprofile_confirmation {
   color: green;
   font-weight: bold;
