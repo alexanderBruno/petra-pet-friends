@@ -42,3 +42,5 @@ Route::post('/point/{id}','PointController@review');
 Route::get('/editpost/{id}', 'EditpostController@index');
 
 Route::post('/editpost/saved', 'EditpostController@save');
+
+Route::get('/deletepost/{id}', 'DeletepostController@delete');
