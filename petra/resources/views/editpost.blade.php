@@ -31,7 +31,7 @@
                     </div>
                     <input type="hidden" name="editpost_id" value="{{$post->id}}">
                     <input type="hidden" name="editpost_previousurl" value="{{url()->previous()}}">
-                    <a href="/home"><button type="button" class="btn btn-primary editpost_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Cancel·lar</button></a>
+                    <a href="{{url()->previous()}}"><button type="button" class="btn btn-primary editpost_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Tornar enrere</button></a>
                     <button type="submit" name="submit" class="btn btn-primary editpost_submit">Guardar canvis</button>
                   </form>
                 </div>
