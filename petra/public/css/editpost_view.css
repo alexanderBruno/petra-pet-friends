@@ -1,0 +1,45 @@
+body {
+  background-color:#ffe0e0;
+}
+
+.editpost.panel-body {
+  font-family: 'Bree Serif', serif;
+}
+
+.editpost_photoimg {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.editpost_submit {
+  margin-top: 2%;
+  float: right;
+}
+
+.editpost_back {
+  margin-top: 2%;
+  float: left;
+}
+
+
+.editpost_options {
+  display: block;
+}
+.editpost_confirmation {
+  color: green;
+  font-weight: bold;
+}
+
+.editpost_content {
+  resize: none;
+}
+
+input.editpost_photo[type="file"] {
+    display: none;
+}
+.editpost_custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 6px;
+    cursor: pointer;
+}

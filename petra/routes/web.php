@@ -38,3 +38,7 @@ Route::get('/points','PointController@getList');//provisional
 Route::get('/point/{id}','PointController@profile');
 
 Route::post('/point/{id}','PointController@review');
+
+Route::get('/editpost/{id}', 'EditpostController@index');
+
+Route::post('/editpost/saved', 'EditpostController@save');

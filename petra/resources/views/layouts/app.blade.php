@@ -18,6 +18,7 @@
     <link href="{{ asset('css/home_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/point_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/paw_style.css') }}" rel="stylesheet">  
+    <link href="{{ asset('css/editpost_view.css') }}" rel="stylesheet">
 
 
     <!-- Scripts -->
