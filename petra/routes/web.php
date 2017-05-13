@@ -27,6 +27,10 @@ Route::get('/home', 'HomeController@index');
 
 Route::post('/home', 'HomeController@post');
 
+Route::get('/home/likepost/{id}', 'HomeController@likepost');
+
+Route::get('/home/droplikepost/{id}', 'HomeController@droplikepost');
+
 Route::get('/profile/{id}', 'ProfileController@index');
 
 Route::get('/editprofile', 'EditprofileController@index');
