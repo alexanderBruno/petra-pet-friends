@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Auth;
+use Auth, DB, Carbon\Carbon;
+
 
 class ProfileController extends Controller
 {
@@ -23,9 +23,8 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-      $id = Auth::id();
       $user = DB::table('users')->where('id', $id)->first();
 
       $posts = DB::table('posts')
@@ -35,6 +34,28 @@ class ProfileController extends Controller
             ->orderBy('posts.id', 'desc')
             ->get();
 
-      return view('profile', ['user' => $user, 'posts' => $posts]);
+      $likesdone = DB::table('likeposts_list')->where('id_user', $id)->get();
+
+      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone]);
+    }
+
+    public function likepost($id)
+    {
+      $existslike = DB::table('likeposts_list')->where('id_user', Auth::id())->where('id_post', $id)->first();
+
+      if (count($existslike)==0) {
+        DB::table('posts')->where('id', $id)->increment('likes', 1);
+        DB::table('likeposts_list')->insert(['id_user' => Auth::id(), 'id_post' => $id, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+      }
+    }
+
+    public function droplikepost($id)
+    {
+      $existslike = DB::table('likeposts_list')->where('id_user', Auth::id())->where('id_post', $id)->first();
+
+      if (count($existslike)!=0) {
+        DB::table('posts')->where('id', $id)->decrement('likes', 1);
+        DB::table('likeposts_list')->where('id_user', Auth::id())->where('id_post', $id)->delete();
+      }
     }
 }

@@ -33,6 +33,10 @@ Route::get('/home/droplikepost/{id}', 'HomeController@droplikepost');
 
 Route::get('/profile/{id}', 'ProfileController@index');
 
+Route::get('/profile/likepost/{id}', 'ProfileController@likepost');
+
+Route::get('/profile/droplikepost/{id}', 'ProfileController@droplikepost');
+
 Route::get('/editprofile', 'EditprofileController@index');
 
 Route::post('/editprofile', 'EditprofileController@save');
