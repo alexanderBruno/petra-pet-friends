@@ -26,23 +26,30 @@ class MessageController extends Controller
 
     public function index()
     {
-        $users = User::all();
-        return view('messages', compact('users'));
+        if (Auth::guest()){
+          return redirect(route('login'));
+        } else {
+          $users = User::all();
+          return view('messages', compact('users'));
+        }
     }
 
     public function chatHistory($id)
     {
-        $conversations = Talk::getMessagesByUserId($id);
-        $user = '';
-        $messages = [];
-        if(!$conversations) {
-            $user = User::find($id);
-        } else {
-            $user = $conversations->withUser;
-            $messages = $conversations->messages;
+      if (Auth::guest()){
+        return redirect(route('login'));
+      } else {
+          $conversations = Talk::getMessagesByUserId($id);
+          $user = '';
+          $messages = [];
+          if(!$conversations) {
+              $user = User::find($id);
+          } else {
+              $user = $conversations->withUser;
+              $messages = $conversations->messages;
+          }
+          return view('messages.conversations', compact('messages', 'user'));
         }
-
-        return view('messages.conversations', compact('messages', 'user'));
     }
 
     public function ajaxSendMessage(Request $request)
