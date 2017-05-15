@@ -19,6 +19,7 @@
     <link href="{{ asset('css/point_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/paw_style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/editpost_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/messages_view.css') }}" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -62,6 +63,7 @@
                         &nbsp;
                         <li><a href="{{ url('/map') }}"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i> Mapa</a></li>
                         <li><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Inici</a></li>
+                        <li><a href="{{ url('/messages') }}"><i class="fa fa-comments" aria-hidden="true"></i> Missatges</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

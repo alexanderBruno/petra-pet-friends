@@ -53,6 +53,7 @@
                         &nbsp;
                         <li><a href="{{ url('/map') }}"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i> Mapa</a></li>
                         <li><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Inici</a></li>
+                        <li><a href="{{ url('/messages') }}"><i class="fa fa-comments" aria-hidden="true"></i> Missatges</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
