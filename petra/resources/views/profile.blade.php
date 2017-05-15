@@ -56,7 +56,7 @@
                         @endif
                       </div>
                       @if ($post->photo!=NULL)
-                        <img src="/images/posts/{{$post->id_user}}_{{$post->name}}/{{$post->photo}}" class="profile_lastpost_photo" alt="lastpost_photo"/>
+                        <img src="/images/posts/{{$post->id_user}}/{{$post->photo}}" class="profile_lastpost_photo" alt="lastpost_photo"/>
                         <div class="profile_modal">
                           <span class="profile_close">&times;</span>
                           <img class="profile_modal-content">

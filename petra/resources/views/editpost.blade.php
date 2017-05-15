@@ -18,7 +18,7 @@
                     <div class="form-group">
                       <label>Imatge:</label><br/>
                       @if ($post->photo!=NULL)
-                        <img src="/images/posts/{{$post->id_user}}_{{$post->name}}/{{$post->photo}}" class="editpost_photoimg" alt="photoimg"/><br/><br/>
+                        <img src="/images/posts/{{$post->id_user}}/{{$post->photo}}" class="editpost_photoimg" alt="photoimg"/><br/><br/>
                         <label for="editpost_file-upload" class="editpost_custom-file-upload">
                             <i class="glyphicon glyphicon-refresh"></i> Canviar imatge...
                         </label>

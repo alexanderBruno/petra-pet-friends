@@ -41,7 +41,7 @@
                   @foreach($lastposts as $post)
                   <div class="panel panel-info media home_post">
                     <div class="home_avatar_post media-left">
-                      <img src="/images/avatars/{{$post->avatar}}" class="home_avatarimg_post" alt="avatarimg_post"/>
+                      <img src="images/avatars/{{$post->avatar}}" class="home_avatarimg_post" alt="avatarimg_post"/>
                     </div>
 
                     <div class="home_name_content_post media-body">
@@ -56,7 +56,7 @@
                         @endif
                       </div>
                       @if ($post->photo!=NULL)
-                        <img src="/images/posts/{{$post->id_user}}_{{$post->name}}/{{$post->photo}}" class="home_lastpost_photo" alt="lastpost_photo"/>
+                        <img src="images/posts/{{$post->id_user}}/{{$post->photo}}" class="home_lastpost_photo" alt="lastpost_photo"/>
                         <div class="home_modal">
                           <span class="home_close">&times;</span>
                           <img class="home_modal-content">
