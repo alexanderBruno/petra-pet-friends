@@ -52,7 +52,7 @@ class EditpostController extends Controller
       }
       $id = $request->input('editpost_id');
       $post = DB::table('posts')->where('id', $id)->first();
-      $path = ("images/posts/".Auth::id()."_".Auth::user()->name);
+      $path = ("/images/posts/".Auth::id()."_".Auth::user()->name);
       if (Auth::id() == $post->id_user) {
         if ($request->input('editpost_content')) {
           DB::table('posts')->where('id', $id)->update(['content' => $request->input('editpost_content')]);
