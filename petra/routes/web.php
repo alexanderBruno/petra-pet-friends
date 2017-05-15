@@ -17,11 +17,9 @@
 
 Route::get('/', 'IndexController@index');
 
-Route::get('/users', 'usersbbdd@select');
+Auth::routes();
 
 Route::get('/map', 'MapController@mostra');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
