@@ -22,7 +22,9 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
-
+    <script>
+      var points = {!! json_encode($all->toArray()) !!};
+    </script>
 </head>
 <body>
     <div id="app">

@@ -6,15 +6,14 @@
 
     <script>
         var map;
-        //https://developers.google.com/maps/documentation/javascript/examples/map-geolocation?hl=es-419
+        var infoWindow;
+
+        // Crea el mapa i el event que tenca els infowindows
         function initMap() {
             map = new google.maps.Map(document.getElementById('map_map'), {
                 zoom: 15,
                 center: new google.maps.LatLng(41.394,2.167),
-
             });
-
-
 
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
@@ -24,51 +23,79 @@
                     lng: position.coords.longitude
                 };
                 map.setCenter(pos);
-            });
+                });
             }
 
+            infoWindow = new google.maps.InfoWindow();
 
-          // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
-          // This example uses a local copy of the GeoJSON stored at
-          // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
-        }
-
-        // Loop through the results array and place a marker for each
-        // set of coordinates.
-        window.eqfeed_callback = function(results) {
-          for (var i = 0; i < results.features.length; i++) {
-            var coords = results.features[i].geometry.coordinates;
-            var latLng = new google.maps.LatLng(coords[1],coords[0]);
-            var marker = new google.maps.Marker({
-              position: latLng,
-              map: map
+            // Event que tenca la infowindow quan cliques el mapa
+            google.maps.event.addListener(map, 'click', function() {
+               infoWindow.close();
             });
 
-            var contentString = '<div id="content">'+'<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            'Contingut de prova = '+String(i)
-            '</div>'+
-            '</div>';
+            // Crida afegirMarkers(), que afegeix els marcadors
+            afegirMarkers();
 
-            afegirFinestra(marker, contentString);
-          }
-          function afegirFinestra(marker, contingutFinestra) {
-            var infowindow = new google.maps.InfoWindow({
-              content: contingutFinestra
-            });
-
-            marker.addListener('click', function() {
-              infowindow.open(marker.get('map_map'), marker);
-            });
-          }
-        }
+    }//initMap()
 
 
+    function afegirMarkers(){
+
+       // Defineix el límit del mapa que es mostra a partir dels marcadors
+       var bounds = new google.maps.LatLngBounds();
+
+       // Recorre l'array i crida a crearMarker per cada marcador
+       for (var i = 0; i < points.length; i++) {
+         //var latitud = points[i].latitude;
+         //var longitud = points[i].longitude;
+         var latlng = new google.maps.LatLng(points[i].latitude, points[i].longitude);
+
+         var nom = points[i].name;
+         var descripcio = points[i].description;
+         var imatge = points[i].avatar;
+         var valoracio = points[i].score;
+
+         crearMarker(latlng, nom, descripcio, imatge, valoracio);
+
+         // S'afegeixen lat i lng del marcador a bounds
+         bounds.extend(latlng);
+
+       }
+
+       // Es defineixen els limits del mapa(Opcional)
+       //map.fitBounds(bounds);
+    }//afegirMarkers()
+
+    // Crea els marcadors, i afegeix el contingut del InfoWindow
+    function crearMarker(latlng, nom, descripcio, imatge, valoracio){
+       var marker = new google.maps.Marker({
+          map: map,
+          position: latlng,
+          // icon: default,
+          title: nom
+       });
+
+
+       // Quan es clica un marcador, es defineix el contingut de l'infowindow i s'obre
+       google.maps.event.addListener(marker, 'click', function() {
+
+          // Contingut de l'infowindow
+          var pointInfo = '<div id="content">'+'<div id="siteNotice">'+'</div>'+
+          '<h3>'+nom+'</h3>'+
+          //'<h3 id="firstHeading" class="firstHeading">'+nom+'</h3>'+
+          '<img class="info_img" src="/images/avatars/'+imatge+'" alt="Imatge_'+nom+'"/>'+
+          '<div id="bodyContent">'+'<p>'+descripcio+'</p>'+
+          '<p>Valoració:'+valoracio+'</p>'
+          '</div>'+
+          '</div>';
+
+          // Afegeix el contingut a l'InfoWindow
+          infoWindow.setContent(pointInfo);
+
+          // Obre l'InfoWindow en el mapa i marcador actual
+          infoWindow.open(map, marker);
+       });
+    }
 
       </script>
 
