@@ -22,7 +22,10 @@
 
                     </div>
                     <div>
-                    	<p>Serveis: {{ $point->services_list }}</p>
+                    	<p>Serveis:</p>
+                      @foreach($services as $service)
+                        <i class="fa {{ $service->icon}}" title="{{ $service->name}}"></i>
+                      @endforeach
                       
                     	<p>Puntuació:</p>
                       
