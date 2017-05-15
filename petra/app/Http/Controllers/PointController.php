@@ -101,8 +101,13 @@ class PointController extends Controller
         $score_addition = $score_addition + $valoration[$i]->score;
       }
 
-      $score = $score_addition/sizeof($valoration);
+      if (sizeof($valoration) < 0) {
+        $score = $score_addition/sizeof($valoration);
       return $score;
+      }else{
+        return 0;
+      }
+      
     }
 
 }
