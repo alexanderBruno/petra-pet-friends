@@ -51,7 +51,9 @@ class PointController extends Controller
             ->where('id', $id)
             ->update(['score' => $score]);
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score,'reviewPermission'=> $reviewPermission, 'loged' => Auth::id()]);
+      $services = $this -> getIconsServices($point->services_list);
+
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score,'reviewPermission'=> $reviewPermission, 'loged' => Auth::id(), 'services'=>$services]);
 
     }
 
@@ -88,8 +90,11 @@ class PointController extends Controller
             ->where('reviews.id_point', $id)
             ->get();
 
+
       $score = $this -> getScore($id);
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id()]);
+      $services = $this -> getIconsServices($point->services_list);
+
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services]);
     }
 
     public function getScore($id)
@@ -108,6 +113,17 @@ class PointController extends Controller
         return 0;
       }
       
+    }
+
+    public function getIconsServices($serv)
+    {
+
+      $splits = explode("-", $serv);
+      
+      $services = DB::table('services_list')
+                ->whereIn('service_code', $splits)
+                ->get();
+      return $services;
     }
 
 }
