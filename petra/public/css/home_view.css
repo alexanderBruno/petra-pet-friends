@@ -68,11 +68,6 @@ input.home_post_photo[type="file"] {
   text-decoration: none;
 }
 
-.home_iduser_post:active  {
-  color: #ff6868;
-  text-decoration: none;
-}
-
 .home_date_post {
   float: right;
 }

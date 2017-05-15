@@ -107,10 +107,10 @@
     </div>
 </div>
 
-    <script>
-      for (i = 0; i < document.getElementsByClassName('profile_post_photo').length; i++) {
+    <script type="text/javascript">
+      for (i = 0; i < document.getElementsByClassName('profile_lastpost_photo').length; i++) {
         var profile_modal = document.getElementsByClassName('profile_modal')[i];
-        var profile_img = document.getElementsByClassName('profile_post_photo')[i];
+        var profile_img = document.getElementsByClassName('profile_lastpost_photo')[i];
         var profile_modalImg = document.getElementsByClassName("profile_modal-content")[i];
         profile_img.onclick = function(){
             profile_modal.style.display = "block";
@@ -120,7 +120,7 @@
         profile_span.onclick = function() {
             profile_modal.style.display = "none";
         }
-      }
+      };
 
       $(".profile_post_likes").on('click', function(){
           var $bnlk = $(this);
