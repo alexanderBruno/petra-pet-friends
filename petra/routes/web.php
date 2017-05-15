@@ -50,3 +50,12 @@ Route::get('/editpost/{id}', 'EditpostController@index');
 Route::post('/editpost/saved', 'EditpostController@save');
 
 Route::get('/deletepost/{id}', 'DeletepostController@delete');
+
+Route::get('/messages', 'MessageController@index');
+
+Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
+
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
+   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
+});
