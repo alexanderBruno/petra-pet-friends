@@ -50,7 +50,7 @@ class HomeController extends Controller
 
       if ($request->input('home_post')) {
 
-        $path = ("/images/posts/".Auth::id());
+        $path = ("images/posts/".Auth::id());
 
         if(!File::exists($path)) {
           File::makeDirectory($path, 0775);
