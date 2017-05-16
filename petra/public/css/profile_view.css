@@ -31,6 +31,22 @@ body {
   font-weight: bold;
 }
 
+.profile_chat {
+  float: right;
+  cursor: pointer;
+}
+
+.profile_chat {
+  float: right;
+  color: #3097d1;
+  font-size: 30px;
+}
+
+.profile_chat:hover {
+  color: #ff6868;
+  text-decoration: none;
+}
+
 /* #################### POSTS #################### */
 
 .profile_avatarimg_post {
@@ -85,7 +101,7 @@ body {
 }
 
 .profile_message_edited {
-  color: #3097d1;
+  color: #ff6868;
   float: right;
   margin-top: -3%;
 }

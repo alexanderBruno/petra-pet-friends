@@ -106,7 +106,7 @@
         @endif
         <div class="chat-about">
             @if(isset($user))
-                <div class="chat-with">{{'Conversació amb ' . @$user->name}}</div>
+                <div class="chat-with">{{'Conversa amb ' . @$user->name}}</div>
             @else
                 <div class="chat-with">No Thread Selected</div>
             @endif
@@ -118,7 +118,7 @@
 
       <div class="chat-message clearfix">
       <form action="" method="post" id="talkSendMessage">
-            <textarea name="message-data" id="message-data" placeholder ="Escriu el teu missatge..." rows="3"></textarea>
+            <textarea name="message-data" id="message-data" placeholder ="Escriu el teu missatge..." rows="2"></textarea>
             <input type="hidden" name="_id" value="{{@request()->route('id')}}">
             <button type="submit">Enviar</button>
       </form>
@@ -141,8 +141,9 @@
 
         <script src="{{asset('chat/js/talk.js')}}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         var show = function(data) {
             alert(data.sender.name + " - '" + data.message + "'");
         }
@@ -166,6 +167,12 @@
             $('form#talkSendMessage').submit();
           }
         });
+
+        $(document).ready(function(){
+          $(".chat-history").animate({scrollTop: $('.chat-history')[0].scrollHeight }, 3000);
+          // $("html,body").delay(1000).animate({scrollTop: $('html,body')[0].scrollHeight }, 3000);
+        });
+
     </script>
     {!! talk_live(['user'=>["id"=>Auth::id(), 'callback'=>['msgshow']]]) !!}
 

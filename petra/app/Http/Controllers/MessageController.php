@@ -48,7 +48,13 @@ class MessageController extends Controller
               $user = $conversations->withUser;
               $messages = $conversations->messages;
           }
-          return view('messages.conversations', compact('messages', 'user'));
+          if ($user==null) {
+            return redirect()->action('MessageController@index')->with('confirmation', 'usernotfound');
+          } elseif ($user->id==Auth::id()) {
+            return redirect()->action('MessageController@index')->with('confirmation', 'sameuser');
+          } else {
+            return view('messages.conversations', compact('messages', 'user'));
+          }
         }
     }
 

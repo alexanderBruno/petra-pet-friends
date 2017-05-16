@@ -23,7 +23,14 @@
                       <img src="/images/avatars/{{$user->avatar}}" class="profile_avatarimg" alt="avatarimg"/>
                     </div>
                     <div class="media-body profile_name_description">
-                      <h1 class="profile_name media-heading">{{$user->name}}</h1>
+                      <h1 class="profile_name media-heading">{{$user->name}}
+                        @if (Auth::id()!=$user->id)
+                        <a href="{{route('message.read', ['id'=>$user->id])}}" class="profile_chat" title="Xatejar amb {{$user->name}}">
+                          <i class="fa fa-commenting profile_chat_button" aria-hidden="true"></i>
+                        </a>
+                        @endif
+                      </h1>
+
                       <div class="profile_description">
                       @if ($user->description=="")
                         <i>Encara sense descripció</i>

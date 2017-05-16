@@ -23,3 +23,13 @@
   color: #ff6868;
   text-decoration: none;
 }
+
+.messages_confirmation_true {
+  color: green;
+  font-weight: bold;
+}
+
+.messages_confirmation_false {
+  color: red;
+  font-weight: bold;
+}
