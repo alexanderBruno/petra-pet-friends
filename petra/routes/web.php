@@ -17,11 +17,9 @@
 
 Route::get('/', 'IndexController@index');
 
-Route::get('/users', 'usersbbdd@select');
+Auth::routes();
 
 Route::get('/map', 'MapController@mostra');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
@@ -47,23 +45,37 @@ Route::get('/point/{id}','PointController@profile');
 
 Route::post('/point/{id}','PointController@review');
 
+Route::get('/editreview/{id}', 'EditReviewController@index');
+
+Route::post('editreview/saved', 'EditReviewController@save');
+ 
+Route::get('/deletereview/{id}', 'DeleteReviewController@delete');
+
 Route::get('/editpost/{id}', 'EditpostController@index');
 
 Route::post('/editpost/saved', 'EditpostController@save');
 
 Route::get('/deletepost/{id}', 'DeletepostController@delete');
 
-Route::get('/messages', 'MessageController@index'); 
- 
-Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read'); 
- 
-Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() { 
-   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new'); 
-   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete'); 
+Route::get('/messages', 'MessageController@index');
+
+Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
+
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
+   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
+   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
 });
 
-Route::get('/editreview/{id}', 'EditReviewController@index');
+Route::get('/friends', 'FriendshipController@index');
 
-Route::post('editreview/saved', 'EditReviewController@save');
+Route::get('/friends/add/{id}', 'FriendshipController@add');
 
-Route::get('/deletereview/{id}', 'DeleteReviewController@delete');
+Route::get('/friends/delete/{id}', 'FriendshipController@delete');
+
+Route::get('/friends/acceptadd/{id}', 'FriendshipController@acceptadd');
+
+Route::get('/friends/denyadd/{id}', 'FriendshipController@denyadd');
+
+Route::get('/friends/removeadd/{id}', 'FriendshipController@delete');
+
+Route::get('/friends/allowadd/{id}', 'FriendshipController@delete');

@@ -20,7 +20,11 @@
     <link href="{{ asset('css/paw_style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/editpost_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/messages_view.css') }}" rel="stylesheet">
-    <link  href="{{ asset('css/editreview_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/friends_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/editreview_view.css') }}" rel="stylesheet"> 
+
+
+
 
     <!-- Scripts -->
     <script>

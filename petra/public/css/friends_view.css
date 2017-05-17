@@ -1,0 +1,56 @@
+
+.friends.tab-pane {
+  margin-top: 10px;
+}
+
+.friends.table td {
+  border-top: none !important;
+}
+
+.friends_hr {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+}
+
+.friends.panel-body {
+  font-family: 'Bree Serif', serif;
+}
+
+.friends_avatarimg {
+  max-width: 100px;
+  max-height: 100px;
+  border: 1px solid black;
+}
+
+.friends_buttonmessage {
+  margin-top: 30px;
+  margin-right: 30px;
+}
+
+.friends_username {
+  margin-left: 10px;
+  font-size: 20px;
+  color: inherit;
+}
+
+.friends_username:hover, .friends_username:active  {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.friends_confirmation_true {
+  color: green;
+  font-weight: bold;
+}
+
+.friends_confirmation_info {
+  color: #3097d1;
+  font-weight: bold;
+  margin-left: 1%;
+}
+
+.friends_confirmation_false {
+  color: red;
+  font-weight: bold;
+}
