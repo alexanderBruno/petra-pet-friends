@@ -31,7 +31,6 @@ class EditprofileController extends Controller
 
 
 
-
     public function save(Request $request)
     {
       function generateRandomString($length = 10) {
@@ -63,6 +62,9 @@ class EditprofileController extends Controller
       }
       if ($request->input('editprofile_type_pet')) {
         DB::table('users')->where('id', $id)->update(['type_pet' => $request->input('editprofile_type_pet')]);
+      }
+      if ($request->input('editprofile_postprivacy')) {
+        DB::table('users')->where('id', $id)->update(['posts_privacy' => $request->input('editprofile_postprivacy')]);
       }
 
       DB::table('users')->where('id', $id)->update(['updated_at' => Carbon::now()]);
