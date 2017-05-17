@@ -20,7 +20,7 @@ class CreateScoreslistTable extends Migration
           $table->integer('id_point')->unsigned();
           $table->foreign('id_point')->references('id')->on('points')->onUpdate('cascade');
           $table->integer('id_review')->unsigned();
-          $table->foreign('id_review')->references('id')->on('reviews')->onUpdate('cascade');
+          $table->foreign('id_review')->references('id')->on('comments')->onUpdate('cascade');
           $table->integer('score')->default(0);
           $table->timestamps();
         });

@@ -17,9 +17,11 @@
 
 Route::get('/', 'IndexController@index');
 
-Auth::routes();
+Route::get('/users', 'usersbbdd@select');
 
 Route::get('/map', 'MapController@mostra');
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
@@ -51,11 +53,17 @@ Route::post('/editpost/saved', 'EditpostController@save');
 
 Route::get('/deletepost/{id}', 'DeletepostController@delete');
 
-Route::get('/messages', 'MessageController@index');
-
-Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
-
-Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() {
-   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new');
-   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete');
+Route::get('/messages', 'MessageController@index'); 
+ 
+Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read'); 
+ 
+Route::group(['prefix'=>'ajax', 'as'=>'ajax::'], function() { 
+   Route::post('message/send', 'MessageController@ajaxSendMessage')->name('message.new'); 
+   Route::delete('message/delete/{id}', 'MessageController@ajaxDeleteMessage')->name('message.delete'); 
 });
+
+Route::get('/editreview/{id}', 'EditReviewController@index');
+
+Route::post('editreview/saved', 'EditReviewController@save');
+
+Route::get('/deletereview/{id}', 'DeleteReviewController@delete');

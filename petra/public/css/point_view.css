@@ -22,9 +22,6 @@ body {
   border: 1px solid black;
 }
 
-.point_review {
-  padding: 1%;
-}
 
 .point_review {
   margin-top: 1%;
@@ -49,4 +46,189 @@ input.point_review_photo[type="file"] {
 .point_confirmation_true {
   color: green;
   font-weight: bold;
+}
+
+.point_confirmation_false {
+  color: red;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.point.panel-body {
+  font-family: 'Bree Serif', serif;
+}
+
+.review_submit {
+  float: right;
+}
+
+.review_confirmation_true {
+  color: green;
+  font-weight: bold;
+}
+
+.point_custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 6px;
+    cursor: pointer;
+}
+
+
+.point_name_review {
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.point_lastreview_photo {
+  max-width: 100px;
+  max-height: 100px;
+  display: block;
+  margin-top: 3%;
+}
+
+.point_iduser_review {
+  color: inherit;
+}
+
+.point_iduser_review:hover, .point_iduser_review:active  {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.point_date_review {
+  float: right;
+}
+
+.point_review_options {
+  float: right;
+  margin-right: 3%;
+  color: #3097d1;
+}
+
+.point_review_options:hover {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.point_message_edited {
+  color: #3097d1;
+  float: right;
+  margin-top: -3%;
+}
+
+.point_review_likes {
+  color: #3097d1;
+  margin-left: 1.5%;
+  cursor: pointer;
+}
+
+.point_review_likes:hover, .point_review_likes_clicked:hover {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.point_review_likes_clicked {
+  margin-left: 1.5%;
+  color: #ff6868;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.point_review_likes_num {
+  cursor: pointer;
+}
+
+.btn-danger {
+  background-color: #cc0000;
+}
+
+
+
+
+
+/*.point_lastreview_photo {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}*/
+
+.point_lastreview_photo:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.point_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.point_modal-content {
+    margin: auto;
+    display: block;
+    max-width: 700px;
+    max-height: 700px;
+}
+
+
+
+/* Add Animation */
+.point_modal-content {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)}
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.point_close {
+    position: absolute;
+    top: 50px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.point_close:hover,
+.point_close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .point_modal-content {
+        width: 100%;
+    }
 }
