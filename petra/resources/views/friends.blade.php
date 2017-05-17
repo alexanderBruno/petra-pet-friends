@@ -54,7 +54,7 @@
                         <p class="friends_confirmation_info">Encara no tens cap amistat, anima't a fer alguna!</p>
                       @else
                         @foreach($yourfriends as $yourfriend)
-                          @if($yourfriend->id!=Auth::id())
+                          @if($yourfriend->id!=Auth::id() and $yourfriend->status==1)
                             <table class="friends table">
                                 <tr>
                                     <td>

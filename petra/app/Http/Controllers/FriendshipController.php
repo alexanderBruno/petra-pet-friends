@@ -23,8 +23,8 @@ class FriendshipController extends Controller
             ->leftJoin('users', function ($join) {
                 $join->on('users.id', '=', 'friendships.sender_id')->orOn('users.id', '=', 'friendships.recipient_id');
             })
-            ->select('friendships.sender_id', 'friendships.recipient_id', 'users.id', 'users.name', 'users.avatar')
-            ->where('friendships.status', 1)->where('friendships.sender_id', Auth::id())->orWhere('friendships.recipient_id', Auth::id())
+            ->select('friendships.sender_id', 'friendships.recipient_id', 'friendships.status', 'users.id', 'users.name', 'users.avatar')
+            ->where('friendships.sender_id', Auth::id())->orWhere('friendships.recipient_id', Auth::id())->where('friendships.status', 1)
             ->orderBy('users.name')
             ->get();
 
