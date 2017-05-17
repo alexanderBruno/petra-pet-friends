@@ -27,7 +27,7 @@
                         <div class="form-group editprofile_postprivacy_group">
                           <label>Qui pot veure les meves publicacions?: </label>
                           <input name="editprofile_postprivacy" type="radio" value=1 <?php if ($user->posts_privacy==1) echo "checked"; ?>> Tothom, vull que les meves publicacions son públiques.
-                          <input name="editprofile_postprivacy" type="radio" value=2 <?php if ($user->posts_privacy==2) echo "checked"; ?>> Nomès les meves amistats, els demès no podrán veure res.
+                          <input name="editprofile_postprivacy" type="radio" value=2 <?php if ($user->posts_privacy==2) echo "checked"; ?>> Només les meves amistats, els altres no podran veure-les.
                         </div>
                       </div>
                       <div class="form-group">
