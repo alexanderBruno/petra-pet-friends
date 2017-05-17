@@ -29,7 +29,7 @@ class MessageController extends Controller
         if (Auth::guest()){
           return redirect(route('login'));
         } else {
-          $users = User::all();
+          $users = User::orderBy('name')->get();
           return view('messages', compact('users'));
         }
     }

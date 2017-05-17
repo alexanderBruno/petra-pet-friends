@@ -169,9 +169,12 @@
         });
 
         $(document).ready(function(){
-          $(".chat-history").animate({scrollTop: $('.chat-history')[0].scrollHeight }, 3000);
-          // $("html,body").delay(1000).animate({scrollTop: $('html,body')[0].scrollHeight }, 3000);
+          $(".chat-history").scrollTop($('.chat-history')[0].scrollHeight);
+        //   $("#talkSendMessage").submit(function(e) {
+        //     $(".chat-history").scrollTop($('.chat-history')[0].scrollHeight);
+        //   });
         });
+
 
     </script>
     {!! talk_live(['user'=>["id"=>Auth::id(), 'callback'=>['msgshow']]]) !!}

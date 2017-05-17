@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Usuaris de la web</div>
+                <div class="panel-heading"><h4>Usuaris de la web</h4></div>
 
                 <div class="messages panel-body">
                   @if(session('confirmation')=='usernotfound')
@@ -15,18 +15,19 @@
                   @endif
                 @foreach($users as $user)
                   @if($user->id!=Auth::id())
-                      <table class="table">
+                      <table class="messages table">
                           <tr>
                               <td>
                                   <img src="/images/avatars/{{$user->avatar}}" class="messages_avatarimg" alt="avatarimg"/>
                                   <a class="messages_username" href="{{ url('/profile/'.$user->id) }}">{{$user->name}}</a>
                               </td>
                               <td>
-                                  <a href="{{route('message.read', ['id'=>$user->id])}}" class="btn btn-success pull-right messages_buttonmessage">Enviar missatge</a>
+                                  <a href="{{route('message.read', ['id'=>$user->id])}}" class="btn btn-primary pull-right messages_buttonmessage">Enviar missatge</a>
                               </td>
                           </tr>
                       </table>
-                    @endif
+                      <hr class="messages_hr">
+                  @endif
                 @endforeach
                 </div>
             </div>
