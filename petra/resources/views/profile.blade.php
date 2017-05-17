@@ -17,6 +17,36 @@
                     <p class="profile_confirmation_true">Publicació eliminada correctament.</p>
                   @elseif(session('confirmation')=='postnotdeleted')
                     <p class="profile_confirmation_false">No pots eliminar aquesta publicació!</p>
+                  @elseif(session('confirmation')=='addsameuser')
+                    <p class="profile_confirmation_false">No et pots enviar una sol·licitud d'amistat a tu mateix!</p>
+                  @elseif(session('confirmation')=='denyaddsameuser')
+                    <p class="profile_confirmation_false">No et pots denegar una sol·licitud d'amistat a tu mateix!</p>
+                  @elseif(session('confirmation')=='acceptaddsameuser')
+                    <p class="profile_confirmation_false">No et pots acceptar una sol·licitud d'amistat a tu mateix!</p>
+                  @elseif(session('confirmation')=='deletesameuser')
+                    <p class="profile_confirmation_false">No et pots eliminar com a amistat a tu mateix!</p>
+                  @elseif(session('confirmation')=='removesameuser')
+                    <p class="profile_confirmation_false">No et pots cancel·lar una sol·licitud d'amistat a tu mateix!</p>
+                  @elseif(session('confirmation')=='addalready')
+                    <p class="profile_confirmation_false">Ja has enviat sol·licitud a aquest usuari, espera fins que respongui.</p>
+                  @elseif(session('confirmation')=='denyaddalready')
+                    <p class="profile_confirmation_false">No existeix aquesta sol·licitud. Ja la has denegat o l'altre usuari la ha cancel·lat.</p>
+                  @elseif(session('confirmation')=='acceptaddalready')
+                    <p class="profile_confirmation_false">No existeix aquesta sol·licitud. Ja la has acceptat o l'altre usuari la ha cancel·lat.</p>
+                  @elseif(session('confirmation')=='deletealready')
+                    <p class="profile_confirmation_false">Ja has eliminat l'amistat amb aquest usuari.</p>
+                  @elseif(session('confirmation')=='removealready')
+                    <p class="profile_confirmation_false">No existeix aquesta sol·licitud. Ja la has cancel·lat o l'altre usuari la ha acceptat.</p>
+                  @elseif(session('confirmation')=='addedfriend')
+                    <p class="profile_confirmation_true">Sol·licitud d'amistat enviada correctament. Esperant resposta de l'usuari.</p>
+                  @elseif(session('confirmation')=='deniedadd')
+                    <p class="profile_confirmation_true">Sol·licitud d'amistat denegada correctament.</p>
+                  @elseif(session('confirmation')=='acceptedadd')
+                    <p class="profile_confirmation_true">Sol·licitud d'amistat acceptada, tens un nou amic! :)</p>
+                  @elseif(session('confirmation')=='deletedfriend')
+                    <p class="profile_confirmation_true">Amistat eliminada correctament, has perdut un amic! :(</p>
+                  @elseif(session('confirmation')=='removedadd')
+                    <p class="profile_confirmation_true">Sol·licitud d'amistat cancel·lada correctament.</p>
                   @endif
                   <div class="profile_first_part media">
                     <div class="profile_avatar media-left embed-responsive-item">
@@ -24,11 +54,41 @@
                     </div>
                     <div class="media-body profile_name_description">
                       <h1 class="profile_name media-heading">{{$user->name}}
-                        @if (Auth::id()!=$user->id)
-                        <a href="{{route('message.read', ['id'=>$user->id])}}" class="profile_chat" title="Xatejar amb {{$user->name}}">
-                          <i class="fa fa-commenting profile_chat_button" aria-hidden="true"></i>
-                        </a>
-                        @endif
+
+                          @if (Auth::id()!=$user->id)
+                            <a href="{{route('message.read', ['id'=>$user->id])}}" class="profile_chat" title="Xatejar amb {{$user->name}}">
+                              <i class="fa fa-commenting profile_chat_button" aria-hidden="true"></i>
+                            </a>
+                            @if($friendship!=null)
+                              @if ($friendship->status==0 and $friendship->sender_id==Auth::id())
+                              <a href="/friends/removeadd/{{$user->id}}" class="profile_askfriend">
+                                <i class="fa fa-question-circle" class="profile_askfriend_button" aria-hidden="true"></i>
+                                <i class="fa fa-times-circle" class="profile_askfriend_button" aria-hidden="true" title="Cancel·lar sol·licitud d'amistat"></i>
+                              </a>
+                              @elseif ($friendship->status==0 and $friendship->recipient_id==Auth::id())
+                              <a href="/friends/denyadd/{{$user->id}}" class="profile_askfriend_indv">
+                                <i class="fa fa-times-circle" class="profile_askfriend_button" aria-hidden="true" title="Denegar sol·licitud d'amistat"></i>
+                              </a>
+                              <a href="/friends/acceptadd/{{$user->id}}" class="profile_askfriend_indv">
+                                <i class="fa fa-check-circle" class="profile_askfriend_button" aria-hidden="true" title="Acceptar sol·licitud d'amistat"></i>
+                              </a>
+                              @elseif ($friendship->status==1)
+                              <a href="/friends/delete/{{$user->id}}" class="profile_askfriend profile_askfriendpink">
+                                <i class="fa fa-check-circle" class="profile_askfriend_button" aria-hidden="true"></i>
+                                <i class="fa fa-minus-circle" class="profile_askfriend_button" aria-hidden="true" title="Eliminar de les meves amistats"></i>
+                              </a>
+                              @elseif ($friendship->status==2 and $friendship->recipient_id==Auth::id())
+                              <a href="/friends/allowadd/{{$user->id}}" class="profile_addfriend">
+                                <i class="fa fa-info-circle" class="profile_addfriend_button" aria-hidden="true" title="Permetre enviar sol·licitud d'amistat"></i>
+                              </a>
+                              @endif
+                            @else
+                              <a href="/friends/add/{{$user->id}}" class="profile_addfriend">
+                                <i class="fa fa-plus-circle" class="profile_addfriend_button" aria-hidden="true" title="Enviar sol·licitud d'amistat a {{$user->name}}"></i>
+                              </a>
+                            @endif
+                          @endif
+
                       </h1>
 
                       <div class="profile_description">
@@ -197,8 +257,11 @@
                     alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
                 }
                 });
-        }
+          }
       });
+
+
+
     </script>
 
 @endsection

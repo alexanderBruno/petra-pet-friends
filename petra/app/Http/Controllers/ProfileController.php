@@ -36,7 +36,9 @@ class ProfileController extends Controller
 
       $likesdone = DB::table('likeposts_list')->where('id_user', $id)->get();
 
-      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone]);
+      $friendship = DB::table('friendships')->where('sender_id', Auth::id())->where('recipient_id', $id)->orWhere('recipient_id', Auth::id())->where('sender_id', $id)->first();
+
+      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship]);
     }
 
     public function likepost($id)

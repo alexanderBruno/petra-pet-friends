@@ -31,20 +31,34 @@ body {
   font-weight: bold;
 }
 
-.profile_chat {
-  float: right;
-  cursor: pointer;
-}
-
-.profile_chat {
+.profile_chat, .profile_addfriend, .profile_askfriend, .profile_askfriend_indv  {
   float: right;
   color: #3097d1;
   font-size: 30px;
 }
 
-.profile_chat:hover {
+.profile_chat:hover, .profile_addfriend:hover, .profile_askfriend:hover, .profile_askfriend_indv:hover, .profile_askfriendpink {
   color: #ff6868;
   text-decoration: none;
+}
+
+.profile_askfriend > .fa + .fa, .profile_askfriend:hover > .fa {
+  display: none;
+}
+.profile_askfriend:hover > .fa + .fa {
+  display: inherit;
+  margin-top: 3px;
+}
+
+.profile_addfriend, .profile_askfriend {
+  cursor: pointer;
+  margin-right: 50px;
+}
+
+.profile_askfriend_indv {
+  cursor: pointer;
+  margin-left: -45px;
+  margin-right: 60px;
 }
 
 /* #################### POSTS #################### */
