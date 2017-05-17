@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth, DB, Image, Input, Carbon\Carbon, File;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -26,14 +27,20 @@ class HomeController extends Controller
     {
       $lastposts = DB::table('posts')
             ->leftJoin('users', 'posts.id_user', '=', 'users.id')
-            ->select('posts.*', 'users.name', 'users.avatar')
+            ->select('posts.*', 'users.name', 'users.avatar', 'users.posts_privacy')
             ->orderBy('posts.id', 'desc')
             ->limit(5)
             ->get();
 
       $likesdone = DB::table('likeposts_list')->where('id_user', Auth::id())->get();
 
-      return view('home', ['lastposts' => $lastposts, 'likesdone' => $likesdone]);
+      $userE = User::where('id', Auth::id())->first();
+
+      $usersR = User::leftJoin('posts', 'posts.id_user', '=', 'users.id')
+            ->select('users.id', 'users.name', 'users.avatar', 'users.posts_privacy')
+            ->get();
+
+      return view('home', ['lastposts' => $lastposts, 'likesdone' => $likesdone, 'userE' => $userE, 'usersR' => $usersR]);
     }
 
     public function post(Request $request)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth, DB, Carbon\Carbon;
+use App\User;
 
 
 class ProfileController extends Controller
@@ -29,7 +30,7 @@ class ProfileController extends Controller
 
       $posts = DB::table('posts')
             ->leftJoin('users', 'posts.id_user', '=', 'users.id')
-            ->select('posts.*', 'users.name', 'users.avatar')
+            ->select('posts.*', 'users.name', 'users.avatar', 'users.posts_privacy')
             ->where('posts.id_user', $id)
             ->orderBy('posts.id', 'desc')
             ->get();
@@ -38,7 +39,13 @@ class ProfileController extends Controller
 
       $friendship = DB::table('friendships')->where('sender_id', Auth::id())->where('recipient_id', $id)->orWhere('recipient_id', Auth::id())->where('sender_id', $id)->first();
 
-      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship]);
+      $userE = User::where('id', Auth::id())->first();
+
+      $usersR = User::leftJoin('posts', 'posts.id_user', '=', 'users.id')
+            ->select('users.id', 'users.name', 'users.avatar', 'users.posts_privacy')
+            ->get();
+
+      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship, 'userE' => $userE, 'usersR' => $usersR]);
     }
 
     public function likepost($id)

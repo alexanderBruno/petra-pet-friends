@@ -106,65 +106,72 @@
                   <hr>
 
                   @foreach($posts as $post)
-                  <div class="panel panel-info media profile_post">
-                    <div class="profile_avatar_post media-left">
-                      <img src="/images/avatars/{{$post->avatar}}" class="profile_avatarimg_post" alt="avatarimg_post"/>
-                    </div>
-
-                    <div class="profile_name_content_post media-body">
-                      <h4 class="profile_name_post media-heading">
-                        <a class="profile_iduser_post" href="{{ url('/profile/'.$post->id_user) }}">{{$post->name}}</a>
-                        <small><p class="profile_date_post"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($post->created_at)); ?></p></small>
-                      </h4>
-                      <div>
-                        {{ $post->content }}
-                        @if ($post->created_at!=$post->updated_at)
-                          <i class="profile_message_edited">Editat</i>
-                        @endif
-                      </div>
-                      @if ($post->photo!=NULL)
-                        <img src="/images/posts/{{$post->id_user}}/{{$post->photo}}" class="profile_lastpost_photo" alt="lastpost_photo"/>
-                        <div class="profile_modal">
-                          <span class="profile_close">&times;</span>
-                          <img class="profile_modal-content">
+                    @foreach($usersR as $userR)
+                      @if($userR->id==$post->id_user)
+                        <?php $userR=$userR ?> @break
+                      @endif
+                    @endforeach
+                    @if($post->id_user==Auth::id() or $post->posts_privacy==1 or ($post->posts_privacy==2 and $userE->isFriendWith($userR)))
+                      <div class="panel panel-info media profile_post">
+                        <div class="profile_avatar_post media-left">
+                          <img src="/images/avatars/{{$post->avatar}}" class="profile_avatarimg_post" alt="avatarimg_post"/>
                         </div>
-                      @endif
-                    </div>
-                    <?php $clicked=False ?>
-                      @foreach($likesdone as $likedone)
-                        @if ($post->id==$likedone->id_post)
-                          <?php $clicked=True ?> @break
-                        @endif
-                      @endforeach
 
-                      @if($clicked)
-                        <a class="profile_post_likes_clicked" data-postid="{{$post->id}}" data-postlikes="{{$post->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="profile_post_likes_num">{{$post->likes}}</label></a>
-                      @else
-                        <a class="profile_post_likes" data-postid="{{$post->id}}" data-postlikes="{{$post->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="profile_post_likes_num">{{$post->likes}}</label></a>
-                      @endif
-                    @if ($post->id_user==Auth::id())
-                      <div class="modal fade" id="confirm_delete_post_{{$post->id}}" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Estàs a punt d'esborrar una publicació, aquesta acció és irreversible.</p>
-                                    <p>Vols continuar?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    <a href="/deletepost/{{$post->id}}"><button type="button" class="btn btn-danger profile_modal_delete_btn">Eliminar</button></a>
+                        <div class="profile_name_content_post media-body">
+                          <h4 class="profile_name_post media-heading">
+                            <a class="profile_iduser_post" href="{{ url('/profile/'.$post->id_user) }}">{{$post->name}}</a>
+                            <small><p class="profile_date_post"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($post->created_at)); ?></p></small>
+                          </h4>
+                          <div>
+                            {{ $post->content }}
+                            @if ($post->created_at!=$post->updated_at)
+                              <i class="profile_message_edited">Editat</i>
+                            @endif
+                          </div>
+                          @if ($post->photo!=NULL)
+                            <img src="/images/posts/{{$post->id_user}}/{{$post->photo}}" class="profile_lastpost_photo" alt="lastpost_photo"/>
+                            <div class="profile_modal">
+                              <span class="profile_close">&times;</span>
+                              <img class="profile_modal-content">
+                            </div>
+                          @endif
+                        </div>
+                        <?php $clicked=False ?>
+                          @foreach($likesdone as $likedone)
+                            @if ($post->id==$likedone->id_post)
+                              <?php $clicked=True ?> @break
+                            @endif
+                          @endforeach
+
+                          @if($clicked)
+                            <a class="profile_post_likes_clicked" data-postid="{{$post->id}}" data-postlikes="{{$post->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="profile_post_likes_num">{{$post->likes}}</label></a>
+                          @else
+                            <a class="profile_post_likes" data-postid="{{$post->id}}" data-postlikes="{{$post->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="profile_post_likes_num">{{$post->likes}}</label></a>
+                          @endif
+                        @if ($post->id_user==Auth::id())
+                          <div class="modal fade" id="confirm_delete_post_{{$post->id}}" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Estàs a punt d'esborrar una publicació, aquesta acció és irreversible.</p>
+                                        <p>Vols continuar?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <a href="/deletepost/{{$post->id}}"><button type="button" class="btn btn-danger profile_modal_delete_btn">Eliminar</button></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                          </div>
+                          <a class="profile_post_options" data-toggle="modal" href="#confirm_delete_post_{{$post->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+                          <a class="profile_post_options" href="{{ url('/editpost/'.$post->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                        @endif
                       </div>
-                      <a class="profile_post_options" data-toggle="modal" href="#confirm_delete_post_{{$post->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
-                      <a class="profile_post_options" href="{{ url('/editpost/'.$post->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                     @endif
-                  </div>
                   @endforeach
 
 
