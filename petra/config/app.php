@@ -165,6 +165,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Nahid\Talk\TalkServiceProvider::class,
+        Hootlex\Friendships\FriendshipsServiceProvider::class,
 
 
 
