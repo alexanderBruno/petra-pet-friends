@@ -54,6 +54,7 @@
                         <p class="friends_confirmation_info">Encara no tens cap amistat, anima't a fer alguna!</p>
                       @else
                         @foreach($yourfriends as $yourfriend)
+                          @if($yourfriend->id!=Auth::id())
                             <table class="friends table">
                                 <tr>
                                     <td>
@@ -66,6 +67,7 @@
                                 </tr>
                             </table>
                             <hr class="friends_hr">
+                          @endif
                         @endforeach
                       @endif
                     </div>
@@ -128,19 +130,23 @@
                                           <a class="friends_username" href="{{ url('/profile/'.$user->id) }}">{{$user->name}}</a>
                                           </td>
                                           <td>
-                                          <?php $cansendrequest=False ?>
                                           @if(count($youcansendrequest)!=0)
+                                            <?php $cansendrequest="False" ?>
                                             @foreach($youcansendrequest as $ycsr)
-                                              @if(!$ycsr->sender_id==Auth::id() and !$ycsr->recipient_id==$user->id or !$ycsr->sender_id==$user->id and !$ycsr->recipient_id==Auth::id())
-                                                <?php $cansendrequest=True ?> @break
+                                              @if($ycsr->sender_id==$user->id and $ycsr->recipient_id==Auth::id() and $ycsr->status==2)
+                                                <?php $cansendrequest="Allow" ?> @break
+                                              @elseif(($ycsr->sender_id==Auth::id() and $ycsr->recipient_id==$user->id) or ($ycsr->sender_id==$user->id and $ycsr->recipient_id==Auth::id()))
+                                                <?php $cansendrequest="False" ?> @break
+                                              @else
+                                                <?php $cansendrequest="True" ?>
                                               @endif
                                             @endforeach
                                           @else
-                                            <?php $cansendrequest=True ?>
+                                            <?php $cansendrequest="True" ?>
                                           @endif
-                                          @if($cansendrequest)
+                                          @if($cansendrequest=="True")
                                             <a href="/friends/add/{{$user->id}}" class="btn btn-info pull-right friends_buttonmessage">Enviar solicitud d'amistat</a>
-                                          @elseif($ycsr->sender_id==$user->id and $ycsr->recipient_id==Auth::id() and $ycsr->status==2)
+                                          @elseif($cansendrequest=="Allow")
                                             <a href="/friends/allowadd/{{$user->id}}" class="btn btn-info pull-right friends_buttonmessage">Permetre enviar sol·licitud d'amistat</a>
                                           @endif
                                           </td>

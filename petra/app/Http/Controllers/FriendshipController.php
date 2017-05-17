@@ -24,7 +24,7 @@ class FriendshipController extends Controller
                 $join->on('users.id', '=', 'friendships.sender_id')->orOn('users.id', '=', 'friendships.recipient_id');
             })
             ->select('friendships.sender_id', 'friendships.recipient_id', 'users.id', 'users.name', 'users.avatar')
-            ->where('friendships.status', 1)->where('users.id', '<>', Auth::id())
+            ->where('friendships.status', 1)->where('friendships.sender_id', Auth::id())->orWhere('friendships.recipient_id', Auth::id())
             ->orderBy('users.name')
             ->get();
 
@@ -102,6 +102,8 @@ class FriendshipController extends Controller
             return redirect()->action('FriendshipController@index')->with('confirmation', 'allowaddsameuser');
           } elseif ($currenturl==("/friends/removeadd"."/".$id)) {
             return redirect()->action('FriendshipController@index')->with('confirmation', 'removeaddsameuser');
+          } elseif ($currenturl==("/friends/denyadd"."/".$id)) {
+            return redirect()->action('FriendshipController@index')->with('confirmation', 'denyaddsameuser');
           } else {
             return redirect()->action('FriendshipController@index')->with('confirmation', 'deletesameuser');
           }
@@ -112,6 +114,8 @@ class FriendshipController extends Controller
               return redirect()->action('FriendshipController@index')->with('confirmation', 'allowaddalready');
             } elseif ($currenturl==("/friends/removeadd"."/".$id)) {
               return redirect()->action('FriendshipController@index')->with('confirmation', 'removeaddalready');
+            } elseif ($currenturl==("/friends/denyadd"."/".$id)) {
+              return redirect()->action('FriendshipController@index')->with('confirmation', 'denyaddalready');
             } else {
               return redirect()->action('FriendshipController@index')->with('confirmation', 'deletealready');
             }
@@ -121,23 +125,50 @@ class FriendshipController extends Controller
           return redirect()->action('FriendshipController@index')->with('confirmation', 'allowedadd');
         } elseif ($currenturl==("/friends/removeadd"."/".$id)) {
           return redirect()->action('FriendshipController@index')->with('confirmation', 'removedadd');
+        } elseif ($currenturl==("/friends/denyadd"."/".$id)) {
+          return redirect()->action('FriendshipController@index')->with('confirmation', 'deniedadd');
         } else {
         return redirect()->action('FriendshipController@index')->with('confirmation', 'deletedfriend');
         }
       }
       elseif ($previousurl==("/profile"."/".$id)) {
         if ($userE==$userR) {
-          return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deletesameuser');
+          if ($currenturl==("/friends/allowadd"."/".$id)) {
+            return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'allowaddsameuser');
+          } elseif ($currenturl==("/friends/removeadd"."/".$id)) {
+            return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'removeaddsameuser');
+          } elseif ($currenturl==("/friends/denyadd"."/".$id)) {
+            return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'denyaddsameuser');
+          } else {
+            return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deletesameuser');
+          }
+
         } else {
           $del=$userE->unfriend($userR);
           if ($del==null) {
-            return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deletealready');
+            if ($currenturl==("/friends/allowadd"."/".$id)) {
+              return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'allowaddalready');
+            } elseif ($currenturl==("/friends/removeadd"."/".$id)) {
+              return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'removeaddalready');
+            } elseif ($currenturl==("/friends/denyadd"."/".$id)) {
+              return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'denyaddalready');
+            } else {
+              return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deletealready');
+            }
           }
         }
-        return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deletedfriend');
+        if ($currenturl==("/friends/allowadd"."/".$id)) {
+          return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'allowedadd');
+        } elseif ($currenturl==("/friends/removeadd"."/".$id)) {
+          return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'removedadd');
+        } elseif ($currenturl==("/friends/denyadd"."/".$id)) {
+          return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deniedadd');
+        } else {
+          return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deletedfriend');
+        }
       }
       else {
-        return redirect()->action('FriendshipController@index')->with('confirmation', 'error');
+        return redirect()->action('ProfileController@index')->with('confirmation', 'error');
       }
     }
 
@@ -172,7 +203,7 @@ class FriendshipController extends Controller
         return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'acceptedadd');
       }
       else {
-        return redirect()->action('FriendshipController@index')->with('confirmation', 'error');
+        return redirect()->action('ProfileController@index')->with('confirmation', 'error');
       }
     }
 
@@ -207,7 +238,7 @@ class FriendshipController extends Controller
         return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deniedadd');
       }
       else {
-        return redirect()->action('FriendshipController@index')->with('confirmation', 'error');
+        return redirect()->action('ProfileController@index')->with('confirmation', 'error');
       }
     }
 
