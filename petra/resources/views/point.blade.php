@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -114,6 +113,7 @@
                               <a class="point_iduser_review" href="{{ url('/profile/'.$review->id_user) }}">{{$review->name}}</a>
                               <small><p class="point_date_review"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($review->created_at)); ?></p></small>
                             </h4>
+
                             <div>
                                 {{ $review->content }}
                                 @if ($review->created_at!=$review->updated_at)
@@ -128,7 +128,24 @@
                                 </div>
                             @endif
                         </div>
-
+                           
+                          <div class="valoration">
+                            <label class = "full" id="p1_r{{$review->id}}"></label> 
+                            <label class = "full" id="p2_r{{$review->id}}"></label> 
+                            <label class = "full" id="p3_r{{$review->id}}"></label> 
+                            <label class = "full" id="p4_r{{$review->id}}"></label> 
+                            <label class = "full" id="p5_r{{$review->id}}"></label> 
+                          </div>
+                          <script type="text/javascript">
+                              var personal_score = {{ $review->score }};
+                    
+                              var per_star = ["p1_r{{$review->id}}","p2_r{{$review->id}}","p3_r{{$review->id}}","p4_r{{$review->id}}","p5_r{{$review->id}}"];
+                              
+                              pawStar = Math.round(personal_score);
+                              for (var i = pawStar -1 ; i >= 0; i--) {
+                                document.getElementById(per_star[i]).style.color = '#ff6868';
+                              }
+                          </script>
                       <div>
                     <!-- modal eliminar review --> 
                         @if ($review->id_user==Auth::id())
@@ -163,6 +180,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js">
-</script>
+
 @endsection

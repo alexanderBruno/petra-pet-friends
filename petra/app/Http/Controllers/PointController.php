@@ -34,16 +34,11 @@ class PointController extends Controller
     	$point = Points::find($id);
 
     	$reviews = DB::table('reviews')
-            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
-            ->select('reviews.*', 'users.name', 'users.avatar')
+            ->join('users', 'reviews.id_user', '=', 'users.id')
+            ->join('scores_list','reviews.id_user','=','scores_list.id_user')
+            ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score')
             ->where('reviews.id_point', $id)
             ->get();
-
-      for ($i=0; $i < sizeof($reviews); $i++) { 
-        if ($reviews[$i]->id_user == Auth::id()) {
-          $reviewPermission = True;
-        }
-      }
 
       $score = $this -> getScore($id);
 
@@ -52,6 +47,7 @@ class PointController extends Controller
             ->update(['score' => $score]);
 
       $services = $this -> getIconsServices($point->services_list);
+
 
     	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score,'reviewPermission'=> $reviewPermission, 'loged' => Auth::id(), 'services'=>$services]);
 

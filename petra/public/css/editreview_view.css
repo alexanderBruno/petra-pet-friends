@@ -1,0 +1,45 @@
+body { 
+  background-color:#ffe0e0; 
+} 
+ 
+.editreview.panel-body { 
+  font-family: 'Bree Serif', serif; 
+} 
+ 
+.editreview_photoimg { 
+  max-width: 150px; 
+  max-height: 150px; 
+} 
+ 
+.editreview_submit { 
+  margin-top: 2%; 
+  float: right; 
+} 
+ 
+.editreview_back { 
+  margin-top: 2%; 
+  float: left; 
+} 
+ 
+ 
+.editreview_options { 
+  display: block; 
+} 
+.editreview_confirmation { 
+  color: green; 
+  font-weight: bold; 
+} 
+ 
+.editreview_content { 
+  resize: none; 
+} 
+ 
+input.editreview_photo[type="file"] { 
+    display: none; 
+} 
+.editreview_custom-file-upload { 
+    border: 1px solid #ccc; 
+    display: inline-block; 
+    padding: 6px 6px; 
+    cursor: pointer; 
+} 
