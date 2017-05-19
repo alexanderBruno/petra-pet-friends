@@ -65,14 +65,14 @@
                                     <p>Vols continuar?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    <a href="/editprofile/deleteuser/{{$user->id}}"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancelar</button>
+                                    <a href="/editprofile/deleteuser/{{$user->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></a>
                                 </div>
                             </div>
                         </div>
                       </div>
-                      <a href="#confirm_delete_user" data-toggle="modal" class="aass"><button type="button" class="btn btn-danger editprofile_deleteuser">Eliminar compte</button></a>
-                      <button type="submit" name="submit" class="btn btn-primary editprofile_submit">Guardar canvis</button>
+                      <a href="#confirm_delete_user" data-toggle="modal" class="editprofile_deleteuser"><button type="button" class="btn btn-danger editprofile_deleteuser_button"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar compte</button></a>
+                      <button type="submit" name="submit" class="btn btn-primary editprofile_submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar canvis</button>
                     </form>
                 </div>
             </div>

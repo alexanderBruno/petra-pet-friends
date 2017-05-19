@@ -23,7 +23,7 @@
                                   <a class="messages_username" href="{{ url('/profile/'.$user->id) }}">{{$user->name}}</a>
                               </td>
                               <td>
-                                  <a href="{{route('message.read', ['id'=>$user->id])}}" class="btn btn-primary pull-right messages_buttonmessage">Enviar missatge</a>
+                                  <a href="{{route('message.read', ['id'=>$user->id])}}" class="btn btn-primary pull-right messages_buttonmessage"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Enviar missatge</a>
                               </td>
                           </tr>
                       </table>

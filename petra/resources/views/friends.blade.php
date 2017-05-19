@@ -62,7 +62,7 @@
                                         <a class="friends_username" href="{{ url('/profile/'.$yourfriend->id) }}">{{$yourfriend->name}}</a>
                                     </td>
                                     <td>
-                                        <a href="/friends/delete/{{$yourfriend->id}}" class="btn btn-danger pull-right friends_buttonmessage">Eliminar de les meves amistats</a>
+                                        <a href="/friends/delete/{{$yourfriend->id}}" class="btn btn-danger pull-right friends_buttonmessage"><i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Eliminar de les meves amistats</a>
                                     </td>
                                 </tr>
                             </table>
@@ -83,8 +83,8 @@
                                         <a class="friends_username" href="{{ url('/profile/'.$yourpendingrequest->id) }}">{{$yourpendingrequest->name}}</a>
                                     </td>
                                     <td>
-                                        <a href="/friends/denyadd/{{$yourpendingrequest->id}}" class="btn btn-danger pull-right friends_buttonmessage">Denegar</a>
-                                        <a href="/friends/acceptadd/{{$yourpendingrequest->id}}" class="btn btn-success pull-right friends_buttonmessage">Acceptar</a>
+                                        <a href="/friends/denyadd/{{$yourpendingrequest->id}}" class="btn btn-danger pull-right friends_buttonmessage"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;&nbsp;Denegar</a>
+                                        <a href="/friends/acceptadd/{{$yourpendingrequest->id}}" class="btn btn-success pull-right friends_buttonmessage"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;&nbsp;Acceptar</a>
                                     </td>
                                 </tr>
                             </table>
@@ -104,7 +104,7 @@
                                         <a class="friends_username" href="{{ url('/profile/'.$yoursendrequest->id) }}">{{$yoursendrequest->name}}</a>
                                     </td>
                                     <td>
-                                        <a href="/friends/removeadd/{{$yoursendrequest->id}}" class="btn btn-danger pull-right friends_buttonmessage">Cancel·lar solicitud</a>
+                                        <a href="/friends/removeadd/{{$yoursendrequest->id}}" class="btn btn-danger pull-right friends_buttonmessage"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;&nbsp;Cancel·lar solicitud</a>
                                     </td>
                                 </tr>
                             </table>
@@ -145,9 +145,9 @@
                                             <?php $cansendrequest="True" ?>
                                           @endif
                                           @if($cansendrequest=="True")
-                                            <a href="/friends/add/{{$user->id}}" class="btn btn-info pull-right friends_buttonmessage">Enviar solicitud d'amistat</a>
+                                            <a href="/friends/add/{{$user->id}}" class="btn btn-info pull-right friends_buttonmessage"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Enviar solicitud d'amistat</a>
                                           @elseif($cansendrequest=="Allow")
-                                            <a href="/friends/allowadd/{{$user->id}}" class="btn btn-info pull-right friends_buttonmessage">Permetre enviar sol·licitud d'amistat</a>
+                                            <a href="/friends/allowadd/{{$user->id}}" class="btn btn-info pull-right friends_buttonmessage"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;&nbsp;Permetre enviar sol·licitud d'amistat</a>
                                           @endif
                                           </td>
                                         @endif
