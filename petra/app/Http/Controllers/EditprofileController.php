@@ -72,4 +72,15 @@ class EditprofileController extends Controller
       $user = DB::table('users')->where('id', $id)->first();
       return view('editprofile', ['user' => $user]);
     }
+
+
+    public function deleteuser($id)
+    {
+      if (Auth::id() == $id) {
+        DB::table('users')->where('id', $id)->delete();
+        return redirect()->route('logout');
+      } else {
+        return redirect()->action('HomeController@index')->with('confirmation', 'usernotdeleted');
+      }
+    }
 }

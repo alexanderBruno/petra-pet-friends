@@ -39,6 +39,8 @@ Route::get('/editprofile', 'EditprofileController@index');
 
 Route::post('/editprofile', 'EditprofileController@save');
 
+Route::get('/editprofile/deleteuser/{id}', 'EditprofileController@deleteuser');
+
 Route::get('/points','PointController@getList');//provisional
 
 Route::get('/point/{id}','PointController@profile');
@@ -48,7 +50,7 @@ Route::post('/point/{id}','PointController@review');
 Route::get('/editreview/{id}', 'EditReviewController@index');
 
 Route::post('editreview/saved', 'EditReviewController@save');
- 
+
 Route::get('/deletereview/{id}', 'DeleteReviewController@delete');
 
 Route::get('/editpost/{id}', 'EditpostController@index');

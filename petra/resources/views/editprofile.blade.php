@@ -52,7 +52,26 @@
                           <option value="fura" <?php if ($user->type_pet=="fura") echo "selected"; ?>>Fura</option>
                         </select>
                       </div>
-                      <a href="{{url()->previous()}}"><button type="button" class="btn btn-primary editpost_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Tornar enrere</button></a>
+                      <a href="{{url()->previous()}}"><button type="button" class="btn btn-primary editprofile_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Tornar enrere</button></a>
+                      <div class="modal fade" id="confirm_delete_user" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title" id="myModalLabel">Eliminar compte</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Estàs a punt d'esborrar el teu compte, aquesta acció és irreversible.</p>
+                                    <p>Vols continuar?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <a href="/editprofile/deleteuser/{{$user->id}}"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <a href="#confirm_delete_user" data-toggle="modal" class="aass"><button type="button" class="btn btn-danger editprofile_deleteuser">Eliminar compte</button></a>
                       <button type="submit" name="submit" class="btn btn-primary editprofile_submit">Guardar canvis</button>
                     </form>
                 </div>

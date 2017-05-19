@@ -19,6 +19,8 @@
                     <p class="home_confirmation_true">Publicació eliminada correctament.</p>
                   @elseif(session('confirmation')=='postnotdeleted')
                     <p class="home_confirmation_false">No pots eliminar aquesta publicació!</p>
+                  @elseif(session('confirmation')=='usernotdeleted')
+                    <p class="home_confirmation_false">No pots eliminar el compte d'un altre usuari!!</p>
                   @endif
 
                   <form action="/home" method="POST" class="home_form" enctype="multipart/form-data">

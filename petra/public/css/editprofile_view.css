@@ -21,6 +21,11 @@ body {
   float: left;
 }
 
+.editprofile_deleteuser {
+  margin-top: 2%;
+  margin-left: 23%;
+}
+
 .editprofile_confirmation {
   color: green;
   font-weight: bold;
