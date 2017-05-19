@@ -14,7 +14,6 @@ body {
 }
 
 .title {
-  /*font-family: 'Bree Serif', serif;*/
   font-family: 'Baloo';
   font-size: 500%;
   color: black;
@@ -35,25 +34,4 @@ body {
   letter-spacing: .1rem;
   text-decoration: none;
   text-transform: uppercase;
-}
-
-.navbar-xs {
-  min-height: 22px;
-  border-radius: 0;
-  height: 22px;
-  width: 54%;
-  margin: auto;
-}
-.navbar-xs .navbar-brand {
-  padding: 2px 8px;
-  font-size: 14px;
-  line-height: 14px;
-}
-.navbar-xs .navbar-nav > li > a {
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  line-height: 16px;
 }

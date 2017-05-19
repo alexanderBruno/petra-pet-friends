@@ -2,25 +2,41 @@
 
 @section('content')
 
-<div class="modal fade" id="afegir_marcador" role="dialog">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title" id="myModalLabel">Afegir marcador</h4>
-          </div>
-          <div class="modal-body">
+    <div class="map panel panel-info">
+      <div class="map panel-heading">Què vols buscar?</div>
+      <div class="map panel-body">
+        <ul class="map nav navbar-nav">
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-adjust"></i></a></li>
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-user"></i></a></li>
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-home"></i></a></li>
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-cd"></i></a></li>
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-flag"></i></a></li>
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-picture"></i></a></li>
+          <li><a class="map a" href="#"><i class="glyphicon glyphicon-leaf"></i></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal fade" id="afegir_marcador" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title" id="myModalLabel">Afegir marcador</h4>
+              </div>
+              <div class="modal-body">
 
-              <p>Aqui va el formulari</p>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <a href="#"><button type="button" class="btn btn-primary">Enviar</button></a>
+                  <p>Aqui va el formulari</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                  <a href="#"><button type="button" class="btn btn-primary">Enviar</button></a>
+              </div>
           </div>
       </div>
-  </div>
-</div>
-<a class="home_post_options" data-toggle="modal" href="#afegir_marcador"><i class="fa fa-plus"></i> Marcador nou</a>
+    </div>
+
+    <a class="home_post_options" data-toggle="modal" href="#afegir_marcador"><i class="fa fa-plus"></i> Marcador nou</a>
 
     <div id="map_map"></div>
 
