@@ -54,13 +54,20 @@ input.point_review_photo[type="file"] {
   font-weight: bold;
 }
 
+.valoration{
+ 
+  display:inline-block;
+  margin-left: 3%;
+}
 
 
+.review_content{
+  margin:1%;
+}
 
-
-
-
-
+.point_info{
+  font-size: 200%;
+}
 
 
 
@@ -89,6 +96,8 @@ input.point_review_photo[type="file"] {
 .point_name_review {
   font-weight: bold;
   margin-bottom: 2%;
+  display: inline-flex;
+  width: 60%;
 }
 
 .point_lastreview_photo {
@@ -113,7 +122,6 @@ input.point_review_photo[type="file"] {
 
 .point_review_options {
   float: right;
-  margin-right: 3%;
   color: #3097d1;
 }
 

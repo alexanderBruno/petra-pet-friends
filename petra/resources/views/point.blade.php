@@ -33,8 +33,8 @@
                         <i>{{$point->description}}</i>
                       @endif
 
-                    </div>
-                    <div>
+                    </div >
+                    <div class="point_info">
                     	<p>Serveis:</p>
                       @foreach($services as $service)
                         <i class="fa {{ $service->icon}}" title="{{ $service->name}}"></i>
@@ -109,12 +109,23 @@
                       
                 <!-- nombre del usuario, contenido de la review, fecha de creacion o actualizacion y foto de la opinion -->
                         <div class="point_name_content_review media-body">
-                            <h4 class="point_name_review media-heading">
+                       <div class="point_name_review media-heading">
+                            <h4 >
                               <a class="point_iduser_review" href="{{ url('/profile/'.$review->id_user) }}">{{$review->name}}</a>
-                              <small><p class="point_date_review"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($review->created_at)); ?></p></small>
+                            
                             </h4>
+                            <div class="valoration">
+                            <label class = "full" id="p1_r{{$review->id}}"></label> 
+                            <label class = "full" id="p2_r{{$review->id}}"></label> 
+                            <label class = "full" id="p3_r{{$review->id}}"></label> 
+                            <label class = "full" id="p4_r{{$review->id}}"></label> 
+                            <label class = "full" id="p5_r{{$review->id}}"></label> 
+                          </div>
 
-                            <div>
+                        </div>
+                            <small><p class="point_date_review"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($review->created_at)); ?></p></small>
+                            
+                            <div class="review_content">
                                 {{ $review->content }}
                                 @if ($review->created_at!=$review->updated_at)
                                     <i class="point_message_edited">Editat</i>
@@ -129,13 +140,7 @@
                             @endif
                         </div>
                            
-                          <div class="valoration">
-                            <label class = "full" id="p1_r{{$review->id}}"></label> 
-                            <label class = "full" id="p2_r{{$review->id}}"></label> 
-                            <label class = "full" id="p3_r{{$review->id}}"></label> 
-                            <label class = "full" id="p4_r{{$review->id}}"></label> 
-                            <label class = "full" id="p5_r{{$review->id}}"></label> 
-                          </div>
+                          
                           <script type="text/javascript">
                               var personal_score = {{ $review->score }};
                     
@@ -147,19 +152,22 @@
                               }
                           </script>
                           @if (!Auth::guest())
-                            <?php $clicked=False ?>
-                            @foreach($likesdone as $likedone)
-                              @if ($review->id==$likedone->id_review)
-                                <?php $clicked=True ?> @break
-                              @endif
-                            @endforeach
-                             @if($clicked)
-                              <a class="point_review_likes_clicked" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
-                            @else
-                              <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
+                          <?php $clicked=False ?>
+                          @foreach($likesdone as $likedone)
+                            @if ($review->id==$likedone->id_review)
+                              <?php $clicked=True ?> @break
                             @endif
+                          @endforeach
+                           @if($clicked)
+                            <a class="point_review_likes_clicked" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
+                          @else
+                            <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
                           @endif
+                          @endif
+                          <a class="point_review_options" data-toggle="modal" href="#confirm_delete_review_{{$review->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+                            <a class="point_review_options" href="{{ url('/editreview/'.$review->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                       <div>
+
                     <!-- modal eliminar review --> 
                         @if ($review->id_user==Auth::id())
                             <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
@@ -181,8 +189,7 @@
                                </div>
                             </div>
 
-                            <a class="point_review_options" data-toggle="modal" href="#confirm_delete_review_{{$review->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
-                            <a class="point_review_options" href="{{ url('/editreview/'.$review->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                            
                       @endif
                     <!-- fin modal -->   
                       </div>
