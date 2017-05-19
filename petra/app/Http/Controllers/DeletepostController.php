@@ -40,8 +40,6 @@ class DeletepostController extends Controller
       }
 
       $previousurl=parse_url(url()->previous(), PHP_URL_PATH);
-      var_dump($previousurl);
-      var_dump(("/profile"."/".$post->id_user));
       if($previousurl=="/home" ) {
         return redirect()->action('HomeController@index')->with('confirmation', 'postnotdeleted');
       } elseif ($previousurl==("/profile"."/".Auth::id())) {
