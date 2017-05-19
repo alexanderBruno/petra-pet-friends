@@ -21,7 +21,7 @@ html, body {
 .infoimg{
   max-width: 75px !important;
   max-height: 75px !important;
-  border: 1px solid #ccc;
+  border: 1botoCentratpx solid #ccc;
 }
 .lletra{
   font-family: 'Bree Serif', serif;
@@ -55,4 +55,26 @@ html, body {
   margin: 5px;
   margin-left: 7px;
   /*color: #ff6868;*/
+}
+#controlBoto{
+
+}
+#botoCentrat {
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  cursor: pointer;
+  float: left;
+  /*margin-bottom: 22px;*/
+  margin-top: 10px;
+  text-align: center;
+}
+#textBotoCentrat {
+  color: rgb(25,25,25);
+  font-family: Roboto,Arial,sans-serif;
+  font-size: 15px;
+  line-height: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
 }

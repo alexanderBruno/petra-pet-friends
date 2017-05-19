@@ -2,17 +2,40 @@
 
 @section('content')
 
+<div class="modal fade" id="afegir_marcador" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">Afegir marcador</h4>
+          </div>
+          <div class="modal-body">
+
+              <p>Aqui va el formulari</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <a href="#"><button type="button" class="btn btn-primary">Enviar</button></a>
+          </div>
+      </div>
+  </div>
+</div>
+<a class="home_post_options" data-toggle="modal" href="#afegir_marcador"><i class="fa fa-plus"></i> Marcador nou</a>
+
     <div id="map_map"></div>
 
     <script>
         var map;
         var infoWindow;
+        var newMarker = [];
 
         // Crea el mapa i el event que tenca els infowindows
         function initMap() {
             map = new google.maps.Map(document.getElementById('map_map'), {
                 zoom: 15,
                 center: new google.maps.LatLng(41.394,2.167),
+                //center: chicago,
+                fullscreenControl: true
             });
 
             // Try HTML5 geolocation.
@@ -32,6 +55,19 @@
             google.maps.event.addListener(map, 'click', function() {
                infoWindow.close();
             });
+
+            // Event que crida a la funció, d'afegir marcador
+            map.addListener('click', function(event) {
+              addMarker(event.latLng);
+            });
+
+
+            var centerControlDiv = document.createElement('div');
+            var centerControl = new CenterControl(centerControlDiv, map);
+
+            centerControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
 
             // Crida afegirMarkers(), que afegeix els marcadors
             afegirMarkers();
@@ -73,14 +109,16 @@
       var opcions = {
          map: map,
          position: latlng,
-         title: nom
+         title: nom,
+         animation: google.maps.Animation.DROP
       }
       if(marca != null){
         var opcions = {
            map: map,
            position: latlng,
            icon: marca,
-           title: nom
+           title: nom,
+           animation: google.maps.Animation.DROP
         }
       }
        var marker = new google.maps.Marker(opcions);
@@ -118,6 +156,46 @@
           infoWindow.open(map, marker);
        });
     }
+
+    function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.title = 'Click to recenter the map';
+        controlUI.id = 'botoCentrat';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.id = 'textBotoCentrat';
+        controlText.innerHTML = 'Afegir Point';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function() {
+          //map.setCenter(chicago);
+          //alert('boto_control');
+          alert('Patata');
+        });
+
+      }
+
+    function addMarker(location) {
+      if (newMarker != null){
+        newMarker.setMap(null);
+        newMarker = null;
+      }
+
+      var newMarker = new google.maps.Marker({
+        position: location,
+        map: map,
+        draggable:true
+      });
+        //newMarker = null;
+        newMarker.push(marker);
+      }
+
+
 
       </script>
 
