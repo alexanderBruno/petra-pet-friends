@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Editar comentari</h3></div>
+                <div class="panel-heading"><h3>Editar opinió</h3></div>
 
                 <div class="editreview panel-body">
                   <form action="/editreview/saved" method="POST" class="editreview_form" enctype="multipart/form-data">
@@ -30,6 +30,17 @@
                       @endif
                       
                       <input id="editreview_file-upload" name="editreview_photo" type="file" class="file editreview_photo">
+                    </div>
+                    <div>
+                    <label>Puntuació:</label><br>
+                    <fieldset class="edit_rating" name="valoration">
+                          <input type="radio" id="paw5" name="rating" value="5" /><label for="paw5" title="Extelent!"></label>
+                          <input type="radio" id="paw4" name="rating" value="4" /><label for="paw4" title="Molt Bé!"></label>
+                          <input type="radio" id="paw3" name="rating" value="3" /><label for="paw3" title="Meh"></label>
+                          <input type="radio" id="paw2" name="rating" value="2" /><label for="paw2" title="Dolent"></label>
+                          <input type="radio" id="paw1" name="rating" value="1" /><label for="paw1" title="Molt dolent"></label> 
+                    </fieldset><br><br>
+                      
                     </div>
                     <input type="hidden" name="editreview_id" value="{{$review->id}}">
                     <input type="hidden" name="editreview_previousurl" value="{{url()->previous()}}">

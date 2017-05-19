@@ -62,8 +62,8 @@
                       </div>
                     </div>
                   </div>
-                  @if(isset($reviewPermission))
-                    @if($reviewPermission == false)
+              
+                    @if($reviewPermission < 1 and !Auth::guest())
                     <hr>
                     <h3>Vols opinar sobre aquest lloc?</h3>
                     <hr>
@@ -96,9 +96,9 @@
                       <button type="submit" name="submit" class="btn btn-primary point_submit">Publicar</button>
                     </form>
                     @endif
-                  @endif
+                 
                   <hr>
-                  <h3>Comentaris:</h3>
+                  <h3>Opinions:</h3>
                   <hr>
                   @foreach($reviews as $review)
 
@@ -124,7 +124,7 @@
                                 <img src="/images/reviews/{{$review->id_point}}/{{$review->photo}}" class="point_lastreview_photo" alt="lastreview_photo"/>
                                 <div class="review_modal">
                                     <span class="point_close">&times;</span>
-                                    <img class="point_modal-content">
+                                    <img class="review_modal-content">
                                 </div>
                             @endif
                         </div>
@@ -146,6 +146,19 @@
                                 document.getElementById(per_star[i]).style.color = '#ff6868';
                               }
                           </script>
+                          @if (!Auth::guest())
+                            <?php $clicked=False ?>
+                            @foreach($likesdone as $likedone)
+                              @if ($review->id==$likedone->id_review)
+                                <?php $clicked=True ?> @break
+                              @endif
+                            @endforeach
+                             @if($clicked)
+                              <a class="point_review_likes_clicked" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
+                            @else
+                              <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
+                            @endif
+                          @endif
                       <div>
                     <!-- modal eliminar review --> 
                         @if ($review->id_user==Auth::id())
@@ -180,5 +193,95 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+//modal de imagen
+      for (j = 0; j < document.getElementsByClassName('point_lastreview_photo').length; j++) {
+        var review_modal = document.getElementsByClassName('review_modal')[j];
+        var review_img = document.getElementsByClassName('point_lastreview_photo')[j];
+        var review_modalImg = document.getElementsByClassName("review_modal-content")[j];
+        review_img.onclick = function(){
+            review_modal.style.display = "block";
+            review_modalImg.src = this.src;
+        }
+        var point_span = document.getElementsByClassName("point_close")[j];
+        point_span.onclick = function() {
+            review_modal.style.display = "none";
+        }
+      }
+
+//sistema de likes
+      $(".point_review_likes").on('click', function(){
+          var $bnlk = $(this);
+          var $lk = $(this).children('.home_post_likes_num');
+          var $review_id = $(this).data('reviewid');
+          var $review_likes = $(this).data('reviewlikes');
+          $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)+1 : $review_likes)
+          if ($bnlk.hasClass('point_review_likes')) {
+            $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
+            $.ajax({
+                  type: 'GET',
+                  url: '/point/likereview/'+$review_id,
+                  success: function(data){
+                      console.log('success', data);
+                  },
+                  error: function(data){
+                      console.log('error', data);
+                      alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                  }
+                  });
+          } else {
+            $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
+            $.ajax({
+                  type: 'GET',
+                  url: '/point/droplikereview/'+$review_id,
+                  success: function(data){
+                      console.log('success', data);
+                  },
+                  error: function(data){
+                      console.log('error', data);
+                      alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                  }
+                  });
+          }
+
+      });
+
+      $(".point_review_likes_clicked").on('click', function(){
+        var $bnlk = $(this);
+        var $lk = $(this).children('.point_review_likes_num');
+        var $review_id = $(this).data('reviewid');
+        var $review_likes = $(this).data('reviewlikes');
+        var $review_likes = $(this).data('reviewlikes');
+        $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)-1 : $review_likes)
+        if ($bnlk.hasClass('point_review_likes_clicked')) {
+          $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
+          $.ajax({
+                type: 'GET',
+                url: '/point/droplikereview/'+$review_id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        } else {
+          $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
+          $.ajax({
+                type: 'GET',
+                url: '/point/likereview/'+$review_id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        }
+      });
+</script>
 
 @endsection

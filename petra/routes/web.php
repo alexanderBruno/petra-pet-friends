@@ -35,6 +35,14 @@ Route::get('/profile/likepost/{id}', 'ProfileController@likepost');
 
 Route::get('/profile/droplikepost/{id}', 'ProfileController@droplikepost');
 
+Route::get('/editpost/{id}', 'EditpostController@index');
+
+Route::post('/editpost/saved', 'EditpostController@save');
+
+Route::get('/deletepost/{id}', 'DeletepostController@delete');
+
+Route::get('/messages', 'MessageController@index');
+
 Route::get('/editprofile', 'EditprofileController@index');
 
 Route::post('/editprofile', 'EditprofileController@save');
@@ -53,13 +61,9 @@ Route::post('editreview/saved', 'EditReviewController@save');
 
 Route::get('/deletereview/{id}', 'DeleteReviewController@delete');
 
-Route::get('/editpost/{id}', 'EditpostController@index');
+Route::get('/point/likereview/{id}', 'PointController@likereview');
 
-Route::post('/editpost/saved', 'EditpostController@save');
-
-Route::get('/deletepost/{id}', 'DeletepostController@delete');
-
-Route::get('/messages', 'MessageController@index');
+Route::get('/point/droplikereview/{id}', 'PointController@droplikereview');
 
 Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
 

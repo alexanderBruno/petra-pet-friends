@@ -30,7 +30,7 @@ class PointController extends Controller
      */
     public function profile($id)
     {
-      $reviewPermission = False;
+   
     	$point = Points::find($id);
 
     	$reviews = DB::table('reviews')
@@ -40,16 +40,27 @@ class PointController extends Controller
             ->where('reviews.id_point', $id)
             ->get();
 
+      $reviewPermission = DB::table('reviews')
+          ->where([['id_user', Auth::id()],['id_point', $id]])
+          ->count();
+
+      $likesdone = DB::table('likereview_list')->where('id_user', Auth::id())->get();
+
       $score = $this -> getScore($id);
 
+      //actualizar la puntuacion de cada punto
       DB::table('points')
             ->where('id', $id)
             ->update(['score' => $score]);
 
       $services = $this -> getIconsServices($point->services_list);
+      //si hay un comentario con el id del usuario, no podra volver a comentar
+       
+        
+      
 
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score,'reviewPermission'=> $reviewPermission, 'loged' => Auth::id(), 'services'=>$services]);
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score,'reviewPermission'=> $reviewPermission, 'loged' => Auth::id(), 'services'=>$services, 'likesdone'=>$likesdone]);
 
     }
 
@@ -100,15 +111,40 @@ class PointController extends Controller
       $point = Points::find($id);
 
     	$reviews = DB::table('reviews')
-            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
-            ->select('reviews.*', 'users.name', 'users.avatar')
+            ->join('users', 'reviews.id_user', '=', 'users.id')
+            ->join('scores_list','reviews.id_user','=','scores_list.id_user')
+            ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score')
             ->where('reviews.id_point', $id)
             ->get();
 
       $score = $this -> getScore($id);
       $services = $this -> getIconsServices($point->services_list);
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services]);
+      $reviewPermission = DB::table('reviews')
+          ->where('id_user', Auth::id())
+          ->count();
+
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services, 'reviewPermission' => $reviewPermission]);
+    }
+
+     public function likereview($id)
+    {
+      $existslike = DB::table('likereview_list')->where('id_user', Auth::id())->where('id_review', $id)->first();
+
+      if (count($existslike)==0) {
+        DB::table('reviews')->where('id', $id)->increment('likes', 1);
+        DB::table('likereview_list')->insert(['id_user' => Auth::id(), 'id_review' => $id, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+      }
+    }
+
+    public function droplikereview($id)
+    {
+      $existslike = DB::table('likereview_list')->where('id_user', Auth::id())->where('id_review', $id)->first();
+
+      if (count($existslike)!=0) {
+        DB::table('reviews')->where('id', $id)->decrement('likes', 1);
+        DB::table('likereview_list')->where('id_user', Auth::id())->where('id_review', $id)->delete();
+      }
     }
 
     public function generateRandomString($length = 10) {

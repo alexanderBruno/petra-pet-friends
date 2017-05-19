@@ -43,3 +43,44 @@ input.editreview_photo[type="file"] {
     padding: 6px 6px; 
     cursor: pointer; 
 } 
+
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+fieldset, label { margin: 0; padding: 0; }
+
+
+
+/****** Style Star Rating Widget *****/
+
+.edit_rating { 
+  border: none;
+
+  float:auto;
+  display: inline-block;
+  margin-right:10px;
+}
+
+.edit_rating > input { display: none; } 
+.edit_rating > label:before { 
+  margin: 5px;
+  font-size: 1.75em;
+  font-family: FontAwesome;
+  display: inline;
+  content: "\f1b0";
+}
+
+.edit_rating > label { 
+  color: #ddd;/*color fondo patita sin clicar*/ 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.edit_rating > input:checked ~ label, /* show gold star when clicked */
+.edit_rating:not(:checked) > label:hover, /* hover current star */
+.edit_rating:not(:checked) > label:hover ~ label { color: #ff6868;  } /* hover previous stars in list */
+
+.edit_rating > input:checked + label:hover, /* hover current star when changing rating */
+.edit_rating > input:checked ~ label:hover,
+.edit_rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.edit_rating > input:checked ~ label:hover ~ label { color: #ffa0a0;  } 

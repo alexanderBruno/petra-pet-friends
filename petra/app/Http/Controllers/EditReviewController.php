@@ -59,6 +59,13 @@ class EditReviewController extends Controller
         if ($request->input('editreview_content')) { 
           DB::table('reviews')->where('id', $id)->update(['content' => $request->input('editreview_content')]); 
         } 
+   
+        if ($request->input('rating')) {
+
+            DB::table('scores_list')->where('id_review',$id)->where('id_user',$review->id_user)
+                    ->update(['score'=>intval($request->input('rating'))]);
+          }
+
         if (Input::hasFile('editreview_photo')) { 
           if ($review->photo==NULL) { 
             $photo = generateRandomString().".png"; 

@@ -26,6 +26,7 @@ body {
 .point_review {
   margin-top: 1%;
   resize: none;
+  padding: 1%;
 }
 
 input.point_review_photo[type="file"] {
@@ -166,7 +167,7 @@ input.point_review_photo[type="file"] {
 .point_lastreview_photo:hover {opacity: 0.7;}
 
 /* The Modal (background) */
-.point_modal {
+.review_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -181,7 +182,7 @@ input.point_review_photo[type="file"] {
 }
 
 /* Modal Content (image) */
-.point_modal-content {
+.review_modal-content {
     margin: auto;
     display: block;
     max-width: 700px;
