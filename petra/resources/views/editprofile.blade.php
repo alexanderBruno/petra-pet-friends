@@ -43,6 +43,10 @@
                        @endif
                       </div>
                       <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" name="editprofile_email" class="form-control" value="{{$user->email}}">
+                      </div>
+                      <div class="form-group">
                         <label>Tipus de mascota:</label>
                         <select name="editprofile_type_pet" class="form-control">
                           <option value="NULL" <?php if ($user->type_pet=="NULL") echo "selected"; ?>>Escull una</option>

@@ -22,8 +22,11 @@ body {
 }
 
 .editprofile_deleteuser {
+  margin-left: 22%;
+}
+
+.editprofile_deleteuser_button {
   margin-top: 2%;
-  margin-left: 23%;
 }
 
 .editprofile_confirmation {
