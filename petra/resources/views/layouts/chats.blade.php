@@ -106,10 +106,10 @@
             <img src="/images/avatars/{{$user->avatar}}" alt="avatar" class="chat_avatarimg" />
         @endif
         <div class="chat-about">
-            @if(isset($user))
+            @if($id==0)
+                <div class="chat-with"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Selecciona una conversa</div>
+            @elseif(isset($user))
                 <div class="chat-with">{{'Conversa amb ' . @$user->name}}</div>
-            @else
-                <div class="chat-with">No Thread Selected</div>
             @endif
         </div>
         <i class="fa fa-star"></i>

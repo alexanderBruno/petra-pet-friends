@@ -5,7 +5,6 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-
                 <div class="home panel-body">
                   @if(session('confirmation')=='error')
                     <p class="home_confirmation_false">Alguna cosa no ha sortit bè. Contacta amb un administrador.</p>
@@ -19,6 +18,8 @@
                     <p class="home_confirmation_true">Publicació eliminada correctament.</p>
                   @elseif(session('confirmation')=='postnotdeleted')
                     <p class="home_confirmation_false">No pots eliminar aquesta publicació!</p>
+                  @elseif(session('confirmation')=='usernotdeleted')
+                    <p class="home_confirmation_false">No pots eliminar el compte d'un altre usuari!!</p>
                   @endif
 
                   <form action="/home" method="POST" class="home_form" enctype="multipart/form-data">
@@ -32,7 +33,7 @@
                         <i class="glyphicon glyphicon-camera"></i> Vols adjuntar una foto? Clica'm a sobre!
                     </label>
                     <input id="home_file-upload" name="home_post_photo" type="file" class="file home_post_photo">
-                    <button type="submit" name="submit" class="btn btn-primary home_submit">Publicar</button>
+                    <button type="submit" name="submit" class="btn btn-primary home_submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;Publicar</button>
                   </form>
 
                   <hr>

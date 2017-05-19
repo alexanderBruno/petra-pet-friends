@@ -13,6 +13,7 @@
                   @elseif(session('confirmation')=='sameuser')
                     <p class="messages_confirmation_false">Aquest id es el teu! Parla amb altres usuaris!</p>
                   @endif
+                <a href="{{route('message.read', ['id'=>0])}}" class="btn btn-primary btn-group btn-group-justified messages_big_buttonmessage"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Obrir missatges</a>
                 @foreach($users as $user)
                   @if($user->id!=Auth::id())
                       <table class="messages table">
@@ -22,7 +23,7 @@
                                   <a class="messages_username" href="{{ url('/profile/'.$user->id) }}">{{$user->name}}</a>
                               </td>
                               <td>
-                                  <a href="{{route('message.read', ['id'=>$user->id])}}" class="btn btn-primary pull-right messages_buttonmessage">Enviar missatge</a>
+                                  <a href="{{route('message.read', ['id'=>$user->id])}}" class="btn btn-primary pull-right messages_buttonmessage"><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Enviar missatge</a>
                               </td>
                           </tr>
                       </table>
