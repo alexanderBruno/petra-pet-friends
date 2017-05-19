@@ -21,7 +21,7 @@ html, body {
 .infoimg{
   max-width: 75px !important;
   max-height: 75px !important;
-  border: 1botoCentratpx solid #ccc;
+  border: 1 solid #ccc;
 }
 .lletra{
   font-family: 'Bree Serif', serif;
@@ -55,9 +55,6 @@ html, body {
   margin: 5px;
   margin-left: 7px;
   /*color: #ff6868;*/
-}
-#controlBoto{
-
 }
 #botoCentrat {
   background-color: #fff;
