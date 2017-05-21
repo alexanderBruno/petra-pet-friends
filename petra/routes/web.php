@@ -35,14 +35,6 @@ Route::get('/profile/likepost/{id}', 'ProfileController@likepost');
 
 Route::get('/profile/droplikepost/{id}', 'ProfileController@droplikepost');
 
-Route::get('/editpost/{id}', 'EditpostController@index');
-
-Route::post('/editpost/saved', 'EditpostController@save');
-
-Route::get('/deletepost/{id}', 'DeletepostController@delete');
-
-Route::get('/messages', 'MessageController@index');
-
 Route::get('/editprofile', 'EditprofileController@index');
 
 Route::post('/editprofile', 'EditprofileController@save');
@@ -55,15 +47,23 @@ Route::get('/point/{id}','PointController@profile');
 
 Route::post('/point/{id}','PointController@review');
 
+Route::get('/point/likereview/{id}', 'PointController@likereview');
+
+Route::get('/point/droplikereview/{id}', 'PointController@droplikereview');
+
 Route::get('/editreview/{id}', 'EditReviewController@index');
 
 Route::post('editreview/saved', 'EditReviewController@save');
 
 Route::get('/deletereview/{id}', 'DeleteReviewController@delete');
 
-Route::get('/point/likereview/{id}', 'PointController@likereview');
+Route::get('/editpost/{id}', 'EditpostController@index');
 
-Route::get('/point/droplikereview/{id}', 'PointController@droplikereview');
+Route::post('/editpost/saved', 'EditpostController@save');
+
+Route::get('/deletepost/{id}', 'DeletepostController@delete');
+
+Route::get('/messages', 'MessageController@index');
 
 Route::get('message/{id}', 'MessageController@chatHistory')->name('message.read');
 
@@ -85,3 +85,7 @@ Route::get('/friends/denyadd/{id}', 'FriendshipController@denyadd');
 Route::get('/friends/removeadd/{id}', 'FriendshipController@delete');
 
 Route::get('/friends/allowadd/{id}', 'FriendshipController@delete');
+
+Route::get('/contact', 'ContactController@index');
+
+Route::post('/contact', 'ContactController@send');

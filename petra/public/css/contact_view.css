@@ -1,0 +1,25 @@
+.contact_firstmessage {
+  font-weight: bold;
+  line-height: 200%;
+}
+
+input.contact_photo[type="file"] {
+  display: none;
+}
+
+.contact_custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 6px;
+  cursor: pointer;
+}
+
+.contact_submit {
+  margin-top: 2%;
+  float: right;
+}
+
+.contact_back {
+  margin-top: 2%;
+  float: left;
+}
