@@ -23,7 +23,7 @@ class DeletepostController extends Controller
     {
       $post = DB::table('posts')->where('id', $id)->first();
 
-      $path = ("images/posts/".Auth::id()."_".Auth::user()->name);
+      $path = ("images/posts/".Auth::id());
 
       if (Auth::id() == $post->id_user) {
         DB::table('posts')->where('id', $id)->delete();
