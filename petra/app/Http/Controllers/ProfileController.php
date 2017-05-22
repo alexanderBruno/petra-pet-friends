@@ -45,7 +45,20 @@ class ProfileController extends Controller
             ->select('users.id', 'users.name', 'users.avatar', 'users.posts_privacy')
             ->get();
 
-      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship, 'userE' => $userE, 'usersR' => $usersR]);
+      $reviews = DB::table('reviews')
+            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+						->leftJoin('scores_list', function ($join) {
+                $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
+            })
+            ->leftJoin('points', 'reviews.id_point', '=', 'points.id')
+            ->select('reviews.*', 'users.name', 'users.avatar', 'scores_list.score', 'points.name as namepoint')
+            ->where('reviews.id_user', $id)
+						->orderBy('reviews.id', 'desc')
+            ->get();
+
+      $likesdonereview = DB::table('likereview_list')->where('id_user', Auth::id())->get();
+
+      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship, 'userE' => $userE, 'usersR' => $usersR, 'reviews' => $reviews, 'likesdonereview' => $likesdonereview]);
     }
 
     public function likepost($id)

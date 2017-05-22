@@ -30,14 +30,15 @@ class PointController extends Controller
      */
     public function profile($id)
     {
-    	$point = Points::find($id);
+			$point = Points::find($id);
 
     	$reviews = DB::table('reviews')
             ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
 						->leftJoin('scores_list', function ($join) {
                 $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
             })
-            ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score')
+						->leftJoin('points', 'reviews.id_point', '=', 'points.id')
+            ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score', 'points.name as namepoint')
             ->where('reviews.id_point', $id)
 						->orderBy('reviews.id', 'desc')
             ->get();
@@ -58,8 +59,7 @@ class PointController extends Controller
       $services = $this -> getIconsServices($point->services_list);
       //si hay un comentario con el id del usuario, no podra volver a comentar
 
-
-
+			$point = Points::find($id);
 
 
     	return view('point', ['point' => $point, 'reviews' => $reviews, 'score' => $score, 'reviewPermission' => $reviewPermission, 'loged' => Auth::id(), 'services' => $services, 'likesdone' => $likesdone]);
@@ -121,15 +121,23 @@ class PointController extends Controller
             ->where('reviews.id_point', $id)
 						->orderBy('reviews.id', 'desc')
             ->get();
-						
+
 			$likesdone = DB::table('likereview_list')->where('id_user', Auth::id())->get();
 
       $score = $this -> getScore($id);
+
+			//actualizar la puntuacion de cada punto
+      DB::table('points')
+            ->where('id', $id)
+            ->update(['score' => $score]);
+
       $services = $this -> getIconsServices($point->services_list);
 
       $reviewPermission = DB::table('reviews')
           ->where('id_user', Auth::id())
           ->count();
+
+			$point = Points::find($id);
 
     	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services, 'reviewPermission' => $reviewPermission, 'likesdone' => $likesdone]);
     }

@@ -31,24 +31,26 @@ class DeleteReviewController extends Controller
 
         $previousurl=parse_url(url()->previous(), PHP_URL_PATH);
 
-        if($previousurl=="/points" ) {
-          //esto redireccionará al mapa cuando esté hecho
-          return redirect()->action('PointController@profile')->with('confirmation', 'postdeleted');
-        } elseif ($previousurl==("/point"."/".$review->id_point)) {
-          return redirect()->action('PointController@profile', ['id' => $review->id_point])->with('confirmation', 'postdeleted');
+        if ($previousurl==("/point"."/".$review->id_point)) {
+          return redirect()->action('PointController@profile', ['id' => $review->id_point])->with('confirmation', 'reviewdeleted');
+        } elseif ($previousurl==("/profile"."/".$review->id_user)) {
+          return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewdeleted');
+        } elseif ($previousurl==("/home")) {
+          return redirect()->action('HomeController@index')->with('confirmation', 'reviewdeleted');
         } else {
           return redirect()->action('PointController@profile')->with('confirmation', 'error');
         }
       } else {
         $previousurl=parse_url(url()->previous(), PHP_URL_PATH);
-        if($previousurl=="/points" ) {
-            //esto redireccionará al mapa cuando esté hecho
-            return redirect()->action('PointController@profile')->with('confirmation', 'reviewnotdeleted');
-          } elseif ($previousurl==("/point"."/".$review->id_point)) {
-            return redirect()->action('PointController@profile', ['id' => $review->id_point])->with('confirmation', 'reviewnotdeleted');
-          } else {
-            return redirect()->action('PointController@profile')->with('confirmation', 'error');
-          }
+        if ($previousurl==("/point"."/".$review->id_point)) {
+          return redirect()->action('PointController@profile', ['id' => $review->id_point])->with('confirmation', 'reviewnotdeleted');
+        } elseif ($previousurl==("/profile"."/".$review->id_user)) {
+          return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewnotdeleted');
+        } elseif ($previousurl==("/home")) {
+          return redirect()->action('HomeController@index')->with('confirmation', 'reviewnotdeleted');
+        } else {
+          return redirect()->action('PointController@profile')->with('confirmation', 'error');
+        }
       }
 
     }

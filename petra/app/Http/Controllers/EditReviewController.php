@@ -81,10 +81,11 @@ class EditReviewController extends Controller
 
         $previousurl=parse_url($request->input('editreview_previousurl'), PHP_URL_PATH);
         if($previousurl==("/point"."/".$review->id_point)) {
-          return redirect()->action('PointController@profile', ['id' => $review->id_point])->with('confirmation', 'postedited');
-        }
-        elseif ($previousurl==("/profile"."/".$review->id_user)) {
-          return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'postedited');
+          return redirect()->action('PointController@profile', ['id' => $review->id_point])->with('confirmation', 'reviewedited');
+        } elseif ($previousurl==("/profile"."/".$review->id_user)) {
+          return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewedited');
+        } elseif ($previousurl==("/home")) {
+          return redirect()->action('HomeController@index')->with('confirmation', 'reviewedited');
         } else {
           return redirect()->action('HomeController@index')->with('confirmation', 'error');
         }
@@ -95,6 +96,10 @@ class EditReviewController extends Controller
 
       if ($previousurl==("/point"."/".$review->id_point)) {
         return redirect()->action('PointController@profile', ['id' => $review->id_point])->with('confirmation', 'reviewnotedited');
+      } elseif ($previousurl==("/profile"."/".$review->id_user)) {
+        return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewnotedited');
+      } elseif ($previousurl==("/home")) {
+        return redirect()->action('HomeController@index')->with('confirmation', 'reviewnotedited');
       } else {
         return redirect()->action('HomeController@index')->with('confirmation', 'error');
       }

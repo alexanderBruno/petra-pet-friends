@@ -161,7 +161,7 @@
                             @else
                               <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
                             @endif
-                    <!-- modal eliminar review -->
+                          <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$review->id_point) }}">{{$review->namepoint}}</a></label> -
                         @if ($review->id_user==Auth::id())
                             <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
                                 <div class="modal-dialog">

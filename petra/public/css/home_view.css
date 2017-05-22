@@ -21,6 +21,14 @@ body {
   font-weight: bold;
 }
 
+.home_tabs {
+  margin-top: 5%;
+}
+
+.home.tab-pane {
+  margin-top: 3%;
+}
+
 .home_post {
   margin-top: 1%;
   resize: none;
@@ -81,6 +89,20 @@ input.home_post_photo[type="file"] {
 .home_post_options:hover {
   color: #ff6868;
   text-decoration: none;
+}
+
+.home_idpost_reviewtext {
+  margin-left: 3.5%;
+  margin-top: 3%;
+  font-weight: normal;
+}
+
+.home_review_options {
+  margin-top: 3%;
+}
+
+.home_idpost_review {
+  font-weight: bold;
 }
 
 .home_message_edited {

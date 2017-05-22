@@ -29,7 +29,7 @@ class HomeController extends Controller
             ->leftJoin('users', 'posts.id_user', '=', 'users.id')
             ->select('posts.*', 'users.name', 'users.avatar', 'users.posts_privacy')
             ->orderBy('posts.id', 'desc')
-            ->limit(5)
+            ->limit(10)
             ->get();
 
       $likesdone = DB::table('likeposts_list')->where('id_user', Auth::id())->get();
@@ -40,7 +40,44 @@ class HomeController extends Controller
             ->select('users.id', 'users.name', 'users.avatar', 'users.posts_privacy')
             ->get();
 
-      return view('home', ['lastposts' => $lastposts, 'likesdone' => $likesdone, 'userE' => $userE, 'usersR' => $usersR]);
+      $reviews = DB::table('reviews')
+            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+						->leftJoin('scores_list', function ($join) {
+                $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
+            })
+            ->leftJoin('points', 'reviews.id_point', '=', 'points.id')
+            ->select('reviews.*', 'users.name', 'users.avatar', 'scores_list.score', 'points.name as namepoint')
+						->orderBy('reviews.id', 'desc')
+            ->limit(10)
+            ->get();
+
+      $likesdonereview = DB::table('likereview_list')->where('id_user', Auth::id())->get();
+
+      $up = DB::table('posts')
+            ->leftJoin('users', 'posts.id_user', '=', 'users.id')
+            ->select('posts.*', 'users.name', 'users.avatar', 'users.posts_privacy')
+            ->orderBy('posts.id', 'desc')
+            ->limit(20)
+            ->get();
+
+      $ur = DB::table('reviews')
+            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+						->leftJoin('scores_list', function ($join) {
+                $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
+            })
+            ->leftJoin('points', 'reviews.id_point', '=', 'points.id')
+            ->select('reviews.*', 'users.name', 'users.avatar', 'scores_list.score', 'points.name as namepoint')
+						->orderBy('reviews.id', 'desc')
+            ->limit(20)
+            ->get();
+
+      $updates = collect();
+      $updates->push($up);
+      $updates->push($ur);
+      $updates = $updates->sortByDesc('created_at');
+      $updates = $updates->all();
+
+      return view('home', ['lastposts' => $lastposts, 'likesdone' => $likesdone, 'userE' => $userE, 'usersR' => $usersR, 'reviews' => $reviews, 'likesdonereview' => $likesdonereview, 'updates' => $updates]);
     }
 
     public function post(Request $request)

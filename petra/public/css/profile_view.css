@@ -31,6 +31,14 @@ body {
   font-weight: bold;
 }
 
+.profile_tabs {
+  margin-top: 5%;
+}
+
+.profile.tab-pane {
+  margin-top: 3%;
+}
+
 .profile_chat, .profile_addfriend, .profile_askfriend, .profile_askfriend_indv  {
   float: right;
   color: #3097d1;
