@@ -72,7 +72,7 @@ class PointController extends Controller
       $review = DB::table('reviews')->where('id', $id)->first();
       $confirmation = False;
 //path a la carpeta donde guardamos las imagenes en este ejemplo /images/reviews/1
-      $path = ("images/reviews/".$id);
+      $path = ("images/reviews/".Auth::id());
 
       if ($request->input('point_review') || $request->input('rating')) {
         $content = "";

@@ -23,7 +23,7 @@ class DeleteReviewController extends Controller
     {
       $review = DB::table('reviews')->where('id', $id)->first();
 
-      $path = ("images/review/".$review->id."_".$review->id_point);
+      $path = ("images/review/".$review->id_user);
 
       if (Auth::id() == $review->id_user or Auth::user()->type_user=="admin") {
         DB::table('reviews')->where('id', $id)->delete();

@@ -53,9 +53,9 @@ class EditReviewController extends Controller
       }
       $id = $request->input('editreview_id');
       $review = DB::table('reviews')->where('id', $id)->first();
-      $path = ("images/reviews/".$review->id_point);
+      $path = ("images/reviews/".$review->id_user);
 
-      if (Auth::id() == $review->id_user) {
+      if (Auth::id() == $review->id_user or Auth::user()->type_user=="admin") {
         if ($request->input('editreview_content')) {
           DB::table('reviews')->where('id', $id)->update(['content' => $request->input('editreview_content')]);
         }
