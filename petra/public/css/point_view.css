@@ -150,7 +150,9 @@ input.point_review_photo[type="file"] {
   float: right;
   margin-right: 3%;
   color: #3097d1;
+  margin-top: 3%;
 }
+
 
 .point_review_options:hover {
   color: #ff6868;

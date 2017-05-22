@@ -117,7 +117,8 @@ class PointController extends Controller
 						->leftJoin('scores_list', function ($join) {
                 $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
             })
-            ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score')
+						->leftJoin('points', 'reviews.id_point', '=', 'points.id')
+						->select('reviews.*', 'users.name', 'users.avatar','scores_list.score', 'points.name as namepoint')
             ->where('reviews.id_point', $id)
 						->orderBy('reviews.id', 'desc')
             ->get();
