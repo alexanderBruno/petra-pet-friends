@@ -43,9 +43,9 @@
 
                   <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#lta">Les meves amistats</a></li>
-                    <li><a data-toggle="pill" href="#sap">Sol·licituds pendents</a></li>
-                    <li><a data-toggle="pill" href="#sae">Sol·licituds enviades</a></li>
-                    <li><a data-toggle="pill" href="#teu">Tots els usuaris</a></li>
+                    <li><a data-toggle="tab" href="#sap">Sol·licituds pendents</a></li>
+                    <li><a data-toggle="tab" href="#sae">Sol·licituds enviades</a></li>
+                    <li><a data-toggle="tab" href="#teu">Tots els usuaris</a></li>
                   </ul>
 
                   <div class="friends tab-content">

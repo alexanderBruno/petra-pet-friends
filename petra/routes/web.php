@@ -51,7 +51,7 @@ Route::get('/point/likereview/{id}', 'PointController@likereview');
 
 Route::get('/point/droplikereview/{id}', 'PointController@droplikereview');
 
-Route::get('/editreview/{id}', 'EditReviewController@index');
+Route::get('/editreview/{id_point}/{id}', 'EditReviewController@index');
 
 Route::post('editreview/saved', 'EditReviewController@save');
 

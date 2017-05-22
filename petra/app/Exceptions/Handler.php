@@ -48,6 +48,10 @@ class Handler extends ExceptionHandler
         abort(404);
       }
 
+      if ($exception instanceof ErrorException) {
+        return response()->action('HomeController@index')->with('confirmation', 'error');
+      }
+
       return parent::render($request, $exception);
     }
 
