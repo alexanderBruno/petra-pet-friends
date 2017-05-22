@@ -25,7 +25,7 @@ class DeleteReviewController extends Controller
 
       $path = ("images/review/".$review->id."_".$review->id_point);
 
-      if (Auth::id() == $review->id_user) {
+      if (Auth::id() == $review->id_user or Auth::user()->type_user=="admin") {
         DB::table('reviews')->where('id', $id)->delete();
         File::delete($path.'/'.$review->photo);
 

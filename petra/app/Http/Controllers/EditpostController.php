@@ -30,7 +30,7 @@ class EditpostController extends Controller
       ->where('posts.id', $id)
       ->first();
 
-      if (Auth::id() == $post->id_user) {
+      if (Auth::id() == $post->id_user or Auth::user()->type_user=="admin") {
         return view('editpost', ['post' => $post]);
       }
       else {
@@ -52,8 +52,8 @@ class EditpostController extends Controller
       }
       $id = $request->input('editpost_id');
       $post = DB::table('posts')->where('id', $id)->first();
-      $path = ("images/posts/".Auth::id());
-      if (Auth::id() == $post->id_user) {
+      $path = ("images/posts/".$post->id_user);
+      if (Auth::id() == $post->id_user or Auth::user()->type_user=="admin") {
         if ($request->input('editpost_content')) {
           DB::table('posts')->where('id', $id)->update(['content' => $request->input('editpost_content')]);
         }

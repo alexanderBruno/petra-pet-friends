@@ -17,7 +17,7 @@
                     <div class="form-group media">
                       <div class="media-left embed-responsive-item">
                         <label>Avatar:</label><br/>
-                        <img src="images/avatars/{{$user->avatar}}" class="editprofile_avatarimg" alt="avatarimg"/><br/><br/>
+                        <img src="/images/avatars/{{$user->avatar}}" class="editprofile_avatarimg" alt="avatarimg"/><br/><br/>
                         <label for="editprofile_file-upload" class="editprofile_custom-file-upload">
                             <i class="glyphicon glyphicon-refresh"></i> Canviar avatar...
                         </label>

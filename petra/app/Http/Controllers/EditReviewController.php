@@ -31,7 +31,7 @@ class EditReviewController extends Controller
       ->where('reviews.id', $id)
       ->first();
 
-      if (Auth::id() == $review->id_user) {
+      if (Auth::id() == $review->id_user or Auth::user()->type_user=="admin") {
         return view('editreview', ['review' => $review]);
       }
       else {

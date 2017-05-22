@@ -63,6 +63,9 @@
                           <li><a href="{{ url('/messages') }}"><i class="fa fa-comments" aria-hidden="true"></i> Missatges</a></li>
                           <li><a href="{{ url('/friends') }}"><i class="fa fa-users" aria-hidden="true"></i> Amistats</a></li>
                           <li><a href="{{ url('/contact') }}"><i class="fa fa-envelope" aria-hidden="true"></i> Contacte</a></li>
+                          @if(Auth::user()->type_user=="admin")
+                            <li ><a href="{{ url('/admin') }}"><i class="fa fa-lock" aria-hidden="true"></i> Administrador</a></li>
+                          @endif
                         @endif
                     </ul>
 
@@ -79,8 +82,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                  <li><a href="{{ url('/profile/'.Auth::user()->id) }}">El meu perfil</a></li>
-                                  <li><a href="{{ url('/editprofile') }}">Editar perfil</a></li>
+                                  <li><a href="{{ url('/profile/'.Auth::id()) }}">El meu perfil</a></li>
+                                  <li><a href="{{ url('/editprofile/'.Auth::id()) }}">Editar perfil</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

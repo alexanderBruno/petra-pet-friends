@@ -37,9 +37,9 @@ Route::get('/profile/likepost/{id}', 'ProfileController@likepost');
 
 Route::get('/profile/droplikepost/{id}', 'ProfileController@droplikepost');
 
-Route::get('/editprofile', 'EditprofileController@index');
+Route::get('/editprofile/{id}', 'EditprofileController@index');
 
-Route::post('/editprofile', 'EditprofileController@save');
+Route::post('/editprofile/{id}', 'EditprofileController@save');
 
 Route::get('/editprofile/deleteuser/{id}', 'EditprofileController@deleteuser');
 
