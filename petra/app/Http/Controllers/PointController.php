@@ -140,7 +140,7 @@ class PointController extends Controller
 
 			$point = Points::find($id);
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services, 'reviewPermission' => $reviewPermission, 'likesdone' => $likesdone]);
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services, 'reviewPermission' => $reviewPermission, 'likesdone' => $likesdone])->with('confirmation', 'reviewcreated');
     }
 
      public function likereview($id)

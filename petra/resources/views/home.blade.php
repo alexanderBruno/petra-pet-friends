@@ -151,7 +151,7 @@
                                 <label class = "full" id="p5_r{{$review->id}}"></label>
                               </div>
                               @if ($review->photo!=NULL)
-                                  <img src="/images/reviews/{{$review->id_point}}/{{$review->photo}}" class="point_lastreview_photo" alt="lastreview_photo"/>
+                                  <img src="/images/reviews/{{$review->id_user}}/{{$review->photo}}" class="point_lastreview_photo" alt="lastreview_photo"/>
                                   <div class="point_modal">
                                       <span class="point_close">&times;</span>
                                       <img class="point_modal-content">
