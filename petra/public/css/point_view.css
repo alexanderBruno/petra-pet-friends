@@ -1,13 +1,18 @@
 body {
   background-color:#ffe0e0;
 }
-.point_name_description {
+
+.point.panel-body {
   font-family: 'Bree Serif', serif;
-  margin-left: 50px;
 }
+
 .point_name {
   color: black;
   margin-bottom: 5%;
+}
+
+.point_description {
+  margin-left: 1.8%;
 }
 
 .point_avatarimg {
@@ -27,6 +32,7 @@ body {
   margin-top: 1%;
   resize: none;
   padding: 1%;
+  border-color: #fbc7c7;
 }
 
 input.point_review_photo[type="file"] {
@@ -38,6 +44,11 @@ input.point_review_photo[type="file"] {
     display: inline-block;
     padding: 6px 6px;
     cursor: pointer;
+    vertical-align:top;
+}
+
+.rating {
+  margin-left: 3%;
 }
 
 .point_submit {
@@ -54,26 +65,36 @@ input.point_review_photo[type="file"] {
   font-weight: bold;
 }
 
-.valoration{
- 
-  display:inline-block;
-  margin-left: 3%;
+.point_titles {
+  text-decoration: underline;
+  margin-top: 3%;
 }
 
-
-.review_content{
-  margin:1%;
+.point_scoreall{
+  text-align: center;
+  font-size: 150%;
+  float: right;
+  margin-top: -11%;
 }
 
-.point_info{
-  font-size: 200%;
+.point_score {
+  font-size: 350%;
+  margin-bottom: -10%;
 }
 
+.valoration {
+  display: inline-block;
+  margin-top: -2%;
+  margin-left: 4%;
+}
 
+.full {
+  margin-right: -4%;
+  margin-left: 2%;
+}
 
-
-.point.panel-body {
-  font-family: 'Bree Serif', serif;
+.point_info {
+  font-size: 150%;
 }
 
 .review_submit {
@@ -96,8 +117,7 @@ input.point_review_photo[type="file"] {
 .point_name_review {
   font-weight: bold;
   margin-bottom: 2%;
-  display: inline-flex;
-  width: 60%;
+
 }
 
 .point_lastreview_photo {
@@ -120,8 +140,15 @@ input.point_review_photo[type="file"] {
   float: right;
 }
 
+.valoration_review {
+  position: absolute;
+  margin-top: -8%;
+  margin-left: 30%;
+}
+
 .point_review_options {
   float: right;
+  margin-right: 3%;
   color: #3097d1;
 }
 
@@ -131,7 +158,7 @@ input.point_review_photo[type="file"] {
 }
 
 .point_message_edited {
-  color: #3097d1;
+  color: #ff6868;
   float: right;
   margin-top: -3%;
 }
@@ -166,16 +193,16 @@ input.point_review_photo[type="file"] {
 
 
 
-/*.point_lastreview_photo {
+.point_lastreview_photo {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
-}*/
+}
 
 .point_lastreview_photo:hover {opacity: 0.7;}
 
 /* The Modal (background) */
-.review_modal {
+.point_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -190,7 +217,7 @@ input.point_review_photo[type="file"] {
 }
 
 /* Modal Content (image) */
-.review_modal-content {
+.point_modal-content {
     margin: auto;
     display: block;
     max-width: 700px;

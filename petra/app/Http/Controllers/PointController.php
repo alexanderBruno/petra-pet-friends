@@ -30,14 +30,16 @@ class PointController extends Controller
      */
     public function profile($id)
     {
-   
     	$point = Points::find($id);
 
     	$reviews = DB::table('reviews')
-            ->join('users', 'reviews.id_user', '=', 'users.id')
-            ->join('scores_list','reviews.id_user','=','scores_list.id_user')
+            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+						->leftJoin('scores_list', function ($join) {
+                $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
+            })
             ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score')
             ->where('reviews.id_point', $id)
+						->orderBy('reviews.id', 'desc')
             ->get();
 
       $reviewPermission = DB::table('reviews')
@@ -55,18 +57,18 @@ class PointController extends Controller
 
       $services = $this -> getIconsServices($point->services_list);
       //si hay un comentario con el id del usuario, no podra volver a comentar
-       
-        
-      
 
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score'=>$score,'reviewPermission'=> $reviewPermission, 'loged' => Auth::id(), 'services'=>$services, 'likesdone'=>$likesdone]);
+
+
+
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score' => $score, 'reviewPermission' => $reviewPermission, 'loged' => Auth::id(), 'services' => $services, 'likesdone' => $likesdone]);
 
     }
 
     public function review($id, Request $request)
     {
-      
+
       $review = DB::table('reviews')->where('id', $id)->first();
       $confirmation = False;
 //path a la carpeta donde guardamos las imagenes en este ejemplo /images/reviews/1
@@ -74,7 +76,7 @@ class PointController extends Controller
 
       if ($request->input('point_review') || $request->input('rating')) {
         $content = "";
-        
+
         //en caso de que no exista el directorio para este ounto, lo creamos
         if(!File::exists($path)) {
           File::makeDirectory($path, 0775);
@@ -85,21 +87,21 @@ class PointController extends Controller
         }
 
         if (Input::hasFile('point_review_photo')){
-            
+
           $photo = $this -> generateRandomString().".png";
-         
+
           Image::make(Input::file('point_review_photo'))->save($path.'/'.$photo);
           DB::table('reviews')->insert(['id_user' => Auth::id(), 'id_point' => $request->input('point_review_id'), 'content' => $content ,'created_at' => Carbon::now(), 'updated_at' => Carbon::now(), 'photo' => $photo]);
         }
         else {
           DB::table('reviews')->insert(['id_user' => Auth::id(), 'id_point' => $request->input('point_review_id'), 'content' => $content ,'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
         }
-          
+
 
           $last_review = DB::table('reviews')->orderBy('id', 'desc')->first();
 
           if ($request->input('rating')) {
-            DB::table('scores_list')->insert(['id_user' => Auth::id(), 
+            DB::table('scores_list')->insert(['id_user' => Auth::id(),
             'id_point' => $request->input('point_review_id'),'id_review' =>
             $last_review->id, 'score'=>$request->input('rating'), 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
           }
@@ -110,12 +112,17 @@ class PointController extends Controller
 
       $point = Points::find($id);
 
-    	$reviews = DB::table('reviews')
-            ->join('users', 'reviews.id_user', '=', 'users.id')
-            ->join('scores_list','reviews.id_user','=','scores_list.id_user')
+			$reviews = DB::table('reviews')
+            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+						->leftJoin('scores_list', function ($join) {
+                $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
+            })
             ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score')
             ->where('reviews.id_point', $id)
+						->orderBy('reviews.id', 'desc')
             ->get();
+						
+			$likesdone = DB::table('likereview_list')->where('id_user', Auth::id())->get();
 
       $score = $this -> getScore($id);
       $services = $this -> getIconsServices($point->services_list);
@@ -124,7 +131,7 @@ class PointController extends Controller
           ->where('id_user', Auth::id())
           ->count();
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services, 'reviewPermission' => $reviewPermission]);
+    	return view('point', ['point' => $point, 'reviews' => $reviews, 'confirmation' => $confirmation, 'score'=>$score, 'loged' => Auth::id(), 'services' => $services, 'reviewPermission' => $reviewPermission, 'likesdone' => $likesdone]);
     }
 
      public function likereview($id)
@@ -162,7 +169,7 @@ class PointController extends Controller
       $valoration = DB::table('scores_list')->select('scores_list.score')->where('id_point', $id)->get();
       $score_addition = 0;
 
-      for ($i=0; $i < sizeof($valoration); $i++) { 
+      for ($i=0; $i < sizeof($valoration); $i++) {
         $score_addition = $score_addition + $valoration[$i]->score;
       }
 
@@ -172,13 +179,13 @@ class PointController extends Controller
       }else{
         return 0;
       }
-      
+
     }
 
     public function getIconsServices($serv){
 
       $splits = explode("-", $serv);
-      
+
       $services = DB::table('services_list')
                 ->whereIn('service_code', $splits)
                 ->get();
