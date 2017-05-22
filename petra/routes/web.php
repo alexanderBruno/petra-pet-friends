@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/map', 'MapController@mostra');
 
+Route::get('/map/{type}', 'MapController@mostra');
+
 Route::get('/home', 'HomeController@index');
 
 Route::post('/home', 'HomeController@post');

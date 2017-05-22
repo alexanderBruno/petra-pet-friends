@@ -27,12 +27,12 @@ html, body {
 .lletra{
   font-family: 'Bree Serif', serif;
 }
-#enlace{
-  text-decoration: none;
+.enlace{
+  text-decoration: none !important;
   font-weight: bold;
   color: inherit;
 }
-#enlace:hover{
+.enlace:hover{
   color: #ff6868;
 }
 .patita_llena{
@@ -76,14 +76,30 @@ html, body {
   padding-left: 5px;
   padding-right: 5px;
 }
+.azulito{
+  color: #3097d1;
+}
+.rosita:hover{
+  background-color: #ff6868;
+  border-color: #ff6868;
+}
+
+.amaga{
+  display: none;
+}
 
 .map.panel {
   width: 20%;
   margin: auto;
   margin-top: -4.5%;
+  margin-bottom: 2%;
   text-align: center;
   font-family: 'Bree Serif', serif;
 }
+/*@media (min-width: 1370px) {
+  .map.panel {
+    margin-top: -3%;
+}*/
 
 .map.panel-body {
   padding: 0;

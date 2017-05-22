@@ -1,56 +1,101 @@
 @extends('layouts.mapapp')
 
 @section('content')
-
+    <!-- Menu per mostrar punts-->
     <div class="map panel panel-info">
       <div class="map panel-heading">Què vols buscar?</div>
       <div class="map panel-body">
         <ul class="map nav navbar-nav">
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-adjust"></i></a></li>
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-bell"></i></a></li>
+          <li><a class="map a" href="/map"><i class="glyphicon glyphicon-home"></i></a></li>
+          <li><a class="map a" href="/map/vet"><i class="glyphicon glyphicon-adjust"></i></a></li>
+          <li><a class="map a" href="/map/park"><i class="glyphicon glyphicon-bell"></i></a></li>
           <li><a class="map a" href="#"><i class="glyphicon glyphicon-user"></i></a></li>
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-home"></i></a></li>
           <li><a class="map a" href="#"><i class="glyphicon glyphicon-cd"></i></a></li>
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-flag"></i></a></li>
           <li><a class="map a" href="#"><i class="glyphicon glyphicon-picture"></i></a></li>
           <li><a class="map a" href="#"><i class="glyphicon glyphicon-leaf"></i></a></li>
+          @if (!Auth::guest())
+            <li><a class="map a" href="#"><i class="glyphicon glyphicon-flag"></i></a></li>
+          @endif
         </ul>
       </div>
     </div>
-    <div class="modal fade" id="afegir_marcador" role="dialog">
+
+    <!--Formulari per afegir marcadors-->
+    <div class="modal fade" id="marker_modal_form" role="dialog">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <h4 class="modal-title" id="myModalLabel">Afegir marcador</h4>
               </div>
-              <div class="modal-body">
 
-                  <p>Aqui va el formulari</p>
+              @if (Auth::guest())
+                <div class="modal-body">
+                  <p>No has accedit.</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <a href="{{ route('login') }}"><button type="button" class="btn btn-primary rosita"><i class="fa fa-sign-in" aria-hidden="true"></i> Accedir</button></a>
+                    <a href="{{ route('register') }}"><button type="button" class="btn btn-primary rosita"><i class="fa fa-user-plus" aria-hidden="true"></i> Registrar-se</button></a>
+                </div>
+              @else
+                <div class="modal-body">
+                  <p id="chivato">Hola</p>
+
+                <!-- Formulari -->
+                <form id="marker_add_form" action="/map" method="POST" class="home_form amaga" enctype="multipart/form-data">
+                  {!! csrf_field() !!}
+
+                  <div class="form-group">
+                   <label>Descripció</label>
+                   <textarea name="point_description" rows="3" class="form-control home_post" placeholder="Descripció"></textarea>
+                  </div>
+                  <label for="home_file-upload" class="home_custom-file-upload">
+                      <i class="glyphicon glyphicon-camera"></i> Vols adjuntar una foto? Clica'm a sobre!
+                  </label>
+                  <input id="home_file-upload" name="home_post_photo" type="file" class="file home_post_photo">
+
+
+                <!-- Formulari -->
+
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                  <a href="#"><button type="button" class="btn btn-primary">Enviar</button></a>
+                  <!--a href="#"><button type="button" class="btn btn-primary rosita">Enviar</button></a-->
+                  <button type="submit" name="submit" class="btn btn-primary home_submit rosita"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>&nbsp;&nbsp;Afegir marcador</button>
+
               </div>
+              </form>
+
+                @endif
+
+
+
+
+
+
+
+
+
+
           </div>
       </div>
     </div>
 
-    <a class="home_post_options" data-toggle="modal" href="#afegir_marcador"><i class="fa fa-plus"></i> Marcador nou</a>
 
     <div id="map_map"></div>
 
     <script>
         var map;
         var infoWindow;
-        var newMarker = [];
+        var newMarker = null;
 
         // Crea el mapa i el event que tenca els infowindows
         function initMap() {
             map = new google.maps.Map(document.getElementById('map_map'), {
                 zoom: 15,
                 center: new google.maps.LatLng(41.394,2.167),
-                //center: chicago,
                 fullscreenControl: true
             });
 
@@ -132,7 +177,7 @@
         var opcions = {
            map: map,
            position: latlng,
-           icon: marca,
+           icon: '/images/markers/'+marca,
            title: nom,
            animation: google.maps.Animation.DROP
         }
@@ -160,7 +205,7 @@
               '<img class="infoimg" src="/images/avatars/'+imatge+'" alt="Imatge_'+nom+'"/>'+
             '</div>'+
             '<div class="media-body">'+
-              '<a class="lletra" id="enlace" href="/point/'+id+'"><h4 class="media-heading nom">'+nom+'</h4></a>'+
+              '<a class="lletra enlace" id="enlace" href="/point/'+id+'"><h4 class="media-heading nom">'+nom+'</h4></a>'+
               estrellitas+'<p id="nums" class="lletra">'+valoracio+'</p>'+
             '</div>'+
           '</div>';
@@ -184,31 +229,37 @@
         // Set CSS for the control interior.
         var controlText = document.createElement('div');
         controlText.id = 'textBotoCentrat';
-        controlText.innerHTML = 'Afegir Point';
+        var botoText = '<a class="home_post_options enlace azulito" data-toggle="modal" href="#marker_modal_form"><i class="fa fa-plus"></i> Afegir marcador</a>';
+        controlText.innerHTML = botoText;
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners: simply set the map to Chicago.
         controlUI.addEventListener('click', function() {
-          //map.setCenter(chicago);
-          //alert('boto_control');
-          alert('Patata');
+          if (newMarker){
+            document.getElementById("marker_add_form").classList.remove('amaga');
+            var latText = newMarker.position.lat();
+            var lngText = newMarker.position.lng();
+            var mesage = ''+//'Latitud: '+String(latText)+' Longitud: '+String(lngText)+
+            ' LatitudTruncada: '+latText.toFixed(6)+' LongitudTruncada: '+lngText.toFixed(6);
+            var form = document.getElementById('chivato');
+            form.innerHTML = mesage;
+            //alert(mesage);
+          }
         });
 
       }
-
+    //location
     function addMarker(location) {
-      if (newMarker != null){
-        newMarker.setMap(null);
-        newMarker = null;
+      //alert(location.lat);
+      if (newMarker == null){
+        newMarker = new google.maps.Marker({
+          position: location,
+          map: map,
+          draggable:true,
+          icon: '/images/markers/new_marker.png'
+        });
       }
 
-      var newMarker = new google.maps.Marker({
-        position: location,
-        map: map,
-        draggable:true
-      });
-        //newMarker = null;
-        newMarker.push(marker);
       }
 
 
