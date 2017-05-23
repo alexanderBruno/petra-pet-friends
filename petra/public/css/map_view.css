@@ -94,6 +94,9 @@ html, body {
 .rosa{
   color: #ff6868;
 }
+/*.ancho{
+  min-width: 300px;
+}*/
 
 .map.panel {
   width: 20%;

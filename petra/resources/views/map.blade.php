@@ -4,23 +4,27 @@
     <!-- Resultat Afegir Marcador-->
     @if(session('mesage')=='notLoged')
       <p>Has d'accedir per poder afegir llocs. Puto desactivador de Javascripts!</p>
-    @elseif(session('confirmation')=='faltaInfo')
-      <p>Falta informació bàsica del lloc. No es pot afegir.</p>
+    @elseif(session('mesage')=='faltaInfo')
+      <p>Falta informació bàsica del lloc. No es pot afegir el lloc.</p>
+    @elseif(session('mesage')=='addMarker')
+      <p>Punt afegit correctament</p>
+    @elseif(session('confirmation')=='pointnotpublic')
+      <p>Aquest lloc està ocult!</p>
     @endif
     <!-- Menu per mostrar punts-->
-    <div class="map panel panel-info">
+    <div class="map panel panel-info ancho">
       <div class="map panel-heading">Què vols buscar?</div>
       <div class="map panel-body">
-        <ul class="map nav navbar-nav">
+        <ul class="map nav"><!--navbar-nav-->
           <li><a class="map a" href="/map"><i class="glyphicon glyphicon-home"></i></a></li>
           <li><a class="map a" href="/map/vet"><i class="glyphicon glyphicon-adjust"></i></a></li>
           <li><a class="map a" href="/map/park"><i class="glyphicon glyphicon-bell"></i></a></li>
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-user"></i></a></li>
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-cd"></i></a></li>
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-picture"></i></a></li>
-          <li><a class="map a" href="#"><i class="glyphicon glyphicon-leaf"></i></a></li>
+          <li><a class="map a" href="/map/pipican"><i class="glyphicon glyphicon-user"></i></a></li>
+          <li><a class="map a" href="/map/hotel_can"><i class="glyphicon glyphicon-cd"></i></a></li>
+          <li><a class="map a" href="/map/protectora"><i class="glyphicon glyphicon-picture"></i></a></li>
+          <li><a class="map a" href="/map/botiga"><i class="glyphicon glyphicon-leaf"></i></a></li>
           @if (!Auth::guest())
-            <li><a class="map a" href="#"><i class="glyphicon glyphicon-flag"></i></a></li>
+            <li><a class="map a" href=""><i class="glyphicon glyphicon-flag"></i></a></li>
           @endif
         </ul>
       </div>
@@ -77,7 +81,7 @@
                   <div class="funkyradio">
                     @foreach ($services as $service)
                       <div class="funkyradio-primary junticos">
-                          <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis" value="{{ $service->service_code }}"/>
+                          <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis{{ $loop->iteration }}" value="{{ $service->service_code }}"/>
                           <label for="checkbox{{ $loop->iteration }}">
                             <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
                             {{ $service->name }}
@@ -210,6 +214,7 @@
       var opcions = {
          map: map,
          position: latlng,
+         icon: '/images/markers/red_marker.png',
          title: nom,
          animation: google.maps.Animation.DROP
       }
@@ -242,7 +247,7 @@
           var pointInfo = ''+
           '<div id="media">'+
             '<div class="media-left media-middle">'+
-              '<img class="infoimg" src="/images/avatars/'+imatge+'" alt="Imatge_'+nom+'"/>'+
+              '<img class="infoimg" src="/images/avatars/points/'+imatge+'" alt="Imatge_'+nom+'"/>'+
             '</div>'+
             '<div class="media-body">'+
               '<a class="lletra enlace" id="enlace" href="/point/'+id+'"><h4 class="media-heading nom">'+nom+'</h4></a>'+
@@ -304,6 +309,8 @@
           draggable:true,
           icon: '/images/markers/new_marker.png'
         });
+      }else{
+        newMarker.setPosition(location);
       }
 
       }

@@ -10,7 +10,16 @@ use Auth, DB, Image, Input, Carbon\Carbon;
 class MapController extends Controller
 {
 
-  public function mostra($type=''){
+  public function mostra(){
+    $all = Points::where('published', '1')->get();
+    $all->toJson();
+    $services = DB::table('services_list')->get();
+    $markers = DB::table('markers_list')->get();
+
+    return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers]);
+  }
+
+  public function tria($type=''){
     if ($type == ''){
       $all = Points::where('published', '1')->get();
       $all->toJson();
@@ -27,10 +36,10 @@ class MapController extends Controller
       return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers]);
   }
 
-
   public function addMarker(Request $request)
   {
-    return redirect()->action('MapController@mostra')->with('mesage', 'notLoged');
+    //return redirect()->action('MapController@mostra')->with('mesage', 'notLoged');
+    // return redirect()->action('HomeController@index');//->with('mesage', 'notLoged');
     function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -41,9 +50,10 @@ class MapController extends Controller
         return $randomString;
     }
 
-    if ($request->input('point_form')) {
+    //if ($request->input('point_form')) {
 
-      $path = ("images/avatars/");
+      $path = ("images/avatars/points/");
+
       if (Auth::guest()){
         return redirect()->action('MapController@mostra')->with('mesage', 'notLoged');
       }else{
@@ -53,25 +63,76 @@ class MapController extends Controller
 
       //Must: point_name, latitude, longitude
       //May: point_description, point_photo, point_serveis, type_point
-      if ($request->input('point_name') && $request->input('latitude') && $request->input('latitude')){
-        if (Input::hasFile('point_photo'))
-        {
+      if (strlen($request->input('point_name')) > 1 and strlen($request->input('latitude')) >= 6 and strlen($request->input('longitude')) >= 6){
+
+        $flag = NULL;
+        if (strlen($request->input('type_point')) > 1 and $request->input('type_point') != 'NULL'){
+          $flag = DB::table('markers_list')
+            ->select('marker_img')
+            ->where('marker_code', $request->input('type_point'))
+            ->get();
+          $flag = $flag[0]->marker_img;
+
+        }
+        $serveis = '';
+        $id_check = 1;
+        if (strlen($request->input('point_serveis'.$id_check)) >= 1){
+
+          do {
+            if ($id_check == 1){
+              $serveis .= $request->input('point_serveis'.$id_check);
+            }else{
+              $serveis .='-'.$request->input('point_serveis'.$id_check);
+            }
+              $id_check += 1;
+          } while ($request->input('point_serveis'.$id_check));
+        }
+
+        //dd($serveis);
+        $description = '';
+        if (strlen($request->input('point_description')) > 0){
+          $description = $request->input('point_description');
+        }
+
+        if (Input::hasFile('point_photo')){
           $photo = generateRandomString().".png";
           Image::make(Input::file('point_photo'))->save($path.$photo);
-          DB::table('points')->insert(['photo' => $photo, 'id_user' => Auth::id(), 'content' => $request->input('home_post'), 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
-        }
-        else {
 
-          DB::table('posts')->insert(['id_user' => Auth::id(), 'content' => $request->input('home_post'), 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+          DB::table('points')->insert(['name' => $request->input('point_name'),
+          'description' => $description,
+          'services_list' => $serveis,
+          'type_point' => $request->input('type_point'),
+          'published' => 2,
+          'latitude' => floatval($request->input('latitude')),
+          'longitude' => floatval($request->input('longitude')),
+          'avatar' => $photo,
+          'created_at' => Carbon::now(),
+          'updated_at' => Carbon::now(),
+          'flag' => $flag,
+          'id_user' => $id_user]);
+
+        }else{
+          DB::table('points')->insert(['name' => $request->input('point_name'),
+          'description' => $description,
+          'services_list' => $serveis,
+          'type_point' => $request->input('type_point'),
+          'published' => 2,
+          'latitude' => floatval($request->input('latitude')),
+          'longitude' => floatval($request->input('longitude')),
+          'created_at' => Carbon::now(),
+          'updated_at' => Carbon::now(),
+          'flag' => $flag,
+          'id_user' => $id_user]);
         }
+
+
+
 
     }else{
       return redirect()->action('MapController@mostra')->with('mesage', 'faltaInfo');
     }
 
-    return redirect()->action('MapController@mostra')->with('mesage', 'addmarker');
-    }// formulari
-  }// request
+    return redirect()->action('MapController@mostra')->with('mesage', 'addMarker');
 
-
+ }
 }
