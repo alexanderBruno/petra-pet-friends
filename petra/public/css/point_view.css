@@ -95,6 +95,8 @@ input.point_review_photo[type="file"] {
 
 .point_info {
   font-size: 150%;
+  margin-top: -2%;
+  margin-bottom: 2%;
 }
 
 .review_submit {

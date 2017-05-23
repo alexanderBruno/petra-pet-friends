@@ -58,14 +58,16 @@
                       @endif
                       </div>
                     </div>
-                    <div class="point_info">
-                      @if(count($services)!=0)
-                      	<p class="point_titles">Serveis que oferim</p>
-                        @foreach($services as $service)
-                          <i class="fa {{$service->icon}}" title="{{ $service->name}}"></i>
-                        @endforeach
-                      @endif
+                    @if(count($services)!=0)
+                    <hr class="messages_hr">
+                    <h3 class="home_updates_title"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;Serveis que oferim&nbsp;&nbsp;<i class="fa fa-handshake-o" aria-hidden="true"></i></h3>
+                    <hr class="messages_hr">
+                    <div class="home_updates_title point_info">
+                      @foreach($services as $service)
+                        <i class="fa {{$service->icon}}" title="{{ $service->name}}"></i>
+                      @endforeach
                     </div>
+                    @endif
                   </div>
 
                     @if($reviewPermission < 1 and !Auth::guest())
