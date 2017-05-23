@@ -21,8 +21,9 @@ body {
 
 .index_links {
   margin: auto;
-  margin-top: 5%;
-  max-width: 70%;
+  margin-top: 50px;
+  /*-width: 70%;*/
+  width: 200px;
 }
 
 .index_links > a {
