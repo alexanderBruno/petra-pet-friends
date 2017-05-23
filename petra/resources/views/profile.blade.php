@@ -278,7 +278,7 @@
                       @endforeach
                     </div>
                     <div id="lp" class="profile tab-pane fade">
-                      Pepe
+                      En contrucción
                     </div>
                     <div id="ma" class="profile tab-pane fade">
                       @if(count($yourpoints)==0)

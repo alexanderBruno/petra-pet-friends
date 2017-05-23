@@ -161,7 +161,8 @@
                               <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
                             @endif
                           <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$review->id_point) }}">{{$review->namepoint}}</a></label> -
-                        @if ($review->id_user==Auth::id() or Auth::user()->type_user=="admin")
+                          @if(Auth::guest())
+                          @elseif ($review->id_user==Auth::id() or Auth::user()->type_user=="admin")
                             <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -182,7 +183,7 @@
                             </div>
                             <a class="point_review_options" data-toggle="modal" href="#confirm_delete_review_{{$review->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
                             <a class="point_review_options" href="{{ url('/editreview/'.$review->id_point.'/'.$review->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
-                        @endif
+                          @endif
                     <!-- fin modal -->
                     </div>
                   @endforeach
