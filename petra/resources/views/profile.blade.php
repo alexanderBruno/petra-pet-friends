@@ -48,14 +48,21 @@
                   @elseif(session('confirmation')=='removedadd')
                     <p class="profile_confirmation_true">Sol·licitud d'amistat cancel·lada correctament.</p>
                   @elseif(session('confirmation')=='reviewedited')
-                    <p class="point_confirmation_true">Opinió editada correctament.</p>
+                    <p class="profile_confirmation_true">Opinió editada correctament.</p>
                   @elseif(session('confirmation')=='reviewnotedited')
-                    <p class="point_confirmation_false">No pots editar aquesta opinió!</p>
+                    <p class="profile_confirmation_false">No pots editar aquesta opinió!</p>
                   @elseif(session('confirmation')=='reviewdeleted')
-                    <p class="point_confirmation_true">Opinió eliminada correctament.</p>
+                    <p class="profile_confirmation_true">Opinió eliminada correctament.</p>
                   @elseif(session('confirmation')=='reviewnotdeleted')
-                    <p class="point_confirmation_false">No pots eliminar aquesta opinió!</p>
+                    <p class="profile_confirmation_false">No pots eliminar aquesta opinió!</p>
+                  @elseif(session('confirmation')=='pointnotedited')
+                    <p class="profile_confirmation_false">No pots editar aquest lloc!</p>
+                  @elseif(session('confirmation')=='pointdeleted')
+                    <p class="profile_confirmation_true">Lloc eliminat correctament.</p>
+                  @elseif(session('confirmation')=='pointnotdeleted')
+                    <p class="profile_confirmation_false">No pots eliminar aquest lloc!</p>
                   @endif
+
                   <div class="profile_first_part media">
                     <div class="profile_avatar media-left embed-responsive-item">
                       <img src="/images/avatars/{{$user->avatar}}" class="profile_avatarimg" alt="avatarimg"/>
@@ -112,6 +119,8 @@
                   <ul class="nav nav-tabs profile_tabs">
                     <li class="active"><a data-toggle="tab" href="#p"><h4>Publicacions</h4></a></li>
                     <li><a data-toggle="tab" href="#o"><h4>Opinions</h4></a></li>
+                    <li><a data-toggle="tab" href="#lp"><h4>Llocs preferits</h4></a></li>
+                    <li><a data-toggle="tab" href="#ma"><h4>Llocs afegits</h4></a></li>
                   </ul>
                   <div class="profile tab-content">
                     <div id="p" class="profile tab-pane fade in active">
@@ -267,6 +276,48 @@
                             @endif
                         </div>
                       @endforeach
+                    </div>
+                    <div id="lp" class="profile tab-pane fade">
+                      Pepe
+                    </div>
+                    <div id="ma" class="profile tab-pane fade">
+                      @if(count($yourpoints)==0)
+                        <p class="friends_confirmation_info">Encara no tens cap lloc afegit, ves al mapa i afegeix un marcador!</p>
+                      @else
+                        @foreach($yourpoints as $yourpoint)
+                            <table class="friends table">
+                                <tr>
+                                    <td>
+                                        <img src="/images/avatars/points/{{$yourpoint->avatar}}" class="friends_avatarimg" alt="avatarimg"/>
+                                        <a class="friends_username" href="{{ url('/point/'.$yourpoint->id) }}">{{$yourpoint->name}}</a>
+                                    </td>
+                                    <td>
+                                      <div class="modal fade" id="confirm_delete_point_{{$yourpoint->id}}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Eliminar lloc</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Estàs a punt d'esborrar aquest lloc, aquesta acció és irreversible.</p>
+                                                    <p>Vols continuar?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancelar</button>
+                                                    <a href="/deletepoint/{{$yourpoint->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                      <a href="#confirm_delete_point_{{$yourpoint->id}}" data-toggle="modal" class="btn btn-danger pull-right friends_buttonmessage"><i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Eliminar lloc</a>
+                                      <a href="/editpoint/{{$yourpoint->id}}" class="btn btn-primary pull-right friends_buttonmessage"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Editar lloc</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr class="friends_hr">
+                        @endforeach
+                      @endif
                     </div>
                 </div>
             </div>

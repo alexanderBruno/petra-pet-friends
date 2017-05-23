@@ -25,7 +25,7 @@
 
                   <div class="point_first_part media">
                     <div class="point_avatar media-left embed-responsive-item">
-                      <img src="/images/avatars/{{$point->avatar}}" class="point_avatarimg" alt="avatarimg"/>
+                      <img src="/images/avatars/points/{{$point->avatar}}" class="point_avatarimg" alt="avatarimg"/>
                     </div>
                     <div class="point_name_description media-body">
                       <h1 class="point_name media-heading">{{ $point->name }}</h1>

@@ -55,9 +55,15 @@ Route::get('/point/likereview/{id}', 'PointController@likereview');
 
 Route::get('/point/droplikereview/{id}', 'PointController@droplikereview');
 
+Route::get('/editpoint/{id}', 'EditpointController@index');
+
+Route::post('/editpoint/{id}', 'EditpointController@save');
+
+Route::get('/deletepoint/{id}', 'DeletepointController@delete');
+
 Route::get('/editreview/{id_point}/{id}', 'EditReviewController@index');
 
-Route::post('editreview/saved', 'EditReviewController@save');
+Route::post('/editreview/saved', 'EditReviewController@save');
 
 Route::get('/deletereview/{id}', 'DeleteReviewController@delete');
 
