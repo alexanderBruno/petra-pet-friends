@@ -1,6 +1,12 @@
 @extends('layouts.mapapp')
 
 @section('content')
+    <!-- Resultat Afegir Marcador-->
+    @if(session('mesage')=='notLoged')
+      <p>Has d'accedir per poder afegir llocs. Puto desactivador de Javascripts!</p>
+    @elseif(session('confirmation')=='faltaInfo')
+      <p>Falta informació bàsica del lloc. No es pot afegir.</p>
+    @endif
     <!-- Menu per mostrar punts-->
     <div class="map panel panel-info">
       <div class="map panel-heading">Què vols buscar?</div>
@@ -41,21 +47,62 @@
                 </div>
               @else
                 <div class="modal-body">
-                  <p id="chivato">Hola</p>
+                  <p id="estat">Has de fer clic al mapa per col·locar el marcador.</p>
 
                 <!-- Formulari -->
-                <form id="marker_add_form" action="/map" method="POST" class="home_form amaga" enctype="multipart/form-data">
+                <form id="marker_add_form" action="/map" method="POST" class="point_form amaga" enctype="multipart/form-data">
                   {!! csrf_field() !!}
 
+                  <!--Nom-->
+                  <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" name="point_name" class="form-control" placeholder="Nom del lloc">
+                  </div>
+                  <!--/Nom-->
+                  <!--Descripcio-->
                   <div class="form-group">
                    <label>Descripció</label>
                    <textarea name="point_description" rows="3" class="form-control home_post" placeholder="Descripció"></textarea>
                   </div>
+                  <!--/Descripcio-->
+                  <!--Imatge-->
                   <label for="home_file-upload" class="home_custom-file-upload">
-                      <i class="glyphicon glyphicon-camera"></i> Vols adjuntar una foto? Clica'm a sobre!
+                      <i class="glyphicon glyphicon-camera"></i> Afegeix una foto del lloc!
                   </label>
-                  <input id="home_file-upload" name="home_post_photo" type="file" class="file home_post_photo">
+                  <input id="home_file-upload" name="point_photo" type="file" class="file home_post_photo" placeholder="Nom del lloc">
+                  <!--Imatge-->
+                  <!--Serveis-->
+                  <br>
+                  <label>Serveis</label>
+                  <div class="funkyradio">
+                    @foreach ($services as $service)
+                      <div class="funkyradio-primary junticos">
+                          <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis" value="{{ $service->service_code }}"/>
+                          <label for="checkbox{{ $loop->iteration }}">
+                            <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
+                            {{ $service->name }}
+                          </label>
+                      </div>
+                    @endforeach
+                  </div>
+                  <!--/Serveis-->
 
+                  <!--Type Point-->
+                  <div class="form-group">
+                    <label>Tipus de marcador</label>
+                    <select name="type_point" class="form-control">
+                      <option value="NULL" selected>Escull un tipus de marcador</option>
+                      @foreach ($markers as $marker)
+                        <option value="{{ $marker->marker_code }}">{{ $marker->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <!--/Type Point-->
+
+                  <!--Latitud i longitud-->
+                    <input id="latitude" type="text" name="latitude" class="form-control amaga" hidden="hidden">
+                    <input id="longitude" type="text" name="longitude" class="form-control amaga" hidden="hidden ">
+                  <!--/Latitud i longitud-->
 
                 <!-- Formulari -->
 
@@ -63,19 +110,12 @@
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                   <!--a href="#"><button type="button" class="btn btn-primary rosita">Enviar</button></a-->
-                  <button type="submit" name="submit" class="btn btn-primary home_submit rosita"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>&nbsp;&nbsp;Afegir marcador</button>
+                  <button id="boto_enviar" type="submit" name="submit" class="btn btn-primary home_submit rosita amaga"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>&nbsp;&nbsp;Afegir marcador</button>
 
               </div>
               </form>
 
                 @endif
-
-
-
-
-
-
-
 
 
 
@@ -237,12 +277,18 @@
         controlUI.addEventListener('click', function() {
           if (newMarker){
             document.getElementById("marker_add_form").classList.remove('amaga');
+            document.getElementById("boto_enviar").classList.remove('amaga');
             var latText = newMarker.position.lat();
             var lngText = newMarker.position.lng();
-            var mesage = ''+//'Latitud: '+String(latText)+' Longitud: '+String(lngText)+
-            ' LatitudTruncada: '+latText.toFixed(6)+' LongitudTruncada: '+lngText.toFixed(6);
-            var form = document.getElementById('chivato');
-            form.innerHTML = mesage;
+            document.getElementById("latitude").value = latText.toFixed(6);
+            document.getElementById("longitude").value = lngText.toFixed(6);
+            /*var mesage = ''+//'Latitud: '+String(latText)+' Longitud: '+String(lngText)+
+            ' LatitudTruncada: '+latText.toFixed(6)+' LongitudTruncada: '+lngText.toFixed(6);*/
+            var estat = document.getElementById("estat");
+            estat.parentNode.removeChild(estat);
+            /*var form = document.getElementById('estat');
+            form.innerHTML = mesage;*/
+
             //alert(mesage);
           }
         });

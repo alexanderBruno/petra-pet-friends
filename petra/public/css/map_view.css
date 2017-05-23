@@ -87,6 +87,13 @@ html, body {
 .amaga{
   display: none;
 }
+.junticos{
+  margin-top: -4%;
+  max-width: 45%;
+}
+.rosa{
+  color: #ff6868;
+}
 
 .map.panel {
   width: 20%;

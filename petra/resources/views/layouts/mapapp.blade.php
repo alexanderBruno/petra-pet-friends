@@ -15,6 +15,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/map_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home_view.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/funkyradio.css') }}" rel="stylesheet">
 
 
     <!-- Scripts -->

@@ -19,6 +19,8 @@ Route::get('/', 'IndexController@index');
 
 Auth::routes();
 
+Route::post('/map', 'MapController@addMarker');
+
 Route::get('/map', 'MapController@mostra');
 
 Route::get('/map/{type}', 'MapController@mostra');
