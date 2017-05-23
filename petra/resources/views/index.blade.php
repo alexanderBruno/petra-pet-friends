@@ -1,34 +1,13 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="favicon.png" type="image/png">
+@extends('layouts.app')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@section('content')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/index_view.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
-</head>
-<body>
-    <div class="logo">
-      <p class="fa fa-paw" aria-hidden="true"></p>
-      <p class="title">Petra</p>
+    <div class="index_logo">
+      <p class="index fa fa-paw" aria-hidden="true"></p>
+      <p class="index_title">Petra</p>
     </div>
 
-    <div class="links">
+    <div class="index_links">
       <a class="btn btn-default" href="{{ url('/map') }}">Mapa</a>
         @if (Auth::check())
             <a class="btn btn-default" href="{{ url('/home') }}">Home</a>
@@ -38,7 +17,4 @@
         @endif
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-</body>
-</html>
+@endsection

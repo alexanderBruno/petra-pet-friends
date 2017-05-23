@@ -2,36 +2,37 @@ body {
   background-color: #ffe0e0;
 }
 
-.logo {
+.index_logo {
   text-align: center;
-  margin-top: 5%;
+  margin-top: 10%;
   line-height: 20px;
 }
 
-.fa-paw {
+.index.fa-paw {
   color: black;
   font-size: 1000%;
 }
 
-.title {
+.index_title {
   font-family: 'Baloo';
   font-size: 500%;
   color: black;
 }
 
-.links {
+.index_links {
   margin: auto;
-  margin-top: 6%;
-  width: 13%;
+  margin-top: 5%;
+  max-width: 70%;
 }
 
-.links > a {
+.index_links > a {
   color: #4f4f4f;
   display: block;
   margin-top: 5%;
-  font-size: 18px;
+  font-size: 130%;
   font-weight: 600;
   letter-spacing: .1rem;
   text-decoration: none;
   text-transform: uppercase;
+
 }

@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/index_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/editprofile_view.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home_view.css') }}" rel="stylesheet">
