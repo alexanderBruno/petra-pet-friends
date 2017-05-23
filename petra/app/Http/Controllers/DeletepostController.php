@@ -37,7 +37,7 @@ class DeletepostController extends Controller
         } elseif($previousurl=="/admin" ) {
           return redirect()->action('AdminController@index')->with('confirmation', 'postdeleted');
         } else {
-          return redirect()->action('HomeController@index')->with('confirmation', 'error');
+          return redirect()->action('HomeController@index');
         }
       }
 
@@ -49,7 +49,7 @@ class DeletepostController extends Controller
       } elseif($previousurl=="/admin" ) {
         return redirect()->action('AdminController@index')->with('confirmation', 'postnotdeleted');
       } else {
-        return redirect()->action('HomeController@index')->with('confirmation', 'error');
+        return redirect()->action('HomeController@index');
       }
 
 

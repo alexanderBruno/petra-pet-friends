@@ -30,6 +30,8 @@
                     <p class="point_confirmation_true">Opinió eliminada correctament.</p>
                   @elseif(session('confirmation')=='reviewnotdeleted')
                     <p class="point_confirmation_false">No pots eliminar aquesta opinió!</p>
+                  @elseif(session('confirmation')=='pointnotpublic')
+                    <p class="point_confirmation_false">Aquest lloc està ocult!</p>
                   @endif
 
                   <form action="/home" method="POST" class="home_form" enctype="multipart/form-data">

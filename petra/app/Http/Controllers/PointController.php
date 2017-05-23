@@ -32,38 +32,53 @@ class PointController extends Controller
     {
 			$point = Points::find($id);
 
-    	$reviews = DB::table('reviews')
-            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
-						->leftJoin('scores_list', function ($join) {
-                $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
-            })
-						->leftJoin('points', 'reviews.id_point', '=', 'points.id')
-            ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score', 'points.name as namepoint')
-            ->where('reviews.id_point', $id)
-						->orderBy('reviews.id', 'desc')
-            ->get();
+			if ($point->published!=1) {
+				$previousurl=parse_url(url()->previous(),PHP_URL_PATH);
+        if($previousurl=="/home" ) {
+          return redirect()->action('HomeController@index')->with('confirmation', 'pointnotpublic');
+        } elseif ($previousurl==("/profile"."/".$point->id_user)) {
+          return redirect()->action('ProfileController@index', ['id' => $point->id_user])->with('confirmation', 'pointnotpublic');
+        } elseif($previousurl=="/admin" ) {
+          return redirect()->action('AdminController@index')->with('confirmation', 'pointnotpublic');
+        } elseif($previousurl=="/map" ) {
+          return redirect()->action('MapController@mostra')->with('confirmation', 'pointnotpublic');
+        } else {
+          return redirect()->action('HomeController@index');
+        }
 
-      $reviewPermission = DB::table('reviews')
-          ->where([['id_user', Auth::id()],['id_point', $id]])
-          ->count();
+			} else {
+	    	$reviews = DB::table('reviews')
+	            ->leftJoin('users', 'reviews.id_user', '=', 'users.id')
+							->leftJoin('scores_list', function ($join) {
+	                $join->on('reviews.id_user', '=', 'scores_list.id_user')->on('reviews.id_point', '=', 'scores_list.id_point');
+	            })
+							->leftJoin('points', 'reviews.id_point', '=', 'points.id')
+	            ->select('reviews.*', 'users.name', 'users.avatar','scores_list.score', 'points.name as namepoint')
+	            ->where('reviews.id_point', $id)
+							->orderBy('reviews.id', 'desc')
+	            ->get();
 
-      $likesdone = DB::table('likereview_list')->where('id_user', Auth::id())->get();
+	      $reviewPermission = DB::table('reviews')
+	          ->where([['id_user', Auth::id()],['id_point', $id]])
+	          ->count();
 
-      $score = $this -> getScore($id);
+	      $likesdone = DB::table('likereview_list')->where('id_user', Auth::id())->get();
 
-      //actualizar la puntuacion de cada punto
-      DB::table('points')
-            ->where('id', $id)
-            ->update(['score' => $score]);
+	      $score = $this -> getScore($id);
 
-      $services = $this -> getIconsServices($point->services_list);
-      //si hay un comentario con el id del usuario, no podra volver a comentar
+	      //actualizar la puntuacion de cada punto
+	      DB::table('points')
+	            ->where('id', $id)
+	            ->update(['score' => $score]);
 
-			$point = Points::find($id);
+	      $services = $this -> getIconsServices($point->services_list);
+	      //si hay un comentario con el id del usuario, no podra volver a comentar
+
+				$point = Points::find($id);
 
 
-    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score' => $score, 'reviewPermission' => $reviewPermission, 'loged' => Auth::id(), 'services' => $services, 'likesdone' => $likesdone]);
-
+	    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score' => $score, 'reviewPermission' => $reviewPermission, 'loged' => Auth::id(), 'services' => $services, 'likesdone' => $likesdone]);
+			}
     }
 
     public function review($id, Request $request)

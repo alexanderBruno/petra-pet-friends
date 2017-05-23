@@ -89,7 +89,7 @@ class EditReviewController extends Controller
         } elseif($previousurl=="/admin" ) {
           return redirect()->action('AdminController@index')->with('confirmation', 'reviewedited');
         } else {
-          return redirect()->action('HomeController@index')->with('confirmation', 'error');
+          return redirect()->action('HomeController@index');
         }
 
       }
@@ -105,7 +105,7 @@ class EditReviewController extends Controller
       } elseif($previousurl=="/admin" ) {
         return redirect()->action('AdminController@index')->with('confirmation', 'reviewnotedited');
       } else {
-        return redirect()->action('HomeController@index')->with('confirmation', 'error');
+        return redirect()->action('HomeController@index');
       }
 
     }

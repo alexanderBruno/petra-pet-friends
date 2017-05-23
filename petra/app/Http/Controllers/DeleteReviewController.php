@@ -40,7 +40,7 @@ class DeleteReviewController extends Controller
         } elseif($previousurl=="/admin" ) {
           return redirect()->action('AdminController@index')->with('confirmation', 'reviewnotdeleted');
         } else {
-          return redirect()->action('PointController@profile')->with('confirmation', 'error');
+          return redirect()->action('PointController@profile');
         }
       } else {
         $previousurl=parse_url(url()->previous(), PHP_URL_PATH);
@@ -53,7 +53,7 @@ class DeleteReviewController extends Controller
         } elseif($previousurl=="/admin" ) {
           return redirect()->action('AdminController@index')->with('confirmation', 'reviewnotdeleted');
         } else {
-          return redirect()->action('PointController@profile')->with('confirmation', 'error');
+          return redirect()->action('PointController@profile');
         }
       }
 

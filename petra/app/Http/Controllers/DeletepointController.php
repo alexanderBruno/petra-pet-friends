@@ -38,7 +38,7 @@ class DeletepointController extends Controller
         } elseif($previousurl=="/admin" ) {
           return redirect()->action('AdminController@index')->with('confirmation', 'pointdeleted');
         } else {
-          return redirect()->action('HomeController@index')->with('confirmation', 'error');
+          return redirect()->action('HomeController@index');
         }
       }
 
@@ -50,7 +50,7 @@ class DeletepointController extends Controller
       } elseif($previousurl=="/admin" ) {
         return redirect()->action('AdminController@index')->with('confirmation', 'pointnotdeleted');
       } else {
-        return redirect()->action('HomeController@index')->with('confirmation', 'error');
+        return redirect()->action('HomeController@index');
       }
 
 

@@ -83,7 +83,7 @@ class FriendshipController extends Controller
         return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'addedfriend');
       }
       else {
-        return redirect()->action('FriendshipController@index')->with('confirmation', 'error');
+        return redirect()->action('FriendshipController@index');
       }
     }
 
@@ -168,7 +168,7 @@ class FriendshipController extends Controller
         }
       }
       else {
-        return redirect()->action('ProfileController@index')->with('confirmation', 'error');
+        return redirect()->action('ProfileController@index');
       }
     }
 
@@ -203,7 +203,7 @@ class FriendshipController extends Controller
         return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'acceptedadd');
       }
       else {
-        return redirect()->action('ProfileController@index')->with('confirmation', 'error');
+        return redirect()->action('ProfileController@index');
       }
     }
 
@@ -238,7 +238,7 @@ class FriendshipController extends Controller
         return redirect()->action('ProfileController@index', ['id' => $id])->with('confirmation', 'deniedadd');
       }
       else {
-        return redirect()->action('ProfileController@index')->with('confirmation', 'error');
+        return redirect()->action('ProfileController@index');
       }
     }
 

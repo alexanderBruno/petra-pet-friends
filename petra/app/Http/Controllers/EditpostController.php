@@ -77,7 +77,7 @@ class EditpostController extends Controller
         } elseif($previousurl=="/admin" ) {
           return redirect()->action('AdminController@index')->with('confirmation', 'postedited');
         } else {
-          return redirect()->action('HomeController@index')->with('confirmation', 'error');
+          return redirect()->action('HomeController@index');
         }
 
       }
@@ -90,7 +90,7 @@ class EditpostController extends Controller
       } elseif($previousurl=="/admin" ) {
         return redirect()->action('AdminController@index')->with('confirmation', 'postnotedited');
       } else {
-        return redirect()->action('HomeController@index')->with('confirmation', 'error');
+        return redirect()->action('HomeController@index');
       }
     }
 }

@@ -17,36 +17,6 @@
                     <p class="profile_confirmation_true">Publicació eliminada correctament.</p>
                   @elseif(session('confirmation')=='postnotdeleted')
                     <p class="profile_confirmation_false">No pots eliminar aquesta publicació!</p>
-                  @elseif(session('confirmation')=='addsameuser')
-                    <p class="profile_confirmation_false">No et pots enviar una sol·licitud d'amistat a tu mateix!</p>
-                  @elseif(session('confirmation')=='denyaddsameuser')
-                    <p class="profile_confirmation_false">No et pots denegar una sol·licitud d'amistat a tu mateix!</p>
-                  @elseif(session('confirmation')=='acceptaddsameuser')
-                    <p class="profile_confirmation_false">No et pots acceptar una sol·licitud d'amistat a tu mateix!</p>
-                  @elseif(session('confirmation')=='deletesameuser')
-                    <p class="profile_confirmation_false">No et pots eliminar com a amistat a tu mateix!</p>
-                  @elseif(session('confirmation')=='removesameuser')
-                    <p class="profile_confirmation_false">No et pots cancel·lar una sol·licitud d'amistat a tu mateix!</p>
-                  @elseif(session('confirmation')=='addalready')
-                    <p class="profile_confirmation_false">Ja has enviat sol·licitud a aquest usuari, espera fins que respongui.</p>
-                  @elseif(session('confirmation')=='denyaddalready')
-                    <p class="profile_confirmation_false">No existeix aquesta sol·licitud. Ja la has denegat o l'altre usuari la ha cancel·lat.</p>
-                  @elseif(session('confirmation')=='acceptaddalready')
-                    <p class="profile_confirmation_false">No existeix aquesta sol·licitud. Ja la has acceptat o l'altre usuari la ha cancel·lat.</p>
-                  @elseif(session('confirmation')=='deletealready')
-                    <p class="profile_confirmation_false">Ja has eliminat l'amistat amb aquest usuari.</p>
-                  @elseif(session('confirmation')=='removealready')
-                    <p class="profile_confirmation_false">No existeix aquesta sol·licitud. Ja la has cancel·lat o l'altre usuari la ha acceptat.</p>
-                  @elseif(session('confirmation')=='addedfriend')
-                    <p class="profile_confirmation_true">Sol·licitud d'amistat enviada correctament. Esperant resposta de l'usuari.</p>
-                  @elseif(session('confirmation')=='deniedadd')
-                    <p class="profile_confirmation_true">Sol·licitud d'amistat denegada correctament.</p>
-                  @elseif(session('confirmation')=='acceptedadd')
-                    <p class="profile_confirmation_true">Sol·licitud d'amistat acceptada, tens un nou amic! :)</p>
-                  @elseif(session('confirmation')=='deletedfriend')
-                    <p class="profile_confirmation_true">Amistat eliminada correctament, has perdut un amic! :(</p>
-                  @elseif(session('confirmation')=='removedadd')
-                    <p class="profile_confirmation_true">Sol·licitud d'amistat cancel·lada correctament.</p>
                   @elseif(session('confirmation')=='reviewedited')
                     <p class="profile_confirmation_true">Opinió editada correctament.</p>
                   @elseif(session('confirmation')=='reviewnotedited')
@@ -61,6 +31,8 @@
                     <p class="profile_confirmation_true">Lloc eliminat correctament.</p>
                   @elseif(session('confirmation')=='pointnotdeleted')
                     <p class="profile_confirmation_false">No pots eliminar aquest lloc!</p>
+                  @elseif(session('confirmation')=='pointnotpublic')
+                    <p class="profile_confirmation_false">Aquest lloc està ocult!</p>
                   @endif
                   <hr class="messages_hr">
                   <h3 class="home_updates_title"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;&nbsp;Panell d'administració&nbsp;&nbsp;<i class="fa fa-lock" aria-hidden="true"></i></h3>

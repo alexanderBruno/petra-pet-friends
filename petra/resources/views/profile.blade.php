@@ -61,6 +61,8 @@
                     <p class="profile_confirmation_true">Lloc eliminat correctament.</p>
                   @elseif(session('confirmation')=='pointnotdeleted')
                     <p class="profile_confirmation_false">No pots eliminar aquest lloc!</p>
+                  @elseif(session('confirmation')=='pointnotpublic')
+                    <p class="profile_confirmation_false">Aquest lloc està ocult!</p>
                   @endif
 
                   <div class="profile_first_part media">
