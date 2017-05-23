@@ -3,6 +3,10 @@
   font-family: 'Bree Serif', serif;
 }
 
+.messages.tab-pane {
+  margin-top: 3%;
+}
+
 .messages.table td {
   border-top: none !important;
 }
@@ -20,7 +24,7 @@
 }
 
 .messages_buttonmessage {
-  margin-top: 30px;
+  margin-top: 8%;
 }
 
 .messages_big_buttonmessage {

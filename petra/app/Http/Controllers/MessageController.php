@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Auth, DB;
 use Illuminate\Contracts\Auth\Guard;
 use App\User;
 use Illuminate\Http\Request;
@@ -29,8 +29,19 @@ class MessageController extends Controller
         if (Auth::guest()){
           return redirect(route('login'));
         } else {
+
           $users = User::orderBy('name')->get();
-          return view('messages', compact('users'));
+
+          $yourfriends = DB::table('friendships')
+                ->leftJoin('users', function ($join) {
+                    $join->on('users.id', '=', 'friendships.sender_id')->orOn('users.id', '=', 'friendships.recipient_id');
+                })
+                ->select('friendships.sender_id', 'friendships.recipient_id', 'friendships.status', 'users.id', 'users.name', 'users.avatar')
+                ->where('friendships.sender_id', Auth::id())->orWhere('friendships.recipient_id', Auth::id())->where('friendships.status', 1)
+                ->orderBy('users.name')
+                ->get();
+
+          return view('messages', ['users' => $users, 'yourfriends' => $yourfriends]);
         }
     }
 
