@@ -9,8 +9,10 @@
             <div class="point panel-body">
                   @if(session('confirmation')=='error')
                     <p class="point_confirmation_false">Alguna cosa no ha sortit bè. Contacta amb un administrador.</p>
-                  @elseif(session('confirmation')=='reviewposted')
+                  @elseif(session('confirmation')=='reviewcreated')
                     <p class="point_confirmation_true">Opinió creada correctament.</p>
+                  @elseif(session('confirmation')=='reviewnotcreated')
+                    <p class="point_confirmation_false">Si no escrius cap missatge o valores, no pots fer una opinió!</p>
                   @elseif(session('confirmation')=='reviewedited')
                     <p class="point_confirmation_true">Opinió editada correctament.</p>
                   @elseif(session('confirmation')=='reviewnotedited')
@@ -75,9 +77,6 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group">
-                          @if (isset($confirmation))
-                            <p class="point_confirmation_true">Opinió feta.</p>
-                          @endif
                          <label>Digues als teus amics que et sembla aquest lloc!</label>
                          <textarea name="point_review" rows="3" class="form-control point_review" placeholder="Escriu la teva opinio i valora!"></textarea>
                         </div>
@@ -162,7 +161,7 @@
                               <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
                             @endif
                           <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$review->id_point) }}">{{$review->namepoint}}</a></label> -
-                        @if ($review->id_user==Auth::id())
+                        @if ($review->id_user==Auth::id() or Auth::user()->type_user=="admin")
                             <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

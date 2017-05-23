@@ -121,7 +121,7 @@
                             <?php $userR=$userR ?> @break
                           @endif
                         @endforeach
-                        @if($post->id_user==Auth::id() or $post->posts_privacy==1 or ($post->posts_privacy==2 and $userE->isFriendWith($userR)))
+                        @if($post->id_user==Auth::id() or $post->posts_privacy==1 or ($post->posts_privacy==2 and $userE->isFriendWith($userR)) or Auth::user()->type_user=="admin")
                           <div class="panel panel-info media profile_post">
                             <div class="profile_avatar_post media-left">
                               <img src="/images/avatars/{{$post->avatar}}" class="profile_avatarimg_post" alt="avatarimg_post"/>
@@ -158,7 +158,7 @@
                               @else
                                 <a class="profile_post_likes" data-postid="{{$post->id}}" data-postlikes="{{$post->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="profile_post_likes_num">{{$post->likes}}</label></a>
                               @endif
-                            @if ($post->id_user==Auth::id())
+                            @if ($post->id_user==Auth::id() or Auth::user()->type_user=="admin")
                               <div class="modal fade" id="confirm_delete_post_{{$post->id}}" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -243,7 +243,7 @@
                                 @endif
 
                               <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$review->id_point) }}">{{$review->namepoint}}</a></label> -
-                            @if ($review->id_user==Auth::id())
+                            @if ($review->id_user==Auth::id() or Auth::user()->type_user=="admin")
                                 <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

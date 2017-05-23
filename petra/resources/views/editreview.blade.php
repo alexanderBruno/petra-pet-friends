@@ -16,7 +16,7 @@
                       <textarea name="editreview_content" class="form-control editreview_content">{{$review->content}}</textarea>
                     </div>
                     <div class="form-group">
-                    
+
                       <label>Imatge:</label><br/>
                       @if ($review->photo!=NULL)
                         <img src="/images/reviews/{{$review->id_point}}/{{$review->photo}}" class="editreview_photoimg" alt="photoimg"/><br/><br/>
@@ -28,7 +28,7 @@
                             <i class="glyphicon glyphicon-refresh"></i> Afegir imatge...
                         </label>
                       @endif
-                      
+
                       <input id="editreview_file-upload" name="editreview_photo" type="file" class="file editreview_photo">
                     </div>
                     <div>
@@ -38,14 +38,14 @@
                           <input type="radio" id="paw4" name="rating" value="4" /><label for="paw4" title="Molt Bé!"></label>
                           <input type="radio" id="paw3" name="rating" value="3" /><label for="paw3" title="Meh"></label>
                           <input type="radio" id="paw2" name="rating" value="2" /><label for="paw2" title="Dolent"></label>
-                          <input type="radio" id="paw1" name="rating" value="1" /><label for="paw1" title="Molt dolent"></label> 
+                          <input type="radio" id="paw1" name="rating" value="1" /><label for="paw1" title="Molt dolent"></label>
                     </fieldset><br><br>
-                      
+
                     </div>
                     <input type="hidden" name="editreview_id" value="{{$review->id}}">
                     <input type="hidden" name="editreview_previousurl" value="{{url()->previous()}}">
                     <a href="{{url()->previous()}}"><button type="button" class="btn btn-primary editreview_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Tornar enrere</button></a>
-                    <button type="submit" name="submit" class="btn btn-primary editreview_submit">Guardar canvis</button>
+                    <button type="submit" name="submit" class="btn btn-primary editreview_submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar canvis</button>
                   </form>
                 </div>
             </div>

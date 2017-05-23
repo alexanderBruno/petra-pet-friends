@@ -10,6 +10,8 @@
                     <p class="home_confirmation_false">Alguna cosa no ha sortit bè. Contacta amb un administrador.</p>
                   @elseif(session('confirmation')=='postposted')
                     <p class="home_confirmation_true">Publicació creada correctament.</p>
+                  @elseif(session('confirmation')=='postnotposted')
+                    <p class="home_confirmation_false">No has escrit cap missatge!</p>
                   @elseif(session('confirmation')=='postedited')
                     <p class="home_confirmation_true">Publicació editada correctament.</p>
                   @elseif(session('confirmation')=='postnotedited')

@@ -109,9 +109,11 @@ class HomeController extends Controller
         else {
           DB::table('posts')->insert(['id_user' => Auth::id(), 'content' => $request->input('home_post'), 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
         }
+
+        return redirect()->action('HomeController@index')->with('confirmation', 'postposted');
       }
 
-      return redirect()->action('HomeController@index')->with('confirmation', 'postposted');
+      return redirect()->action('HomeController@index')->with('confirmation', 'postnotposted');
 
     }
 

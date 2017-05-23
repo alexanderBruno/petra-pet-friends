@@ -13,6 +13,7 @@
                   <h5>Si creus que es un error, posa't en contacte amb nosaltres.</h5><br/>
                   <img src="/images/avatars/404img.png" style="width:40%; height:40%;"/><br/><br/>
                   <a href="/home"><button type="button" class="btn btn-primary"><i class="fa fa-home" aria-hidden="true"></i> Tornar a l'inici</button></a>
+                  <a href="/contact"><button type="button" class="btn btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i> Anar a contacte</button></a>
                 </div>
 
                 </div>
