@@ -34,6 +34,8 @@ class DeletepostController extends Controller
           return redirect()->action('HomeController@index')->with('confirmation', 'postdeleted');
         } elseif ($previousurl==("/profile"."/".$post->id_user)) {
           return redirect()->action('ProfileController@index', ['id' => $post->id_user])->with('confirmation', 'postdeleted');
+        } elseif($previousurl=="/admin" ) {
+          return redirect()->action('AdminController@index')->with('confirmation', 'postdeleted');
         } else {
           return redirect()->action('HomeController@index')->with('confirmation', 'error');
         }
@@ -44,6 +46,8 @@ class DeletepostController extends Controller
         return redirect()->action('HomeController@index')->with('confirmation', 'postnotdeleted');
       } elseif ($previousurl==("/profile"."/".$post->id_user)) {
         return redirect()->action('ProfileController@index', ['id' => $post->id_user])->with('confirmation', 'postnotdeleted');
+      } elseif($previousurl=="/admin" ) {
+        return redirect()->action('AdminController@index')->with('confirmation', 'postnotdeleted');
       } else {
         return redirect()->action('HomeController@index')->with('confirmation', 'error');
       }

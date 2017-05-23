@@ -35,6 +35,8 @@ class DeletepointController extends Controller
           return redirect()->action('HomeController@index')->with('confirmation', 'pointdeleted');
         } elseif ($previousurl==("/profile"."/".$point->id_user)) {
           return redirect()->action('ProfileController@index', ['id' => $point->id_user])->with('confirmation', 'pointdeleted');
+        } elseif($previousurl=="/admin" ) {
+          return redirect()->action('AdminController@index')->with('confirmation', 'pointdeleted');
         } else {
           return redirect()->action('HomeController@index')->with('confirmation', 'error');
         }
@@ -45,6 +47,8 @@ class DeletepointController extends Controller
         return redirect()->action('HomeController@index')->with('confirmation', 'pointnotdeleted');
       } elseif ($previousurl==("/profile"."/".$point->id_user)) {
         return redirect()->action('ProfileController@index', ['id' => $point->id_user])->with('confirmation', 'pointnotdeleted');
+      } elseif($previousurl=="/admin" ) {
+        return redirect()->action('AdminController@index')->with('confirmation', 'pointnotdeleted');
       } else {
         return redirect()->action('HomeController@index')->with('confirmation', 'error');
       }

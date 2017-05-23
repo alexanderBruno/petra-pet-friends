@@ -37,6 +37,8 @@ class DeleteReviewController extends Controller
           return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewdeleted');
         } elseif ($previousurl==("/home")) {
           return redirect()->action('HomeController@index')->with('confirmation', 'reviewdeleted');
+        } elseif($previousurl=="/admin" ) {
+          return redirect()->action('AdminController@index')->with('confirmation', 'reviewnotdeleted');
         } else {
           return redirect()->action('PointController@profile')->with('confirmation', 'error');
         }
@@ -48,6 +50,8 @@ class DeleteReviewController extends Controller
           return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewnotdeleted');
         } elseif ($previousurl==("/home")) {
           return redirect()->action('HomeController@index')->with('confirmation', 'reviewnotdeleted');
+        } elseif($previousurl=="/admin" ) {
+          return redirect()->action('AdminController@index')->with('confirmation', 'reviewnotdeleted');
         } else {
           return redirect()->action('PointController@profile')->with('confirmation', 'error');
         }

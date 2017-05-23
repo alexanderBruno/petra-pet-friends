@@ -86,6 +86,8 @@ class EditReviewController extends Controller
           return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewedited');
         } elseif ($previousurl==("/home")) {
           return redirect()->action('HomeController@index')->with('confirmation', 'reviewedited');
+        } elseif($previousurl=="/admin" ) {
+          return redirect()->action('AdminController@index')->with('confirmation', 'reviewedited');
         } else {
           return redirect()->action('HomeController@index')->with('confirmation', 'error');
         }
@@ -100,6 +102,8 @@ class EditReviewController extends Controller
         return redirect()->action('ProfileController@index', ['id' => $review->id_user])->with('confirmation', 'reviewnotedited');
       } elseif ($previousurl==("/home")) {
         return redirect()->action('HomeController@index')->with('confirmation', 'reviewnotedited');
+      } elseif($previousurl=="/admin" ) {
+        return redirect()->action('AdminController@index')->with('confirmation', 'reviewnotedited');
       } else {
         return redirect()->action('HomeController@index')->with('confirmation', 'error');
       }

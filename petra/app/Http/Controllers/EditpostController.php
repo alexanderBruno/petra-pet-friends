@@ -74,6 +74,8 @@ class EditpostController extends Controller
           return redirect()->action('HomeController@index')->with('confirmation', 'postedited');
         } elseif ($previousurl==("/profile"."/".$post->id_user)) {
           return redirect()->action('ProfileController@index', ['id' => $post->id_user])->with('confirmation', 'postedited');
+        } elseif($previousurl=="/admin" ) {
+          return redirect()->action('AdminController@index')->with('confirmation', 'postedited');
         } else {
           return redirect()->action('HomeController@index')->with('confirmation', 'error');
         }
@@ -85,6 +87,8 @@ class EditpostController extends Controller
         return redirect()->action('HomeController@index')->with('confirmation', 'postnotedited');
       } elseif ($previousurl==("/profile"."/".$post->id_user)) {
         return redirect()->action('ProfileController@index', ['id' => $post->id_user])->with('confirmation', 'postnotedited');
+      } elseif($previousurl=="/admin" ) {
+        return redirect()->action('AdminController@index')->with('confirmation', 'postnotedited');
       } else {
         return redirect()->action('HomeController@index')->with('confirmation', 'error');
       }
