@@ -47,7 +47,7 @@
                   </form><br/>
 
                   <hr class="messages_hr">
-                  <h3 class="home_updates_title">Últimes novetats</h3>
+                  <h3 class="home_updates_title"><i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;Últimes novetats&nbsp;&nbsp;<i class="fa fa-newspaper-o" aria-hidden="true"></i></h3>
                   <hr class="messages_hr">
 
                       @foreach($updates as $update)

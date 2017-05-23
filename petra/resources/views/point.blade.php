@@ -100,9 +100,9 @@
                     </form>
                     @endif
 
-                  <hr>
-                  <h3>Opinions:</h3>
-                  <hr>
+                    <hr class="messages_hr">
+                    <h3 class="home_updates_title"><i class="fa fa-envelope-open" aria-hidden="true"></i>&nbsp;&nbsp;Opinions&nbsp;&nbsp;<i class="fa fa-envelope-open" aria-hidden="true"></i></h3>
+                    <hr class="messages_hr">
                   @foreach($reviews as $review)
 
                     <div class="panel panel-info media point_review">
