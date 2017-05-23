@@ -44,173 +44,163 @@
                     </label>
                     <input id="home_file-upload" name="home_post_photo" type="file" class="file home_post_photo">
                     <button type="submit" name="submit" class="btn btn-primary home_submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;Publicar</button>
-                  </form>
+                  </form><br/>
 
-                  <ul class="nav nav-tabs home_tabs">
-                    <li class="active"><a data-toggle="tab" href="#ua"><h4>Últimes actualitzacions</h4></a></li>
-                    <li><a data-toggle="tab" href="#up"><h4>Últimes publicacions</h4></a></li>
-                    <li><a data-toggle="tab" href="#uo"><h4>Últimes opinions</h4></a></li>
-                  </ul>
+                  <hr class="messages_hr">
+                  <h3 class="home_updates_title">Últimes novetats</h3>
+                  <hr class="messages_hr">
 
-                  <div class="home tab-content">
-                    <div id="ua" class="home tab-pane fade in active">
-                      En construcción
-                    </div>
-                    <div id="up" class="home tab-pane fade">
-                      @foreach($lastposts as $post)
-                        @foreach($usersR as $userR)
-                          @if($userR->id==$post->id_user)
-                            <?php $userR=$userR ?> @break
-                          @endif
-                        @endforeach
-                        @if($post->id_user==Auth::id() or $post->posts_privacy==1 or ($post->posts_privacy==2 and $userE->isFriendWith($userR))  or Auth::user()->type_user=="admin")
-                          <div class="panel panel-info media home_post">
-                            <div class="home_avatar_post media-left">
-                              <img src="images/avatars/{{$post->avatar}}" class="home_avatarimg_post" alt="avatarimg_post"/>
-                            </div>
-
-                            <div class="home_name_content_post media-body">
-                              <h4 class="home_name_post media-heading">
-                                <a class="home_iduser_post" href="{{ url('/profile/'.$post->id_user) }}">{{$post->name}}</a>
-                                <small><p class="home_date_post"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($post->created_at)); ?></p></small>
-                              </h4>
-                              <div>
-                                {{ $post->content }}
-                                @if ($post->created_at!=$post->updated_at)
-                                  <i class="home_message_edited">Editat</i>
-                                @endif
+                      @foreach($updates as $update)
+                        @if(isset($update->score))
+                          <div class="panel panel-info media point_review">
+                              <div class="point_avatar_review media-left">
+                                  <img src="/images/avatars/{{$update->avatar}}" class="point_avatarimg_review" alt="avatarimg_review"/>
                               </div>
-                              @if ($post->photo!=NULL)
-                                <img src="images/posts/{{$post->id_user}}/{{$post->photo}}" class="home_lastpost_photo" alt="lastpost_photo"/>
-                                <div class="home_modal">
-                                  <span class="home_close">&times;</span>
-                                  <img class="home_modal-content">
-                                </div>
-                              @endif
-                            </div>
-                            <?php $clicked=False ?>
-                              @foreach($likesdone as $likedone)
-                                @if ($post->id==$likedone->id_post)
-                                  <?php $clicked=True ?> @break
-                                @endif
-                              @endforeach
 
-                              @if($clicked)
-                                <a class="home_post_likes_clicked" data-postid="{{$post->id}}" data-postlikes="{{$post->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="home_post_likes_num">{{$post->likes}}</label></a>
-                              @else
-                                <a class="home_post_likes" data-postid="{{$post->id}}" data-postlikes="{{$post->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="home_post_likes_num">{{$post->likes}}</label></a>
-                              @endif
-                            @if ($post->id_user==Auth::id() or Auth::user()->type_user=="admin")
-                              <div class="modal fade" id="confirm_delete_post_{{$post->id}}" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Estàs a punt d'esborrar una publicació, aquesta acció és irreversible.</p>
-                                            <p>Vols continuar?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                            <a href="/deletepost/{{$post->id}}"><button type="button" class="btn btn-danger home_modal_delete_btn">Eliminar</button></a>
-                                        </div>
+                              <div class="point_name_content_review media-body">
+                                <h4 class="point_name_review media-heading">
+                                  <a class="point_iduser_review" href="{{ url('/profile/'.$update->id_user) }}">{{$update->name}}</a>
+                                  <small><p class="point_date_review"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($update->created_at)); ?></p></small>
+                                </h4>
+                                <div class="review_content">
+                                    {{ $update->content }}
+                                    @if ($update->created_at!=$update->updated_at)
+                                        <i class="point_message_edited">Editat</i>
+                                    @endif
+                                </div>
+                                <div class="valoration valoration_review">
+                                  <label class = "full" id="p1_r{{$update->id}}"></label>
+                                  <label class = "full" id="p2_r{{$update->id}}"></label>
+                                  <label class = "full" id="p3_r{{$update->id}}"></label>
+                                  <label class = "full" id="p4_r{{$update->id}}"></label>
+                                  <label class = "full" id="p5_r{{$update->id}}"></label>
+                                </div>
+                                @if ($update->photo!=NULL)
+                                    <img src="/images/reviews/{{$update->id_user}}/{{$update->photo}}" class="point_lastreview_photo" alt="lastreview_photo"/>
+                                    <div class="point_modal">
+                                        <span class="point_close">&times;</span>
+                                        <img class="point_modal-content">
                                     </div>
-                                </div>
+                                @endif
                               </div>
-                              <a class="home_post_options" data-toggle="modal" href="#confirm_delete_post_{{$post->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
-                              <a class="home_post_options" href="{{ url('/editpost/'.$post->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
-                            @endif
-                          </div>
-                        @endif
-                      @endforeach
-                    </div>
-                    <div id="uo" class="home tab-pane fade">
-                      @foreach($reviews as $review)
 
-                        <div class="panel panel-info media point_review">
-                            <div class="point_avatar_review media-left">
-                                <img src="/images/avatars/{{$review->avatar}}" class="point_avatarimg_review" alt="avatarimg_review"/>
-                            </div>
 
-                            <div class="point_name_content_review media-body">
-                              <h4 class="point_name_review media-heading">
-                                <a class="point_iduser_review" href="{{ url('/profile/'.$review->id_user) }}">{{$review->name}}</a>
-                                <small><p class="point_date_review"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($review->created_at)); ?></p></small>
-                              </h4>
-                              <div class="review_content">
-                                  {{ $review->content }}
-                                  @if ($review->created_at!=$review->updated_at)
-                                      <i class="point_message_edited">Editat</i>
+                                <script type="text/javascript">
+                                    var personal_score = {{ $update->score }};
+
+                                    var per_star = ["p1_r{{$update->id}}","p2_r{{$update->id}}","p3_r{{$update->id}}","p4_r{{$update->id}}","p5_r{{$update->id}}"];
+
+                                    pawStar = Math.round(personal_score);
+                                    for (var i = pawStar -1 ; i >= 0; i--) {
+                                      document.getElementById(per_star[i]).style.color = '#ff6868';
+                                    }
+                                </script>
+                                  <?php $clickedreview=False ?>
+                                  @foreach($likesdonereview as $likedonereview)
+                                    @if ($update->id==$likedonereview->id_review)
+                                      <?php $clickedreview=True ?> @break
+                                    @endif
+                                  @endforeach
+                                  @if($clickedreview)
+                                    <a class="point_review_likes_clicked" data-reviewid="{{$update->id}}" data-reviewlikes="{{$update->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$update->likes}}</label></a>
+                                  @else
+                                    <a class="point_review_likes" data-reviewid="{{$update->id}}" data-reviewlikes="{{$update->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$update->likes}}</label></a>
                                   @endif
-                              </div>
-                              <div class="valoration valoration_review">
-                                <label class = "full" id="p1_r{{$review->id}}"></label>
-                                <label class = "full" id="p2_r{{$review->id}}"></label>
-                                <label class = "full" id="p3_r{{$review->id}}"></label>
-                                <label class = "full" id="p4_r{{$review->id}}"></label>
-                                <label class = "full" id="p5_r{{$review->id}}"></label>
-                              </div>
-                              @if ($review->photo!=NULL)
-                                  <img src="/images/reviews/{{$review->id_user}}/{{$review->photo}}" class="point_lastreview_photo" alt="lastreview_photo"/>
-                                  <div class="point_modal">
-                                      <span class="point_close">&times;</span>
-                                      <img class="point_modal-content">
+
+                                <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$update->id_point) }}">{{$update->namepoint}}</a></label> -
+                              @if ($update->id_user==Auth::id() or Auth::user()->type_user=="admin")
+                                  <div class="modal fade" id="confirm_delete_review_{{$update->id}}" role="dialog">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal" aria-hiddtrue>×</button>
+                                                  <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <p>Estàs a punt d'esborrar la teva opinió, aquesta acció és irreversible</p>
+                                                  <p>Vols continuar?</p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                  <a href="/deletereview/{{$update->id}}"><button type="button" class="btn btn-danger point_modal_delete_btn">Eliminar</button></a>
+                                              </div>
+                                          </div>
+                                     </div>
                                   </div>
+                                  <a class="point_review_options home_review_options" data-toggle="modal" href="#confirm_delete_review_{{$update->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+                                  <a class="point_review_options home_review_options" href="{{ url('/editreview/'.$update->id_point.'/'.$update->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                               @endif
-                            </div>
+                          </div>
+                        @else
+                          @foreach($usersR as $userR)
+                            @if($userR->id==$update->id_user)
+                              <?php $userR=$userR ?> @break
+                            @endif
+                          @endforeach
+                          @if($update->id_user==Auth::id() or $update->posts_privacy==1 or ($update->posts_privacy==2 and $userE->isFriendWith($userR))  or Auth::user()->type_user=="admin")
+                            <div class="panel panel-info media home_post">
+                              <div class="home_avatar_post media-left">
+                                <img src="images/avatars/{{$update->avatar}}" class="home_avatarimg_post" alt="avatarimg_post"/>
+                              </div>
 
-
-                              <script type="text/javascript">
-                                  var personal_score = {{ $review->score }};
-
-                                  var per_star = ["p1_r{{$review->id}}","p2_r{{$review->id}}","p3_r{{$review->id}}","p4_r{{$review->id}}","p5_r{{$review->id}}"];
-
-                                  pawStar = Math.round(personal_score);
-                                  for (var i = pawStar -1 ; i >= 0; i--) {
-                                    document.getElementById(per_star[i]).style.color = '#ff6868';
-                                  }
-                              </script>
-                                <?php $clickedreview=False ?>
-                                @foreach($likesdonereview as $likedonereview)
-                                  @if ($review->id==$likedonereview->id_review)
-                                    <?php $clickedreview=True ?> @break
+                              <div class="home_name_content_post media-body">
+                                <h4 class="home_name_post media-heading">
+                                  <a class="home_iduser_post" href="{{ url('/profile/'.$update->id_user) }}">{{$update->name}}</a>
+                                  <small><p class="home_date_post"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($update->created_at)); ?></p></small>
+                                </h4>
+                                <div>
+                                  {{ $update->content }}
+                                  @if ($update->created_at!=$update->updated_at)
+                                    <i class="home_message_edited">Editat</i>
+                                  @endif
+                                </div>
+                                @if ($update->photo!=NULL)
+                                  <img src="images/posts/{{$update->id_user}}/{{$update->photo}}" class="home_lastpost_photo" alt="lastpost_photo"/>
+                                  <div class="home_modal">
+                                    <span class="home_close">&times;</span>
+                                    <img class="home_modal-content">
+                                  </div>
+                                @endif
+                              </div>
+                              <?php $clicked=False ?>
+                                @foreach($likesdone as $likedone)
+                                  @if ($update->id==$likedone->id_post)
+                                    <?php $clicked=True ?> @break
                                   @endif
                                 @endforeach
-                                @if($clickedreview)
-                                  <a class="point_review_likes_clicked" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
-                                @else
-                                  <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
-                                @endif
 
-                              <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$review->id_point) }}">{{$review->namepoint}}</a></label> -
-                            @if ($review->id_user==Auth::id() or Auth::user()->type_user=="admin")
-                                <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hiddtrue>×</button>
-                                                <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Estàs a punt d'esborrar la teva opinió, aquesta acció és irreversible</p>
-                                                <p>Vols continuar?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                <a href="/deletereview/{{$review->id}}"><button type="button" class="btn btn-danger point_modal_delete_btn">Eliminar</button></a>
-                                            </div>
-                                        </div>
-                                   </div>
+                                @if($clicked)
+                                  <a class="home_post_likes_clicked" data-postid="{{$update->id}}" data-postlikes="{{$update->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="home_post_likes_num">{{$update->likes}}</label></a>
+                                @else
+                                  <a class="home_post_likes" data-postid="{{$update->id}}" data-postlikes="{{$update->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="home_post_likes_num">{{$update->likes}}</label></a>
+                                @endif
+                              @if ($update->id_user==Auth::id() or Auth::user()->type_user=="admin")
+                                <div class="modal fade" id="confirm_delete_post_{{$update->id}}" role="dialog">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                              <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                              <p>Estàs a punt d'esborrar una publicació, aquesta acció és irreversible.</p>
+                                              <p>Vols continuar?</p>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                              <a href="/deletepost/{{$update->id}}"><button type="button" class="btn btn-danger home_modal_delete_btn">Eliminar</button></a>
+                                          </div>
+                                      </div>
+                                  </div>
                                 </div>
-                                <a class="point_review_options home_review_options" data-toggle="modal" href="#confirm_delete_review_{{$review->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
-                                <a class="point_review_options home_review_options" href="{{ url('/editreview/'.$review->id_point.'/'.$review->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
-                            @endif
-                        </div>
+                                <a class="home_post_options" data-toggle="modal" href="#confirm_delete_post_{{$update->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+                                <a class="home_post_options" href="{{ url('/editpost/'.$update->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                              @endif
+                            </div>
+                          @endif
+                        @endif
                       @endforeach
-                    </div>
-                  </div>
+
 
             </div>
         </div>

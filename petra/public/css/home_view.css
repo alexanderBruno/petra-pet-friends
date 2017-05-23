@@ -21,14 +21,6 @@ body {
   font-weight: bold;
 }
 
-.home_tabs {
-  margin-top: 5%;
-}
-
-.home.tab-pane {
-  margin-top: 3%;
-}
-
 .home_post {
   margin-top: 1%;
   resize: none;
@@ -44,6 +36,11 @@ input.home_post_photo[type="file"] {
     padding: 6px 6px;
     cursor: pointer;
 }
+
+.home_updates_title {
+  text-align: center;
+}
+
 
 .home_avatarimg_post {
   max-width: 50px;
