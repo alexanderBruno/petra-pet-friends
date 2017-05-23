@@ -280,11 +280,11 @@
                       @endforeach
                     </div>
                     <div id="lp" class="profile tab-pane fade">
-                      En contrucción
+                      <p class="friends_confirmation_info">En contrucció</p>
                     </div>
                     <div id="ma" class="profile tab-pane fade">
                       @if(count($yourpoints)==0)
-                        <p class="friends_confirmation_info">Encara no tens cap lloc afegit, ves al mapa i afegeix un marcador!</p>
+                        <p class="friends_confirmation_info">Encara no tens cap lloc afegit o acceptat, ves al mapa i afegeix un marcador o tingues paciència!</p>
                       @else
                         @foreach($yourpoints as $yourpoint)
                             <table class="friends table">

@@ -102,93 +102,95 @@
                     </form>
                     @endif
 
-                    <hr class="messages_hr">
-                    <h3 class="home_updates_title"><i class="fa fa-envelope-open" aria-hidden="true"></i>&nbsp;&nbsp;Opinions&nbsp;&nbsp;<i class="fa fa-envelope-open" aria-hidden="true"></i></h3>
-                    <hr class="messages_hr">
-                  @foreach($reviews as $review)
+                    @if(count($reviews)!=0)
+                      <hr class="messages_hr">
+                      <h3 class="home_updates_title"><i class="fa fa-envelope-open" aria-hidden="true"></i>&nbsp;&nbsp;Opinions&nbsp;&nbsp;<i class="fa fa-envelope-open" aria-hidden="true"></i></h3>
+                      <hr class="messages_hr">
+                      @foreach($reviews as $review)
 
-                    <div class="panel panel-info media point_review">
-                        <div class="point_avatar_review media-left">
-                            <img src="/images/avatars/{{$review->avatar}}" class="point_avatarimg_review" alt="avatarimg_review"/>
-                        </div>
-
-                        <!-- nombre del usuario, contenido de la review, fecha de creacion o actualizacion y foto de la opinion -->
-                        <div class="point_name_content_review media-body">
-                          <h4 class="point_name_review media-heading">
-                            <a class="point_iduser_review" href="{{ url('/profile/'.$review->id_user) }}">{{$review->name}}</a>
-                            <small><p class="point_date_review"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($review->created_at)); ?></p></small>
-                          </h4>
-                          <div class="review_content">
-                              {{ $review->content }}
-                              @if ($review->created_at!=$review->updated_at)
-                                  <i class="point_message_edited">Editat</i>
-                              @endif
-                          </div>
-                          <div class="valoration valoration_review">
-                            <label class = "full" id="p1_r{{$review->id}}"></label>
-                            <label class = "full" id="p2_r{{$review->id}}"></label>
-                            <label class = "full" id="p3_r{{$review->id}}"></label>
-                            <label class = "full" id="p4_r{{$review->id}}"></label>
-                            <label class = "full" id="p5_r{{$review->id}}"></label>
-                          </div>
-                          @if ($review->photo!=NULL)
-                              <img src="/images/reviews/{{$review->id_user}}/{{$review->photo}}" class="point_lastreview_photo" alt="lastreview_photo"/>
-                              <div class="point_modal">
-                                  <span class="point_close">&times;</span>
-                                  <img class="point_modal-content">
-                              </div>
-                          @endif
-                        </div>
-
-
-                          <script type="text/javascript">
-                              var personal_score = {{ $review->score }};
-
-                              var per_star = ["p1_r{{$review->id}}","p2_r{{$review->id}}","p3_r{{$review->id}}","p4_r{{$review->id}}","p5_r{{$review->id}}"];
-
-                              pawStar = Math.round(personal_score);
-                              for (var i = pawStar -1 ; i >= 0; i--) {
-                                document.getElementById(per_star[i]).style.color = '#ff6868';
-                              }
-                          </script>
-                            <?php $clicked=False ?>
-                            @foreach($likesdone as $likedone)
-                              @if ($review->id==$likedone->id_review)
-                                <?php $clicked=True ?> @break
-                              @endif
-                            @endforeach
-                            @if($clicked)
-                              <a class="point_review_likes_clicked" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
-                            @else
-                              <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
-                            @endif
-                          <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$review->id_point) }}">{{$review->namepoint}}</a></label> -
-                          @if(Auth::guest())
-                          @elseif ($review->id_user==Auth::id() or Auth::user()->type_user=="admin")
-                            <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hiddtrue>×</button>
-                                            <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Estàs a punt d'esborrar la teva opinió, aquesta acció és irreversible</p>
-                                            <p>Vols continuar?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                            <a href="/deletereview/{{$review->id}}"><button type="button" class="btn btn-danger point_modal_delete_btn">Eliminar</button></a>
-                                        </div>
-                                    </div>
-                               </div>
+                        <div class="panel panel-info media point_review">
+                            <div class="point_avatar_review media-left">
+                                <img src="/images/avatars/{{$review->avatar}}" class="point_avatarimg_review" alt="avatarimg_review"/>
                             </div>
-                            <a class="point_review_options" data-toggle="modal" href="#confirm_delete_review_{{$review->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
-                            <a class="point_review_options" href="{{ url('/editreview/'.$review->id_point.'/'.$review->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
-                          @endif
-                    <!-- fin modal -->
-                    </div>
-                  @endforeach
+
+                            <!-- nombre del usuario, contenido de la review, fecha de creacion o actualizacion y foto de la opinion -->
+                            <div class="point_name_content_review media-body">
+                              <h4 class="point_name_review media-heading">
+                                <a class="point_iduser_review" href="{{ url('/profile/'.$review->id_user) }}">{{$review->name}}</a>
+                                <small><p class="point_date_review"><?php echo strftime('%d/%m/%Y %H:%M', strtotime($review->created_at)); ?></p></small>
+                              </h4>
+                              <div class="review_content">
+                                  {{ $review->content }}
+                                  @if ($review->created_at!=$review->updated_at)
+                                      <i class="point_message_edited">Editat</i>
+                                  @endif
+                              </div>
+                              <div class="valoration valoration_review">
+                                <label class = "full" id="p1_r{{$review->id}}"></label>
+                                <label class = "full" id="p2_r{{$review->id}}"></label>
+                                <label class = "full" id="p3_r{{$review->id}}"></label>
+                                <label class = "full" id="p4_r{{$review->id}}"></label>
+                                <label class = "full" id="p5_r{{$review->id}}"></label>
+                              </div>
+                              @if ($review->photo!=NULL)
+                                  <img src="/images/reviews/{{$review->id_user}}/{{$review->photo}}" class="point_lastreview_photo" alt="lastreview_photo"/>
+                                  <div class="point_modal">
+                                      <span class="point_close">&times;</span>
+                                      <img class="point_modal-content">
+                                  </div>
+                              @endif
+                            </div>
+
+
+                              <script type="text/javascript">
+                                  var personal_score = {{ $review->score }};
+
+                                  var per_star = ["p1_r{{$review->id}}","p2_r{{$review->id}}","p3_r{{$review->id}}","p4_r{{$review->id}}","p5_r{{$review->id}}"];
+
+                                  pawStar = Math.round(personal_score);
+                                  for (var i = pawStar -1 ; i >= 0; i--) {
+                                    document.getElementById(per_star[i]).style.color = '#ff6868';
+                                  }
+                              </script>
+                                <?php $clicked=False ?>
+                                @foreach($likesdone as $likedone)
+                                  @if ($review->id==$likedone->id_review)
+                                    <?php $clicked=True ?> @break
+                                  @endif
+                                @endforeach
+                                @if($clicked)
+                                  <a class="point_review_likes_clicked" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
+                                @else
+                                  <a class="point_review_likes" data-reviewid="{{$review->id}}" data-reviewlikes="{{$review->likes}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> <label class="point_review_likes_num">{{$review->likes}}</label></a>
+                                @endif
+                              <label class="home_idpost_reviewtext">- Opinió sobre <a class="point_iduser_review home_idpost_review" href="{{ url('/point/'.$review->id_point) }}">{{$review->namepoint}}</a></label> -
+                              @if(Auth::guest())
+                              @elseif ($review->id_user==Auth::id() or Auth::user()->type_user=="admin")
+                                <div class="modal fade" id="confirm_delete_review_{{$review->id}}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hiddtrue>×</button>
+                                                <h4 class="modal-title" id="myModalLabel">Eliminar publicació</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Estàs a punt d'esborrar la teva opinió, aquesta acció és irreversible</p>
+                                                <p>Vols continuar?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <a href="/deletereview/{{$review->id}}"><button type="button" class="btn btn-danger point_modal_delete_btn">Eliminar</button></a>
+                                            </div>
+                                        </div>
+                                   </div>
+                                </div>
+                                <a class="point_review_options" data-toggle="modal" href="#confirm_delete_review_{{$review->id}}"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+                                <a class="point_review_options" href="{{ url('/editreview/'.$review->id_point.'/'.$review->id) }}"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                              @endif
+                        <!-- fin modal -->
+                        </div>
+                      @endforeach
+                    @endif
             </div>
         </div>
     </div>

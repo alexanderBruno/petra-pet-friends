@@ -23,6 +23,7 @@
                         </label>
                         <input id="editprofile_file-upload" name="editpoint_avatar" type="file" class="file editprofile_avatar">
                       </div>
+                      @if(Auth::user()->type_user=="admin")
                       <div class="media-body">
                         <div class="form-group editprofile_postprivacy_group">
                           <label>Visibilitat del lloc en la web: </label>
@@ -30,6 +31,7 @@
                           <input name="editpoint_published" type="radio" value=2 <?php if ($point->published==2) echo "checked"; ?>> Ocult.
                         </div>
                       </div>
+                      @endif
                       <div class="form-group">
                         <label>Nom:</label>
                         <input type="text" name="editpoint_name" class="form-control" value="{{$point->name}}">

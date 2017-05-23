@@ -48,8 +48,10 @@ class EditpointController extends Controller
           }
           return $randomString;
       }
-      if (Auth::id() == $id or Auth::user()->type_user=="admin") {
-        $point = DB::table('points')->where('id', $id)->first();
+
+      $point = DB::table('points')->where('id', $id)->first();
+
+      if (Auth::id() == $point->id_user or Auth::user()->type_user=="admin") {
         if ($request->input('editpoint_name')) {
           DB::table('points')->where('id', $id)->update(['name' => $request->input('editpoint_name')]);
         }

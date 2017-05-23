@@ -19,7 +19,7 @@
 
                       <label>Imatge:</label><br/>
                       @if ($review->photo!=NULL)
-                        <img src="/images/reviews/{{$review->id_point}}/{{$review->photo}}" class="editreview_photoimg" alt="photoimg"/><br/><br/>
+                        <img src="/images/reviews/{{$review->id_user}}/{{$review->photo}}" class="editreview_photoimg" alt="photoimg"/><br/><br/>
                         <label for="editreview_file-upload" class="editreview_custom-file-upload">
                             <i class="glyphicon glyphicon-refresh"></i> Canviar imatge...
                         </label>
@@ -45,7 +45,7 @@
                     <input type="hidden" name="editreview_id" value="{{$review->id}}">
                     <input type="hidden" name="editreview_previousurl" value="{{url()->previous()}}">
                     <a href="{{url()->previous()}}"><button type="button" class="btn btn-primary editreview_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Tornar enrere</button></a>
-                    <button type="submit" name="submit" class="btn btn-primary editreview_submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar canvis</button>
+                    <button type="submit" name="submit" class="btn btn-primary editreview_submit"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;&nbsp;Guardar canvis</button>
                   </form>
                 </div>
             </div>

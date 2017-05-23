@@ -60,6 +60,7 @@ class ProfileController extends Controller
 
       $yourpoints = DB::table('points')
             ->where('points.id_user', $id)
+            ->where('points.published', 1)
             ->orderBy('points.id', 'desc')
             ->get();
 
