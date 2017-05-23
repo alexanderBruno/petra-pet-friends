@@ -99,3 +99,5 @@ Route::get('/friends/allowadd/{id}', 'FriendshipController@delete');
 Route::get('/contact', 'ContactController@index');
 
 Route::post('/contact', 'ContactController@send');
+
+Route::get('/admin', 'AdminController@index');
