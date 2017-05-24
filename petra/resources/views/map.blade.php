@@ -19,7 +19,8 @@
             @elseif(session('mesage')=='faltaInfo')
               <h3 class="error">Falta informació bàsica. No es pot afegir el lloc.</h3>
             @elseif(session('mesage')=='addMarker')
-              <h3 class="correcte">Punt afegit correctament</h3>
+              <h3 class="correcte">Lloc afegit correctament</h3>
+              <p><b>Ens guardem el dret d'eliminar/editar qüalsevol lloc afegit a aquest web.</b></p>
             @elseif(session('confirmation')=='pointnotpublic')
               <h3 class="error">Aquest lloc està ocult!</h3>
             @endif
