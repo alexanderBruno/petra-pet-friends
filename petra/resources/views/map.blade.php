@@ -19,8 +19,10 @@
             @elseif(session('mesage')=='faltaInfo')
               <h3 class="error">Falta informació bàsica. No es pot afegir el lloc.</h3>
             @elseif(session('mesage')=='addMarker')
-              <h3 class="correcte">Lloc afegit correctament</h3>
-              <p><b>Ens guardem el dret d'eliminar/editar qüalsevol lloc afegit a aquest web.</b></p>
+              <h3 class="correcte">Lloc afegit correctament.</h3>
+              <p><b>Tan aviat com sigui possible, comprobarem la informació introduïda del lloc.</b></p>
+              <p><b>En cas de que sigui correcte, el teu lloc estarà disponible públicament a la nostra web.</b></p>
+              <p>Ens guardem el dret d'eliminar/editar qüalsevol lloc afegit a aquest web.</p>
             @elseif(session('mesage')=='diferentID')
               <h3 class="error">No pots mirar els llocs que han afegit altres</h3>
             @elseif(session('confirmation')=='pointnotpublic')
