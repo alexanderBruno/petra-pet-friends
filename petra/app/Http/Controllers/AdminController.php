@@ -27,9 +27,9 @@ class AdminController extends Controller
     public function index()
     {
       if (Auth::user()->type_user=="admin") {
-        $users = DB::table('users')->orderBy('users.name', 'asc')->get();
+        $users = DB::table('users')->orderBy('users.id', 'desc')->get();
 
-        $points = DB::table('points')->orderBy('points.name', 'asc')->get();
+        $points = DB::table('points')->orderBy('points.id', 'desc')->get();
 
         $posts = DB::table('posts')
               ->leftJoin('users', 'posts.id_user', '=', 'users.id')

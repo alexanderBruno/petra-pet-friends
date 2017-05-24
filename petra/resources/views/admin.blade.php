@@ -56,7 +56,7 @@
                                     <td>
                                         <img src="/images/avatars/{{$user->avatar}}" class="friends_avatarimg" alt="avatarimg"/>
                                         @if($user->id==Auth::id())
-                                          <a class="friends_username" href="{{ url('/profile/'.$user->id) }}">{{$user->name}} (jo)</a>
+                                          <a class="friends_username" href="{{ url('/profile/'.$user->id) }}"><b>{{$user->name}} (jo)</b></a>
                                         @else
                                           <a class="friends_username" href="{{ url('/profile/'.$user->id) }}">{{$user->name}}</a>
                                         @endif
@@ -91,14 +91,18 @@
                     </div>
                     <div id="l" class="profile tab-pane fade">
                       @if(count($points)==0)
-                        <p class="profile_confirmation_info">Encara no hi ha cap lloc afegit, ves al mapa i afegeix un marcador!</p>
+                        <p class="profile_confirmation_info">Encara no hi ha cap lloc afegit.</p>
                       @else
                         @foreach($points as $point)
                             <table class="friends table">
                                 <tr>
                                     <td>
                                         <img src="/images/avatars/points/{{$point->avatar}}" class="friends_avatarimg" alt="avatarimg"/>
-                                        <a class="friends_username" href="{{ url('/point/'.$point->id) }}">{{$point->name}}</a>
+                                        @if($point->published==1)
+                                          <a class="friends_username" href="{{ url('/point/'.$point->id) }}">{{$point->name}}</a>
+                                        @else
+                                          <a class="friends_username" href="{{ url('/point/'.$point->id) }}">{{$point->name}} <b>- OCULT</b></a>
+                                        @endif
                                     </td>
                                     <td>
                                       <div class="modal fade" id="confirm_delete_point_{{$point->id}}" role="dialog">
