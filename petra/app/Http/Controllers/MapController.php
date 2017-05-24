@@ -66,9 +66,6 @@ class MapController extends Controller
         return $randomString;
     }
 
-    //if ($request->input('point_form')) {
-
-      $path = ("images/avatars/points/");
 
       if (Auth::guest()){
         return redirect()->action('MapController@mostra')->with('mesage', 'notLoged');
@@ -90,18 +87,20 @@ class MapController extends Controller
           $flag = $flag[0]->marker_img;
 
         }
+
         $serveis = '';
         $id_check = 1;
-        if (strlen($request->input('point_serveis'.$id_check)) >= 1){
-
-          do {
-            if ($id_check == 1){
+        $primer = 0;
+        while ($id_check <= 20){
+          if ($request->input('point_serveis'.$id_check)){
+            if ($primer == 0){
               $serveis .= $request->input('point_serveis'.$id_check);
             }else{
               $serveis .='-'.$request->input('point_serveis'.$id_check);
             }
-              $id_check += 1;
-          } while ($request->input('point_serveis'.$id_check));
+              $primer += 1;
+          }
+          $id_check += 1;
         }
 
         //dd($serveis);
@@ -111,6 +110,7 @@ class MapController extends Controller
         }
 
         if (Input::hasFile('point_photo')){
+          $path = ("images/avatars/points/");
           $photo = generateRandomString().".png";
           Image::make(Input::file('point_photo'))->save($path.$photo);
 

@@ -82,7 +82,7 @@ class EditpointController extends Controller
         if ($request->input('editpoint_published')) {
           DB::table('points')->where('id', $id)->update(['published' => $request->input('editpoint_published')]);
         }
-        /*$serveis = '';
+        $serveis = '';
         $id_check = 1;
         $primer = 0;
         while ($id_check <= 20){
@@ -92,12 +92,13 @@ class EditpointController extends Controller
             }else{
               $serveis .='-'.$request->input('edit_point_serveis'.$id_check);
             }
-              $id_check += 1;
               $primer += 1;
           }
+          $id_check += 1;
         }
-        dd($serveis);
-          //DB::table('points')->where('id', $id)->update(['services_list' => $serveis]);*/
+        //dd($serveis);
+
+        DB::table('points')->where('id', $id)->update(['services_list' => $serveis]);
 
 
 

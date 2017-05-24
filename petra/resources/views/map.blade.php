@@ -107,32 +107,19 @@
                   <br>
                   <label>Serveis</label>
 
-                  <div class="columna">
-                    <div class="funkyradio">
-                      @foreach ($services as $service)
-                        <div class="funkyradio-primary junticos">
-                            <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis{{ $loop->iteration }}" value="{{ $service->service_code }}"/>
-                            <label for="checkbox{{ $loop->iteration }}">
-                              <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
-                              {{ $service->name }}
-                            </label>
-                        </div>
-                      @endforeach
-                    </div>
-
-                    <div class="funkyradio">
-                      @foreach ($services as $service)
-                        <div class="funkyradio-primary junticos">
-                            <input id="checkbox{{ $loop->iteration+2 }}" type="checkbox" name="point_serveis{{ $loop->iteration+2 }}" value="{{ $service->service_code }}"/>
-                            <label for="checkbox{{ $loop->iteration+2 }}">
-                              <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
-                              {{ $service->name }}
-                            </label>
-                        </div>
-                      @endforeach
-                    </div>
-
+                  <!--div class="columna"-->
+                  <div class="funkyradio">
+                    @foreach ($services as $service)
+                      <div class="funkyradio-primary junticos">
+                          <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis{{ $loop->iteration }}" value="{{ $service->service_code }}"/>
+                          <label for="checkbox{{ $loop->iteration }}">
+                            <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
+                            {{ $service->name }}
+                          </label>
+                      </div>
+                    @endforeach
                   </div>
+
 
 
 

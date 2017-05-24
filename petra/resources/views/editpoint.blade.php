@@ -67,6 +67,7 @@
                       </div>
 
                       <div class="form-group">
+                        <label>Serveis:</label>
                       @foreach ($services as $service)
                         <div class="checkbox">
                           <label>
