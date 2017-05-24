@@ -67,6 +67,7 @@ html, body {
   /*margin-bottom: 22px;*/
   margin-top: 10px;
   text-align: center;
+  width: 105px;
 }
 #textBotoCentrat {
   color: rgb(25,25,25);
@@ -93,6 +94,15 @@ html, body {
 }
 .rosa{
   color: #ff6868;
+}
+.correcte {
+  color: green;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
 }
 /*.ancho{
   min-width: 300px;

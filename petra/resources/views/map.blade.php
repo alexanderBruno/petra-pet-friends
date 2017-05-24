@@ -1,21 +1,44 @@
 @extends('layouts.mapapp')
 
 @section('content')
-    <!-- Resultat Afegir Marcador-->
-    @if(session('mesage')=='notLoged')
-      <p>Has d'accedir per poder afegir llocs. Puto desactivador de Javascripts!</p>
-    @elseif(session('mesage')=='faltaInfo')
-      <p>Falta informació bàsica del lloc. No es pot afegir el lloc.</p>
-    @elseif(session('mesage')=='addMarker')
-      <p>Punt afegit correctament</p>
-    @elseif(session('confirmation')=='pointnotpublic')
-      <p>Aquest lloc està ocult!</p>
+    <!-- Modal informatiu-->
+    @if (session('mesage') OR session('confirmation'))
+    <div class="modal fade" id="information" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title azulito"><i class="fa fa-info-circle" aria-hidden="true"></i> Informació</h2>
+        </div>
+        <div class="modal-body">
+
+            @if(session('mesage')=='notLoged')
+              <h3 class="error">Has d'accedir per poder afegir llocs. Senyor desactivador de Javascripts, així no!</h3>
+            @elseif(session('mesage')=='faltaInfo')
+              <h3 class="error">Falta informació bàsica. No es pot afegir el lloc.</h3>
+            @elseif(session('mesage')=='addMarker')
+              <h3 class="correcte">Punt afegit correctament</h3>
+            @elseif(session('confirmation')=='pointnotpublic')
+              <h3 class="error">Aquest lloc està ocult!</h3>
+            @endif
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+          </div>
+        </div>
+
+      </div>
+      </div>
     @endif
+
     <!-- Menu per mostrar punts-->
     <div class="map panel panel-info ancho">
       <div class="map panel-heading">Què vols buscar?</div>
       <div class="map panel-body">
-        <ul class="map nav"><!--navbar-nav-->
+        <!--ul class="map nav navbar-nav"-->
+        <ul class="map nav navbar-nav">
           <li><a class="map a" href="/map"><i class="glyphicon glyphicon-home"></i></a></li>
           <li><a class="map a" href="/map/vet"><i class="glyphicon glyphicon-adjust"></i></a></li>
           <li><a class="map a" href="/map/park"><i class="glyphicon glyphicon-bell"></i></a></li>
@@ -36,7 +59,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title" id="myModalLabel">Afegir marcador</h4>
+                  <h4 class="modal-title">Afegir lloc</h4>
               </div>
 
               @if (Auth::guest())
@@ -93,9 +116,9 @@
 
                   <!--Type Point-->
                   <div class="form-group">
-                    <label>Tipus de marcador</label>
+                    <label>Tipus de lloc</label>
                     <select name="type_point" class="form-control">
-                      <option value="NULL" selected>Escull un tipus de marcador</option>
+                      <option value="NULL" selected>Escull un tipus de lloc</option>
                       @foreach ($markers as $marker)
                         <option value="{{ $marker->marker_code }}">{{ $marker->name }}</option>
                       @endforeach
@@ -114,7 +137,7 @@
               <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                   <!--a href="#"><button type="button" class="btn btn-primary rosita">Enviar</button></a-->
-                  <button id="boto_enviar" type="submit" name="submit" class="btn btn-primary home_submit rosita amaga"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>&nbsp;&nbsp;Afegir marcador</button>
+                  <button id="boto_enviar" type="submit" name="submit" class="btn btn-primary home_submit rosita amaga"><i class="fa fa-map-marker fa-1x" aria-hidden="true"></i>&nbsp;&nbsp;Afegir lloc</button>
 
               </div>
               </form>
@@ -131,6 +154,11 @@
     <div id="map_map"></div>
 
     <script>
+    $(window).on('load',function(){
+        $('#information').modal('show');
+        //$("#").modal();
+    });
+
         var map;
         var infoWindow;
         var newMarker = null;
@@ -263,18 +291,19 @@
        });
     }
 
+    // Crea el boto per poder afegir marcadors
     function CenterControl(controlDiv, map) {
 
         // Set CSS for the control border.
         var controlUI = document.createElement('div');
-        controlUI.title = 'Click to recenter the map';
+        controlUI.title = 'Fes clic per afegir un lloc';
         controlUI.id = 'botoCentrat';
         controlDiv.appendChild(controlUI);
 
         // Set CSS for the control interior.
         var controlText = document.createElement('div');
         controlText.id = 'textBotoCentrat';
-        var botoText = '<a class="home_post_options enlace azulito" data-toggle="modal" href="#marker_modal_form"><i class="fa fa-plus"></i> Afegir marcador</a>';
+        var botoText = '<a class="home_post_options enlace azulito" data-toggle="modal" href="#marker_modal_form"><i class="fa fa-plus"></i> Afegir lloc</a>';
         controlText.innerHTML = botoText;
         controlUI.appendChild(controlText);
 
