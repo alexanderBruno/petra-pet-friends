@@ -29,7 +29,9 @@ class EditpointController extends Controller
       ->first();
 
       if (Auth::id() == $point->id_user or Auth::user()->type_user=="admin") {
-        return view('editpoint', ['point' => $point]);
+        $services = DB::table('services_list')->get();
+
+        return view('editpoint', ['point' => $point, 'services' => $services]);
       }
       else {
         return redirect()->action('ProfileController@index', ['id' => Auth::id()])->with('confirmation', 'pointnotedited');
@@ -80,11 +82,30 @@ class EditpointController extends Controller
         if ($request->input('editpoint_published')) {
           DB::table('points')->where('id', $id)->update(['published' => $request->input('editpoint_published')]);
         }
+        /*$serveis = '';
+        $id_check = 1;
+        $primer = 0;
+        while ($id_check <= 20){
+          if ($request->input('edit_point_serveis'.$id_check)){
+            if ($primer == 0){
+              $serveis .= $request->input('edit_point_serveis'.$id_check);
+            }else{
+              $serveis .='-'.$request->input('edit_point_serveis'.$id_check);
+            }
+              $id_check += 1;
+              $primer += 1;
+          }
+        }
+        dd($serveis);
+          //DB::table('points')->where('id', $id)->update(['services_list' => $serveis]);*/
+
+
 
         DB::table('points')->where('id', $id)->update(['updated_at' => Carbon::now()]);
 
         $point = DB::table('points')->where('id', $id)->first();
-        return view('editpoint', ['point' => $point]);
+        $services = DB::table('services_list')->get();
+        return view('editpoint', ['point' => $point, 'services' => $services]);
       } else {
         return redirect()->action('ProfileController@index', ['id' => Auth::id()])->with('confirmation', 'pointnotedited');
       }

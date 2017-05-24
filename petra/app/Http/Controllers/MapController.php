@@ -36,6 +36,22 @@ class MapController extends Controller
       return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers]);
   }
 
+  public function meus($id){
+    if ($id == Auth::id()){
+      $all = Points::where([
+        ['published', '=', '1'],
+        ['id_user', '=', $id],
+        ])->get();
+      $all->toJson();
+    }else{
+      return redirect()->action('MapController@mostra')->with('mesage', 'diferentID');
+    }
+    $services = DB::table('services_list')->get();
+    $markers = DB::table('markers_list')->get();
+
+      return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers]);
+  }
+
   public function addMarker(Request $request)
   {
     //return redirect()->action('MapController@mostra')->with('mesage', 'notLoged');

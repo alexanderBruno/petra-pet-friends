@@ -1,7 +1,7 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map_map {
-  height: 79%;
+  height: 77%;
   width: 100%;
   margin-top: -1%;
 }
@@ -22,7 +22,7 @@ html, body {
 .infoimg{
   max-width: 75px !important;
   max-height: 75px !important;
-  border: 1 solid #ccc;
+  border: 1 solid black;
 }
 .lletra{
   font-family: 'Bree Serif', serif;
@@ -89,8 +89,15 @@ html, body {
   display: none;
 }
 .junticos{
-  margin-top: -4%;
-  max-width: 45%;
+  margin-top: -20%;
+  /*max-width: 45%;*/
+  width: 160%;
+}
+.columna{
+  margin-left: -80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 .rosa{
   color: #ff6868;
@@ -104,14 +111,15 @@ html, body {
   color: red;
   font-weight: bold;
 }
-/*.ancho{
+.ancho{
+  width: 300px;
   min-width: 300px;
-}*/
+  max-height: 67px;
+}
 
 .map.panel {
-  width: 20%;
   margin: auto;
-  margin-top: -4.5%;
+  margin-top: -55px;
   margin-bottom: 2%;
   text-align: center;
   font-family: 'Bree Serif', serif;
@@ -141,4 +149,23 @@ html, body {
 
 .glyphicon {
   font-size: 1.25em;
+}
+.augmentar{
+  font-size: 1.25em;
+}
+.augmentar_mes{
+  font-size: 1.5em;
+}
+/*.augmentar:hover{
+  color: red !important;
+}*/
+.bien{
+  display: inline-block !important;
+  margin: 0px !important;
+}
+
+@media (max-width: 770px) {
+  .bien{
+    margin-top: -15px !important;
+  }
 }

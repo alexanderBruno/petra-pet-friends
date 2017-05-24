@@ -3,16 +3,16 @@
 @section('content')
     <!-- Modal informatiu-->
     @if (session('mesage') OR session('confirmation'))
-    <div class="modal fade" id="information" role="dialog">
-    <div class="modal-dialog">
+      <div class="modal fade" id="information" role="dialog">
+      <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h2 class="modal-title azulito"><i class="fa fa-info-circle" aria-hidden="true"></i> Informació</h2>
-        </div>
-        <div class="modal-body">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title azulito"><i class="fa fa-info-circle" aria-hidden="true"></i> Informació</h2>
+          </div>
+          <div class="modal-body">
 
             @if(session('mesage')=='notLoged')
               <h3 class="error">Has d'accedir per poder afegir llocs. Senyor desactivador de Javascripts, així no!</h3>
@@ -21,6 +21,8 @@
             @elseif(session('mesage')=='addMarker')
               <h3 class="correcte">Lloc afegit correctament</h3>
               <p><b>Ens guardem el dret d'eliminar/editar qüalsevol lloc afegit a aquest web.</b></p>
+            @elseif(session('mesage')=='diferentID')
+              <h3 class="error">No pots mirar els llocs que han afegit altres</h3>
             @elseif(session('confirmation')=='pointnotpublic')
               <h3 class="error">Aquest lloc està ocult!</h3>
             @endif
@@ -40,15 +42,15 @@
       <div class="map panel-body">
         <!--ul class="map nav navbar-nav"-->
         <ul class="map nav navbar-nav">
-          <li><a class="map a" href="/map"><i class="glyphicon glyphicon-home"></i></a></li>
-          <li><a class="map a" href="/map/vet"><i class="glyphicon glyphicon-adjust"></i></a></li>
-          <li><a class="map a" href="/map/park"><i class="glyphicon glyphicon-bell"></i></a></li>
-          <li><a class="map a" href="/map/pipican"><i class="glyphicon glyphicon-user"></i></a></li>
-          <li><a class="map a" href="/map/hotel_can"><i class="glyphicon glyphicon-cd"></i></a></li>
-          <li><a class="map a" href="/map/protectora"><i class="glyphicon glyphicon-picture"></i></a></li>
-          <li><a class="map a" href="/map/botiga"><i class="glyphicon glyphicon-leaf"></i></a></li>
+          <li class="bien"><a class="map a augmentar" href="/map" title="Tots els llocs"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+          <li class="bien"><a class="map a augmentar" href="/map/vet" title="Veterinaris"><i class="fa fa-medkit"></i></a></li>
+          <li class="bien"><a class="map a augmentar" href="/map/park" title="Parcs"><i class="fa fa-futbol-o" aria-hidden="true"></i></a></li>
+          <li class="bien"><a class="map a augmentar" href="/map/pipican" title="Pipicans"><i class="fa fa-cube" aria-hidden="true"></i></a></li>
+          <li class="bien"><a class="map a augmentar_mes" href="/map/hotel_can" title="Hotels pet friendly"><i class="fa fa-hospital-o" aria-hidden="true"></i></a></li>
+          <li class="bien"><a class="map a augmentar_mes" href="/map/protectora" title="Protectores"><i class="fa fa-shield" aria-hidden="true"></i></a></li>
+          <li class="bien"><a class="map a augmentar" href="/map/botiga" title="Botiges"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
           @if (!Auth::guest())
-            <li><a class="map a" href=""><i class="glyphicon glyphicon-flag"></i></a></li>
+            <li class="bien"><a class="map a augmentar" href="/map/meus/{{ Auth::id() }}" title="Els meus llocs"><i class="fa fa-flag" aria-hidden="true"></i></a></li>
           @endif
         </ul>
       </div>
@@ -102,17 +104,36 @@
                   <!--Serveis-->
                   <br>
                   <label>Serveis</label>
-                  <div class="funkyradio">
-                    @foreach ($services as $service)
-                      <div class="funkyradio-primary junticos">
-                          <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis{{ $loop->iteration }}" value="{{ $service->service_code }}"/>
-                          <label for="checkbox{{ $loop->iteration }}">
-                            <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
-                            {{ $service->name }}
-                          </label>
-                      </div>
-                    @endforeach
+
+                  <div class="columna">
+                    <div class="funkyradio">
+                      @foreach ($services as $service)
+                        <div class="funkyradio-primary junticos">
+                            <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis{{ $loop->iteration }}" value="{{ $service->service_code }}"/>
+                            <label for="checkbox{{ $loop->iteration }}">
+                              <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
+                              {{ $service->name }}
+                            </label>
+                        </div>
+                      @endforeach
+                    </div>
+
+                    <div class="funkyradio">
+                      @foreach ($services as $service)
+                        <div class="funkyradio-primary junticos">
+                            <input id="checkbox{{ $loop->iteration+2 }}" type="checkbox" name="point_serveis{{ $loop->iteration+2 }}" value="{{ $service->service_code }}"/>
+                            <label for="checkbox{{ $loop->iteration+2 }}">
+                              <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
+                              {{ $service->name }}
+                            </label>
+                        </div>
+                      @endforeach
+                    </div>
+
                   </div>
+
+
+
                   <!--/Serveis-->
 
                   <!--Type Point-->

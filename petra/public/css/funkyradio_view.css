@@ -7,6 +7,7 @@
   width: 100%;
   border-radius: 3px;
   border: 1px solid #D1D3D4;
+  border: 1px solid #ff6868;
   font-weight: normal;
 }
 
@@ -81,6 +82,7 @@
 .funkyradio-primary input[type="checkbox"]:checked ~ label:before {
   color: #fff;
   background-color: #ff6868;
+  border-color: #ff6868;
 }
 
 .funkyradio-success input[type="radio"]:checked ~ label:before,

@@ -66,6 +66,17 @@
                         </select>
                       </div>
 
+                      <div class="form-group">
+                      @foreach ($services as $service)
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="edit_point_serveis{{ $loop->iteration }}" value="{{ $service->service_code }}"
+                            <?php if (strpos($point->services_list, $service->service_code) !== false) echo "checked"; ?>/>{{ $service->name }}
+                          </label>
+                        </div>
+                      @endforeach
+                      </div>
+
 
                       @if(parse_url(url()->previous(), PHP_URL_PATH)==("/editpoint/".$point->id))
                         <a href="{{ url('/profile/'.Auth::id()) }}"><button type="button" class="btn btn-primary editprofile_back"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;Tornar enrere</button></a>
