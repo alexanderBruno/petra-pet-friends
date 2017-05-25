@@ -90,7 +90,12 @@ html, body {
 }
 .junticos{
   margin-top: -4.5%;
-  max-width: 45%;
+  max-width: 50%;
+}
+.form_icon{
+  /*width:20px;
+  height:20px;*/
+  margin-left: -40px;
 }
 /*.columna{
   margin-left: -80px;

@@ -113,16 +113,11 @@
                       <div class="funkyradio-primary junticos">
                           <input id="checkbox{{ $loop->iteration }}" type="checkbox" name="point_serveis{{ $loop->iteration }}" value="{{ $service->service_code }}"/>
                           <label for="checkbox{{ $loop->iteration }}">
-                            <img src="/images/service_icons/{{ $service->icon }}" width="20px" height="20px">
-                            {{ $service->name }}
+                            <i class="fa {{ $service->icon }} form_icon" aria-hidden="true"></i> {{ $service->name }}
                           </label>
                       </div>
                     @endforeach
                   </div>
-
-
-
-
                   <!--/Serveis-->
 
                   <!--Type Point-->

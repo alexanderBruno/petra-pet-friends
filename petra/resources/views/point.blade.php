@@ -64,7 +64,7 @@
                     <hr class="messages_hr">
                     <div class="home_updates_title point_info">
                       @foreach($services as $service)
-                        <i class="fa {{$service->icon}}" title="{{ $service->name}}"></i>
+                        <i class="fa {{$service->icon}}" title="{{ $service->name}}"></i>&nbsp;
                       @endforeach
                     </div>
                     @endif
