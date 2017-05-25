@@ -5,44 +5,19 @@
 
 body {
   background: #ffe0e0;
-  padding-bottom: 40px;
   color: white;
 }
 
 .container_chat {
   margin: 0 auto;
-  width: 750px;
-  border-radius: 5px;
+  width: 75%;
+  border-radius: 15px;
   font: 14px/20px "Lato", Arial, sans-serif;
-  height: 85vh;
+  height: 85%;
 }
 
 .body_chat {
     background: #444753;
-    margin-top: 10px;
-}
-
-.header {
-    height: 40px;
-    padding-top:10px;
-    padding-bottom: 15px;
-    width:100%;
-    background-color: white;
-    top: 0;
-    margin-top: 0;
-    position: fixed;
-    z-index: 999;
-}
-
-.header-brand {
-    background-color: white;
-}
-
-.header-brand .brand {
-    color: #333333;
-    font-size: 18px;
-    text-decoration:none;
-    font-weight:400;
 }
 
 .chat_avatarimg {
@@ -52,12 +27,14 @@ body {
 }
 
 .people-list {
-    width: 260px;
+    width: 25%;
     float: left;
 }
+
 .people-list .search {
   padding: 20px;
 }
+
 .people-list input {
   border-radius: 3px;
   border: none;
@@ -73,7 +50,6 @@ body {
 }
 .people-list ul {
   padding: 20px;
-  /*height: 41.1vh;*/
 }
 .people-list ul li {
   padding-bottom: 20px;
@@ -93,7 +69,7 @@ body {
 }
 
 .chat {
-  width: 490px;
+  width: 50%;
   float: left;
   background: #F2F5F8;
   border-top-right-radius: 5px;
@@ -254,4 +230,16 @@ body {
 
 .talkDeleteMessage {
     color: #563333;
+}
+
+@media only screen and (max-width: 768px) {
+    [class*="chat"] {
+        width: 100%;
+    }
+    [class="list"] {
+        display: none;
+    }
+    [class="people-list"] {
+      margin-left: 35%;
+    }
 }

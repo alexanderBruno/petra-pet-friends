@@ -1,6 +1,6 @@
 <div class="people-list" id="people-list">
     <div class="search" style="text-align: center">
-        <a href="{{url('/messages')}}" style="font-size:16px; text-decoration:none; color: white;"><i class="fa fa-user"></i> {{auth()->user()->name}}</a>
+        <a href="{{url('/messages')}}" style="font-size:16px; text-decoration:none; color: white;"><i class="fa fa-paw" style="color:white;"></i> {{auth()->user()->name}}</a>
     </div>
     <ul class="list">
         @foreach($threads as $inbox)
@@ -14,13 +14,12 @@
                     @if(auth()->user()->id == $inbox->thread->sender->id)
                         <span class="fa fa-reply"></span>
                     @endif
-                    <span>{{substr($inbox->thread->message, 0, 20)}}</span>
+                    <span>{{substr($inbox->thread->message, 0, 15)}}</span>
                 </div>
             </div>
             </a>
         </li>
             @endif
         @endforeach
-
     </ul>
 </div>
