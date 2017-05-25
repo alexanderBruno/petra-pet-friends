@@ -1,4 +1,4 @@
-<div class="people-list" id="people-list">
+<div class="people-list mostra_be" id="people-list">
     <div class="search" style="text-align: center">
         <a href="{{url('/messages')}}" style="font-size:16px; text-decoration:none; color: white;"><i class="fa fa-paw" style="color:white;"></i> {{auth()->user()->name}}</a>
     </div>

@@ -232,11 +232,19 @@ body {
     color: #563333;
 }
 
+.keep_size{
+  min-width: 300px;
+}
+
 @media only screen and (max-width: 768px) {
     [class*="chat"] {
         width: 100%;
     }
     [class="people-list"] {
       margin-left: 35%;
+    }
+    .mostra_be{
+      width:70%;
+      margin-left: 15%;
     }
 }

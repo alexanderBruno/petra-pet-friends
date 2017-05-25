@@ -102,7 +102,7 @@
         </nav>
     </div>
 
-  <div class="container_chat clearfix body_chat">
+  <div class="container_chat clearfix body_chat keep_size">
    @include('partials.peoplelist')
 
     <div class="chat">
