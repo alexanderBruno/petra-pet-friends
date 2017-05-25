@@ -78,6 +78,12 @@ class EditpointController extends Controller
         }
         if ($request->input('editpoint_type_point')) {
           DB::table('points')->where('id', $id)->update(['type_point' => $request->input('editpoint_type_point')]);
+          $flag = DB::table('markers_list')
+            ->select('marker_img')
+            ->where('marker_code', $request->input('editpoint_type_point'))
+            ->get();
+          $flag = $flag[0]->marker_img;
+          DB::table('points')->where('id', $id)->update(['flag' => $flag]);
         }
         if ($request->input('editpoint_published')) {
           DB::table('points')->where('id', $id)->update(['published' => $request->input('editpoint_published')]);

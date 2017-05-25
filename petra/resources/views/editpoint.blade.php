@@ -61,8 +61,8 @@
                           <option value="hotel_can" <?php if ($point->type_point=="hotel_can") echo "selected"; ?>>Hotel pet-friendly</option>
                           <option value="protectora" <?php if ($point->type_point=="protectora") echo "selected"; ?>>Protectora</option>
                           <option value="botiga" <?php if ($point->type_point=="botiga") echo "selected"; ?>>Botiga</option>
-                          <option value="park" <?php if ($point->type_point=="park") echo "selected"; ?>>Parc</option>
-                          <option value="rest" <?php if ($point->type_point=="rest") echo "selected"; ?>>Restaurant pet-friendly</option>
+                          <!--option value="park" <?php //if ($point->type_point=="park") echo "selected"; ?>>Parc</option>
+                          <option value="rest" <?php //if ($point->type_point=="rest") echo "selected"; ?>>Restaurant pet-friendly</option-->
                         </select>
                       </div>
 
