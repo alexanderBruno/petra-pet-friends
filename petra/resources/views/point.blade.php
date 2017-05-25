@@ -125,7 +125,11 @@
                                       <i class="point_message_edited">Editat</i>
                                   @endif
                               </div>
+                              @if($review->content=="")
+                              <div class="valoration valoration_review_withoutcomment">
+                              @else
                               <div class="valoration valoration_review">
+                              @endif
                                 <label class = "full" id="p1_r{{$review->id}}"></label>
                                 <label class = "full" id="p2_r{{$review->id}}"></label>
                                 <label class = "full" id="p3_r{{$review->id}}"></label>

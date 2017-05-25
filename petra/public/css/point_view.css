@@ -16,8 +16,8 @@ body {
 }
 
 .point_avatarimg {
-  width: 150px;
-  height: 150px;
+  max-width: 150px;
+  max-height: 150px;
   border: 1px solid black;
 }
 
@@ -97,7 +97,6 @@ input.point_review_photo[type="file"] {
   font-size: 1.8em;
   margin-top: -2%;
   color: #3097d1;
-  /*margin-bottom: 2%;*/
 }
 
 .review_submit {
@@ -146,6 +145,12 @@ input.point_review_photo[type="file"] {
 .valoration_review {
   position: absolute;
   margin-top: -8%;
+  margin-left: 28.5%;
+}
+
+.valoration_review_withoutcomment {
+  position: absolute;
+  margin-top: -5.3%;
   margin-left: 28.5%;
 }
 

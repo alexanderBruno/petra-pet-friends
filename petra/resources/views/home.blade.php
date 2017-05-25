@@ -70,7 +70,11 @@
                                         <i class="point_message_edited">Editat</i>
                                     @endif
                                 </div>
+                                @if($update->content=="")
+                                <div class="valoration valoration_review_withoutcomment">
+                                @else
                                 <div class="valoration valoration_review">
+                                @endif
                                   <label class = "full" id="p1_r{{$update->id}}"></label>
                                   <label class = "full" id="p2_r{{$update->id}}"></label>
                                   <label class = "full" id="p3_r{{$update->id}}"></label>

@@ -117,7 +117,6 @@
                 <div class="chat-with">{{'Conversa amb ' . @$user->name}}</div>
             @endif
         </div>
-        <i class="fa fa-star"></i>
       </div> <!-- end chat-header -->
 
       @yield('content')
