@@ -158,7 +158,7 @@
             var html = '<li id="message-' + data.id + '">' +
             '<div class="message-data">' +
             '<span class="message-data-name"> <a href="#" class="talkDeleteMessage" data-message-id="' + data.id + '" title="Delete Messag"><i class="fa fa-close" style="margin-right: 3px;"></i></a>' + data.sender.name + '</span>' +
-            '<span class="message-data-time">1 Second ago</span>' +
+            '<span class="message-data-time">fa 1 second</span>' +
             '</div>' +
             '<div class="message my-message">' +
             data.message +
@@ -166,6 +166,7 @@
             '</li>';
 
             $('#talkMessages').append(html);
+            $(".chat-history").scrollTop($('.chat-history')[0].scrollHeight);
         }
 
         $('#message-data').keypress(function (e) {
@@ -176,9 +177,6 @@
 
         $(document).ready(function(){
           $(".chat-history").scrollTop($('.chat-history')[0].scrollHeight);
-        //   $("#talkSendMessage").submit(function(e) {
-        //     $(".chat-history").scrollTop($('.chat-history')[0].scrollHeight);
-        //   });
         });
 
 
