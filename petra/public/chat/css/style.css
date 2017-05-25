@@ -236,9 +236,6 @@ body {
     [class*="chat"] {
         width: 100%;
     }
-    [class="list"] {
-        display: none;
-    }
     [class="people-list"] {
       margin-left: 35%;
     }
