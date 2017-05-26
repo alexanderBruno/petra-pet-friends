@@ -284,6 +284,8 @@
            }
          }
          estrellitas += '</div>';
+
+         //Codi Favorits
          var faved = false;
 
          for (var i = 0; i < favsdone.length; i++) {
@@ -293,11 +295,13 @@
            }
          }
          if (faved == true){
-            var point_fav_or_faved = '<i id="map_faved_'+id+'" class="fa fa-heart map_faved" onclick="faved('+id+')" aria-hidden="true"></i>';
+            var point_fav_or_faved = '<i id="map_faved_'+id+'" class="fa fa-heart map_faved ves" onclick="faved('+id+')" aria-hidden="true"></i>';
          }else{
-           var point_fav_or_faved = '<i id="map_fav_'+id+'" class="fa fa-heart map_fav" onclick="fav('+id+')" aria-hidden="true"></i>';
+           var point_fav_or_faved = '<i id="map_fav_'+id+'" class="fa fa-heart map_fav ves" onclick="fav('+id+')" aria-hidden="true"></i>';
          }
 
+         var latDest = latlng.lat();
+         var lngDest = latlng.lng();
 
           // Contingut de l'infowindow
           var pointInfo = ''+
@@ -307,8 +311,11 @@
             '</div>'+
             '<div class="media-body">'+
               '<a class="lletra enlace" id="enlace" href="/point/'+id+'"><h4 class="media-heading nom">'+nom+'</h4></a>'+
-              estrellitas+'<p id="nums" class="lletra">'+valoracio+'</p>'+
+              estrellitas+'<p id="nums" class="lletra">'+valoracio+'</p><br>'+
+              '<div class="ves">'+
+              '<a class="lletra enlace ves" href="https://www.google.es/maps/dir//'+latDest+','+lngDest+'/@'+',15z"><h6>Ves-hi</h6></a>'+
               point_fav_or_faved+
+              '</div>'
             '</div>'+
           '</div>';
 

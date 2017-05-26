@@ -221,7 +221,10 @@ html, body {
 .ba_color_meus{
   color: #fc2511 !important;
 }
-
+.ves{
+  display: inline-block;
+  margin-left: 15px;
+}
 /*Azul: 5781fc
 Marrón: 937644
 Verde: 00e13c
