@@ -43,6 +43,9 @@ class MapController extends Controller
         ['id_user', '=', $id],
         ])->get();
       $all->toJson();
+      if(empty(get_object_vars($all))){
+        return redirect()->action('MapController@mostra')->with('mesage', 'noPoints');
+      }
     }else{
       return redirect()->action('MapController@mostra')->with('mesage', 'diferentID');
     }

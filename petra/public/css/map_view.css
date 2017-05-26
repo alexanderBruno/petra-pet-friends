@@ -110,9 +110,12 @@ html, body {
   color: green;
   font-weight: bold;
 }
-
 .error {
   color: red;
+  font-weight: bold;
+}
+.warning{
+  color: orange;
   font-weight: bold;
 }
 .ancho{
@@ -167,9 +170,43 @@ html, body {
   display: inline-block !important;
   margin: 0px !important;
 }
+.ba_color_map{
+  color: #595959 !important;
+}
+.ba_color_vet{
+  color: #00e13c !important;
+}
+.ba_color_park{
+  color: #937644 !important;
+}
+.ba_color_pipican{
+  color: #FFDA44 !important;
+}
+.ba_color_hotel_can{
+  color: #5781fc !important;
+}
+.ba_color_protectora{
+  color: #ff9900 !important;
+}
+.ba_color_botiga{
+  color: #4e359c !important;
+}
+.ba_color_rest{
+  color: #e065ab !important;
+}
+.ba_color_meus{
+  color: #fc2511 !important;
+}
 
+/*Azul: 5781fc
+Marrón: 937644
+Verde: 00e13c
+Naranja: ff9900
+Lila: 4e359c
+Rojo: fc2511
+Amarillo: fcf357*/
 @media (max-width: 770px) {
   .bien{
-    margin-top: -15px !important;
+    margin-top: -7px !important;
   }
 }
