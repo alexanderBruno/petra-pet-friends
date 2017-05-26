@@ -42,6 +42,31 @@
       </div>
       </div>
     @endif
+    <!--Error Ajax -->
+    <div class="modal fade" id="information_ajax" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title azulito"><i class="fa fa-info-circle" aria-hidden="true"></i> Informació</h2>
+        </div>
+        <div class="modal-body">
+            <h3 class="warning">No s'ha pogut afegir el lloc a favorits</h3>
+            <p><strong>És molt provable que no hagis accedit al web.</strong></p>
+            <p><strong>Si no és així, prova-ho més tard. O bé contacta'ns</strong></p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+          <a href="{{ route('login') }}"><button type="button" class="btn btn-primary rosita"><i class="fa fa-sign-in" aria-hidden="true"></i> Accedir</button></a>
+          <a href="{{ route('register') }}"><button type="button" class="btn btn-primary rosita"><i class="fa fa-user-plus" aria-hidden="true"></i> Registrar-se</button></a>
+        </div>
+      </div>
+
+    </div>
+    </div>
 
     <!-- Menu per mostrar punts-->
     <div class="map panel panel-info ancho">
@@ -393,7 +418,8 @@
                 },
                 error: function(data){
                     console.log('error', data);
-                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    //alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    $('#information_ajax').modal('show');
                 }
                 });
         } else {
@@ -406,7 +432,8 @@
                 },
                 error: function(data){
                     console.log('error', data);
-                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    //alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    $('#information_ajax').modal('show');
                 }
                 });
         }
@@ -417,29 +444,31 @@
       function faved(id) {
         var heart = $("#map_faved_"+id);
         if (heart.hasClass('map_fav')) {
-          heart.removeClass('map_fav').addClass('map_faved');
           $.ajax({
                 type: 'GET',
                 url: '/map/favpoint/'+id,
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_fav').addClass('map_faved');
                 },
                 error: function(data){
                     console.log('error', data);
-                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    //alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    $('#information_ajax').modal('show');
                 }
                 });
-        } else {
-          heart.removeClass('map_faved').addClass('map_fav');
+        } else {          
           $.ajax({
                 type: 'GET',
                 url: '/map/dropfavpoint/'+id,
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_faved').addClass('map_fav');
                 },
                 error: function(data){
                     console.log('error', data);
-                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    //alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                    $('#information_ajax').modal('show');
                 }
                 });
         }
