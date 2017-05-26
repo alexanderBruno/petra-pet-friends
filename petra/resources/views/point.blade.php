@@ -28,8 +28,21 @@
                       <img src="/images/avatars/points/{{$point->avatar}}" class="point_avatarimg" alt="avatarimg"/>
                     </div>
                     <div class="point_name_description media-body">
-                      <h1 class="point_name media-heading">{{ $point->name }}</h1>
+                      <h1 class="point_name media-heading">{{ $point->name }}
 
+                      <?php $faved=false; ?>
+                        @foreach($favsdone as $favdone)
+                          @if ($point->id==$favdone->id_point)
+                            <?php $faved=true; ?> @break
+                          @endif
+                        @endforeach
+
+                       @if($faved)
+                          <i id="map_faved_{{$point->id}}" class="fa fa-heart map_faved" onclick="faved({{$point->id}})" aria-hidden="true"></i>
+                       @else
+                          <i id="map_fav_{{$point->id}}" class="fa fa-heart map_fav" onclick="fav({{$point->id}})" aria-hidden="true"></i>
+                       @endif
+                       </h1>
                       <script type="text/javascript">
                             var score = {{ $score }};
                             var stars = ['#p1','#p2','#p3','#p4','#p5'];
@@ -294,6 +307,72 @@
             }
           });
       }
+
+
+      function fav(id) {
+        var heart = $("#map_fav_"+{{$point->id}});
+        if (heart.hasClass('map_fav')) {
+          heart.removeClass('map_fav').addClass('map_faved');
+          $.ajax({
+                type: 'GET',
+                url: '/map/favpoint/'+{{$point->id}},
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        } else {
+          heart.removeClass('map_faved').addClass('map_fav');
+          $.ajax({
+                type: 'GET',
+                url: '/map/dropfavpoint/'+{{$point->id}},
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        }
+
+      };
+
+
+      function faved(id) {
+        var heart = $("#map_faved_"+{{$point->id}});
+        if (heart.hasClass('map_fav')) {
+          heart.removeClass('map_fav').addClass('map_faved');
+          $.ajax({
+                type: 'GET',
+                url: '/map/favpoint/'+id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        } else {
+          heart.removeClass('map_faved').addClass('map_fav');
+          $.ajax({
+                type: 'GET',
+                url: '/map/dropfavpoint/'+id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        }
+
+      };
 </script>
 
 @endsection

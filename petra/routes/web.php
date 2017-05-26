@@ -51,8 +51,6 @@ Route::post('/editprofile/{id}', 'EditprofileController@save');
 
 Route::get('/editprofile/deleteuser/{id}', 'EditprofileController@deleteuser');
 
-Route::get('/points','PointController@getList');//provisional
-
 Route::get('/point/{id}','PointController@profile');
 
 Route::post('/point/{id}','PointController@review');
@@ -60,6 +58,10 @@ Route::post('/point/{id}','PointController@review');
 Route::get('/point/likereview/{id}', 'PointController@likereview');
 
 Route::get('/point/droplikereview/{id}', 'PointController@droplikereview');
+
+Route::get('/point/favpoint/{id}', 'PointController@favpoint');
+
+Route::get('/point/dropfavpoint/{id}', 'PointController@dropfavpoint');
 
 Route::get('/editpoint/{id}', 'EditpointController@index');
 

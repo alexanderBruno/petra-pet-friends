@@ -14,17 +14,6 @@ use Auth, DB, Image, Input, Carbon\Carbon, File;
 class PointController extends Controller
 {
 
-	/**
-	 * Provisional
-	 * el objetivo es poder acceder a los perfiles de los puntos de interes.
-	 */
-    public function getList()
-    {
-
-    	$points = Points::all();
-    	return view('listPoints', ['points' => $points]);
-    }
-
     /**
      * $id es la id que pasamos por la URL
      */
@@ -76,8 +65,9 @@ class PointController extends Controller
 
 				$point = Points::find($id);
 
+				$favsdone = DB::table('favpoints_list')->where('id_user', Auth::id())->get();
 
-	    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score' => $score, 'reviewPermission' => $reviewPermission, 'loged' => Auth::id(), 'services' => $services, 'likesdone' => $likesdone]);
+	    	return view('point', ['point' => $point, 'reviews' => $reviews, 'score' => $score, 'reviewPermission' => $reviewPermission, 'loged' => Auth::id(), 'services' => $services, 'likesdone' => $likesdone, 'favsdone' => $favsdone]);
 			}
     }
 
@@ -143,6 +133,24 @@ class PointController extends Controller
       if (count($existslike)!=0) {
         DB::table('reviews')->where('id', $id)->decrement('likes', 1);
         DB::table('likereview_list')->where('id_user', Auth::id())->where('id_review', $id)->delete();
+      }
+    }
+
+		public function favpoint($id)
+    {
+      $existsfav = DB::table('favpoints_list')->where('id_user', Auth::id())->where('id_point', $id)->first();
+
+      if (count($existsfav)==0) {
+        DB::table('favpoints_list')->insert(['id_user' => Auth::id(), 'id_point' => $id, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+      }
+    }
+
+    public function dropfavpoint($id)
+    {
+      $existsfav = DB::table('favpoints_list')->where('id_user', Auth::id())->where('id_point', $id)->first();
+
+      if (count($existsfav)!=0) {
+        DB::table('favpoints_list')->where('id_user', Auth::id())->where('id_point', $id)->delete();
       }
     }
 

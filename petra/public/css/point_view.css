@@ -21,6 +21,27 @@ body {
   border: 1px solid black;
 }
 
+
+.map_fav {
+  color: #bfbec1;
+  cursor: pointer;
+  margin-left: 25%;
+  font-size: 120% !important;
+}
+
+.map_fav:hover, .map_faved:hover {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.map_faved {
+  color: #ff6868;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 25%;
+  font-size: 120% !important;
+}
+
 .point_avatarimg_review {
   max-width: 50px;
   max-height: 50px;
