@@ -122,7 +122,7 @@
                     <li class="active"><a data-toggle="tab" href="#p"><h4>Publicacions</h4></a></li>
                     <li><a data-toggle="tab" href="#o"><h4>Opinions</h4></a></li>
                     <li><a data-toggle="tab" href="#lp"><h4>Llocs preferits</h4></a></li>
-                    <li><a data-toggle="tab" href="#ma"><h4>Llocs afegits</h4></a></li>
+                    <li><a data-toggle="tab" href="#la"><h4>Llocs afegits</h4></a></li>
                   </ul>
                   <div class="profile tab-content">
                     <div id="p" class="profile tab-pane fade in active">
@@ -284,11 +284,47 @@
                       @endforeach
                     </div>
                     <div id="lp" class="profile tab-pane fade">
-                      <p class="friends_confirmation_info">En contrucció</p>
+                      @if(count($yourfavpoints)==0)
+                        <p class="friends_confirmation_info">Encara no tens cap lloc preferit, ves al mapa o al perfil d'un lloc i afegeix-lo dins dels teus preferits!</p>
+                      @else
+                        @foreach($yourfavpoints as $yourfavpoint)
+                            <table class="friends table">
+                                <tr>
+                                    <td>
+                                        <img src="/images/avatars/points/{{$yourfavpoint->avatar}}" class="friends_avatarimg" alt="avatarimg"/>
+                                        <a class="friends_username" href="{{ url('/point/'.$yourfavpoint->id) }}">{{$yourfavpoint->name}}</a>
+                                    </td>
+                                    <td>
+                                      <div class="modal fade" id="confirm_delete_point_{{$yourfavpoint->id}}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Eliminar lloc</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Estàs a punt d'esborrar aquest lloc, aquesta acció és irreversible.</p>
+                                                    <p>Vols continuar?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancelar</button>
+                                                    <a href="/deletepoint/{{$yourfavpoint->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                      <a href="#confirm_delete_point_{{$yourfavpoint->id}}" data-toggle="modal" class="btn btn-danger pull-right friends_buttonmessage"><i class="glyphicon glyphicon-trash"></i>&nbsp;&nbsp;Eliminar lloc</a>
+                                      <a href="/editpoint/{{$yourfavpoint->id}}" class="btn btn-primary pull-right friends_buttonmessage"><i class="glyphicon glyphicon-pencil"></i>&nbsp;&nbsp;Editar lloc</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr class="friends_hr">
+                        @endforeach
+                      @endif
                     </div>
-                    <div id="ma" class="profile tab-pane fade">
+                    <div id="la" class="profile tab-pane fade">
                       @if(count($yourpoints)==0)
-                        <p class="friends_confirmation_info">Encara no tens cap lloc afegit o acceptat, ves al mapa i afegeix un marcador o tingues paciència!</p>
+                        <p class="friends_confirmation_info">Encara no tens cap lloc afegit o acceptat, ves al mapa i afegeix un lloc o tingues paciència!</p>
                       @else
                         @foreach($yourpoints as $yourpoint)
                             <table class="friends table">

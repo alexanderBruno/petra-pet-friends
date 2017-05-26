@@ -64,7 +64,14 @@ class ProfileController extends Controller
             ->orderBy('points.id', 'desc')
             ->get();
 
-      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship, 'userE' => $userE, 'usersR' => $usersR, 'reviews' => $reviews, 'likesdonereview' => $likesdonereview, 'yourpoints' => $yourpoints]);
+      $yourfavpoints = DB::table('points')
+            ->leftJoin('favpoints_list', 'points.id', '=', 'favpoints_list.id_point')
+            ->select('points.*')
+            ->where('favpoints_list.id_user', $id)
+            ->orderBy('points.id', 'desc')
+            ->get();
+
+      return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship, 'userE' => $userE, 'usersR' => $usersR, 'reviews' => $reviews, 'likesdonereview' => $likesdonereview, 'yourpoints' => $yourpoints, 'yourfavpoints' => $yourfavpoints]);
     }
 
 }
