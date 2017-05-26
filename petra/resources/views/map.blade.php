@@ -377,12 +377,12 @@
       function fav(id) {
         var heart = $("#map_fav_"+id);
         if (heart.hasClass('map_fav')) {
-          heart.removeClass('map_fav').addClass('map_faved');
           $.ajax({
                 type: 'GET',
                 url: '/map/favpoint/'+id,
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_fav').addClass('map_faved');
                 },
                 error: function(data){
                     console.log('error', data);
@@ -390,12 +390,12 @@
                 }
                 });
         } else {
-          heart.removeClass('map_faved').addClass('map_fav');
           $.ajax({
                 type: 'GET',
                 url: '/map/dropfavpoint/'+id,
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_faved').addClass('map_fav');
                 },
                 error: function(data){
                     console.log('error', data);

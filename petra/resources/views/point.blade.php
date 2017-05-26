@@ -240,14 +240,14 @@
               var $lk = $(this).children('.point_review_likes_num');
               var $review_id = $(this).data('reviewid');
               var $review_likes = $(this).data('reviewlikes');
-              $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)+1 : $review_likes)
               if ($bnlk.hasClass('point_review_likes')) {
-                $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
                 $.ajax({
                       type: 'GET',
                       url: '/point/likereview/'+$review_id,
                       success: function(data){
                           console.log('success', data);
+                          $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)+1 : $review_likes)
+                          $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
                       },
                       error: function(data){
                           console.log('error', data);
@@ -255,12 +255,13 @@
                       }
                       });
               } else {
-                $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
                 $.ajax({
                       type: 'GET',
                       url: '/point/droplikereview/'+$review_id,
                       success: function(data){
                           console.log('success', data);
+                          $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)+1 : $review_likes)
+                          $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
                       },
                       error: function(data){
                           console.log('error', data);
@@ -277,14 +278,14 @@
             var $review_id = $(this).data('reviewid');
             var $review_likes = $(this).data('reviewlikes');
             var $review_likes = $(this).data('reviewlikes');
-            $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)-1 : $review_likes)
             if ($bnlk.hasClass('point_review_likes_clicked')) {
-              $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
               $.ajax({
                     type: 'GET',
                     url: '/point/droplikereview/'+$review_id,
                     success: function(data){
                         console.log('success', data);
+                        $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)-1 : $review_likes)
+                        $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
                     },
                     error: function(data){
                         console.log('error', data);
@@ -292,12 +293,13 @@
                     }
                     });
             } else {
-              $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
               $.ajax({
                     type: 'GET',
                     url: '/point/likereview/'+$review_id,
                     success: function(data){
                         console.log('success', data);
+                        $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)-1 : $review_likes)
+                        $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
                     },
                     error: function(data){
                         console.log('error', data);
@@ -312,12 +314,12 @@
       function fav(id) {
         var heart = $("#map_fav_"+{{$point->id}});
         if (heart.hasClass('map_fav')) {
-          heart.removeClass('map_fav').addClass('map_faved');
           $.ajax({
                 type: 'GET',
                 url: '/map/favpoint/'+{{$point->id}},
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_fav').addClass('map_faved');
                 },
                 error: function(data){
                     console.log('error', data);
@@ -325,12 +327,12 @@
                 }
                 });
         } else {
-          heart.removeClass('map_faved').addClass('map_fav');
           $.ajax({
                 type: 'GET',
                 url: '/map/dropfavpoint/'+{{$point->id}},
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_faved').addClass('map_fav');
                 },
                 error: function(data){
                     console.log('error', data);
@@ -345,12 +347,12 @@
       function faved(id) {
         var heart = $("#map_faved_"+{{$point->id}});
         if (heart.hasClass('map_fav')) {
-          heart.removeClass('map_fav').addClass('map_faved');
           $.ajax({
                 type: 'GET',
                 url: '/map/favpoint/'+id,
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_fav').addClass('map_faved');
                 },
                 error: function(data){
                     console.log('error', data);
@@ -358,12 +360,12 @@
                 }
                 });
         } else {
-          heart.removeClass('map_faved').addClass('map_fav');
           $.ajax({
                 type: 'GET',
                 url: '/map/dropfavpoint/'+id,
                 success: function(data){
                     console.log('success', data);
+                    heart.removeClass('map_faved').addClass('map_fav');
                 },
                 error: function(data){
                     console.log('error', data);

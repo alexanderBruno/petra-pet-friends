@@ -35,7 +35,7 @@ class ProfileController extends Controller
             ->orderBy('posts.id', 'desc')
             ->get();
 
-      $likesdone = DB::table('likeposts_list')->where('id_user', $id)->get();
+      $likesdone = DB::table('likeposts_list')->where('id_user', Auth::id())->get();
 
       $friendship = DB::table('friendships')->where('sender_id', Auth::id())->where('recipient_id', $id)->orWhere('recipient_id', Auth::id())->where('sender_id', $id)->first();
 
@@ -67,23 +67,4 @@ class ProfileController extends Controller
       return view('profile', ['user' => $user, 'posts' => $posts, 'likesdone' => $likesdone, 'friendship' => $friendship, 'userE' => $userE, 'usersR' => $usersR, 'reviews' => $reviews, 'likesdonereview' => $likesdonereview, 'yourpoints' => $yourpoints]);
     }
 
-    public function likepost($id)
-    {
-      $existslike = DB::table('likeposts_list')->where('id_user', Auth::id())->where('id_post', $id)->first();
-
-      if (count($existslike)==0) {
-        DB::table('posts')->where('id', $id)->increment('likes', 1);
-        DB::table('likeposts_list')->insert(['id_user' => Auth::id(), 'id_post' => $id, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
-      }
-    }
-
-    public function droplikepost($id)
-    {
-      $existslike = DB::table('likeposts_list')->where('id_user', Auth::id())->where('id_post', $id)->first();
-
-      if (count($existslike)!=0) {
-        DB::table('posts')->where('id', $id)->decrement('likes', 1);
-        DB::table('likeposts_list')->where('id_user', Auth::id())->where('id_post', $id)->delete();
-      }
-    }
 }

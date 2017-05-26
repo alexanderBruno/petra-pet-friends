@@ -352,14 +352,14 @@
           var $lk = $(this).children('.profile_post_likes_num');
           var $post_id = $(this).data('postid');
           var $post_likes = $(this).data('postlikes');
-          $lk.text(($lk.text() == $post_likes) ? parseInt($post_likes)+1 : $post_likes)
           if ($bnlk.hasClass('profile_post_likes')) {
-            $bnlk.removeClass('profile_post_likes').addClass('profile_post_likes_clicked');
             $.ajax({
                   type: 'GET',
-                  url: '/profile/likepost/'+$post_id,
+                  url: '/home/likepost/'+$post_id,
                   success: function(data){
                       console.log('success', data);
+                      $lk.text(($lk.text() == $post_likes) ? parseInt($post_likes)+1 : $post_likes)
+                      $bnlk.removeClass('profile_post_likes').addClass('profile_post_likes_clicked');
                   },
                   error: function(data){
                       console.log('error', data);
@@ -367,12 +367,13 @@
                   }
                   });
           } else {
-            $bnlk.removeClass('profile_post_likes_clicked').addClass('profile_post_likes');
             $.ajax({
                   type: 'GET',
-                  url: '/profile/droplikepost/'+$post_id,
+                  url: '/home/droplikepost/'+$post_id,
                   success: function(data){
                       console.log('success', data);
+                      $lk.text(($lk.text() == $post_likes) ? parseInt($post_likes)+1 : $post_likes)
+                      $bnlk.removeClass('profile_post_likes_clicked').addClass('profile_post_likes');
                   },
                   error: function(data){
                       console.log('error', data);
@@ -388,14 +389,14 @@
         var $lk = $(this).children('.profile_post_likes_num');
         var $post_id = $(this).data('postid');
         var $post_likes = $(this).data('postlikes');
-        $lk.text(($lk.text() == $post_likes) ? parseInt($post_likes)-1 : $post_likes)
         if ($bnlk.hasClass('profile_post_likes_clicked')) {
-          $bnlk.removeClass('profile_post_likes_clicked').addClass('profile_post_likes');
           $.ajax({
                 type: 'GET',
-                url: '/profile/droplikepost/'+$post_id,
+                url: '/home/droplikepost/'+$post_id,
                 success: function(data){
                     console.log('success', data);
+                    $lk.text(($lk.text() == $post_likes) ? parseInt($post_likes)-1 : $post_likes)
+                    $bnlk.removeClass('profile_post_likes_clicked').addClass('profile_post_likes');
                 },
                 error: function(data){
                     console.log('error', data);
@@ -403,12 +404,13 @@
                 }
                 });
         } else {
-          $bnlk.removeClass('profile_post_likes').addClass('profile_post_likes_clicked');
           $.ajax({
                 type: 'GET',
-                url: '/profile/likepost/'+$post_id,
+                url: '/home/likepost/'+$post_id,
                 success: function(data){
                     console.log('success', data);
+                    $lk.text(($lk.text() == $post_likes) ? parseInt($post_likes)-1 : $post_likes)
+                    $bnlk.removeClass('profile_post_likes').addClass('profile_post_likes_clicked');
                 },
                 error: function(data){
                     console.log('error', data);
@@ -440,14 +442,14 @@
           var $lk = $(this).children('.point_review_likes_num');
           var $review_id = $(this).data('reviewid');
           var $review_likes = $(this).data('reviewlikes');
-          $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)+1 : $review_likes)
           if ($bnlk.hasClass('point_review_likes')) {
-            $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
             $.ajax({
                   type: 'GET',
                   url: '/point/likereview/'+$review_id,
                   success: function(data){
                       console.log('success', data);
+                      $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)+1 : $review_likes)
+                      $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
                   },
                   error: function(data){
                       console.log('error', data);
@@ -455,12 +457,13 @@
                   }
                   });
           } else {
-            $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
             $.ajax({
                   type: 'GET',
                   url: '/point/droplikereview/'+$review_id,
                   success: function(data){
                       console.log('success', data);
+                      $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)+1 : $review_likes)
+                      $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
                   },
                   error: function(data){
                       console.log('error', data);
@@ -477,14 +480,14 @@
         var $review_id = $(this).data('reviewid');
         var $review_likes = $(this).data('reviewlikes');
         var $review_likes = $(this).data('reviewlikes');
-        $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)-1 : $review_likes)
         if ($bnlk.hasClass('point_review_likes_clicked')) {
-          $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
           $.ajax({
                 type: 'GET',
                 url: '/point/droplikereview/'+$review_id,
                 success: function(data){
                     console.log('success', data);
+                    $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)-1 : $review_likes)
+                    $bnlk.removeClass('point_review_likes_clicked').addClass('point_review_likes');
                 },
                 error: function(data){
                     console.log('error', data);
@@ -492,12 +495,13 @@
                 }
                 });
         } else {
-          $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
           $.ajax({
                 type: 'GET',
                 url: '/point/likereview/'+$review_id,
                 success: function(data){
                     console.log('success', data);
+                    $lk.text(($lk.text() == $review_likes) ? parseInt($review_likes)-1 : $review_likes)
+                    $bnlk.removeClass('point_review_likes').addClass('point_review_likes_clicked');
                 },
                 error: function(data){
                     console.log('error', data);
