@@ -27,6 +27,10 @@ Route::get('/map/{type}', 'MapController@tria');
 
 Route::get('/map/meus/{id}', 'MapController@meus');
 
+Route::get('/map/favpoint/{id}', 'MapController@favpoint');
+
+Route::get('/map/dropfavpoint/{id}', 'MapController@dropfavpoint');
+
 Route::get('/home', 'HomeController@index');
 
 Route::post('/home', 'HomeController@post');

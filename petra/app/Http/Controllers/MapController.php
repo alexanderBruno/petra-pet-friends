@@ -15,8 +15,9 @@ class MapController extends Controller
     $all->toJson();
     $services = DB::table('services_list')->get();
     $markers = DB::table('markers_list')->get();
+    $favsdone = DB::table('favpoints_list')->where('id_user', Auth::id())->get();
 
-    return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers]);
+    return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers, 'favsdone' => $favsdone]);
   }
 
   public function tria($type=''){
@@ -32,8 +33,9 @@ class MapController extends Controller
     }
     $services = DB::table('services_list')->get();
     $markers = DB::table('markers_list')->get();
+    $favsdone = DB::table('favpoints_list')->where('id_user', Auth::id())->get();
 
-      return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers]);
+    return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers, 'favsdone' => $favsdone]);
   }
 
   public function meus($id){
@@ -51,8 +53,9 @@ class MapController extends Controller
     }
     $services = DB::table('services_list')->get();
     $markers = DB::table('markers_list')->get();
+    $favsdone = DB::table('favpoints_list')->where('id_user', Auth::id())->get();
 
-      return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers]);
+    return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers, 'favsdone' => $favsdone]);
   }
 
   public function addMarker(Request $request)
@@ -154,4 +157,23 @@ class MapController extends Controller
     return redirect()->action('MapController@mostra')->with('mesage', 'addMarker');
 
  }
+
+   public function favpoint($id)
+   {
+     $existsfav = DB::table('favpoints_list')->where('id_user', Auth::id())->where('id_point', $id)->first();
+
+     if (count($existsfav)==0) {
+       DB::table('favpoints_list')->insert(['id_user' => Auth::id(), 'id_point' => $id, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+     }
+   }
+
+   public function dropfavpoint($id)
+   {
+     $existsfav = DB::table('favpoints_list')->where('id_user', Auth::id())->where('id_point', $id)->first();
+
+     if (count($existsfav)!=0) {
+       DB::table('favpoints_list')->where('id_user', Auth::id())->where('id_point', $id)->delete();
+     }
+   }
+
 }

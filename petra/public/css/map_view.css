@@ -77,6 +77,30 @@ html, body {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.map_fav {
+  float: right;
+  margin-top: 11%;
+  font-size: 1.5em;
+  color: #bfbec1;
+  cursor: pointer;
+}
+
+.map_fav:hover, .map_faved:hover {
+  color: #ff6868;
+  text-decoration: none;
+}
+
+.map_faved {
+  float: right;
+  margin-top: 11%;
+  font-size: 1.5em;
+  color: #ff6868;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 .azulito{
   color: #3097d1;
 }

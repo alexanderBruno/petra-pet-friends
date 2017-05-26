@@ -56,7 +56,7 @@
           <li class="bien"><a class="map a augmentar_mes ba_color_hotel_can" href="/map/hotel_can" title="Hotels pet friendly"><i class="fa fa-h-square" aria-hidden="true"></i></a></li>
           <li class="bien"><a class="map a augmentar_mes ba_color_protectora" href="/map/protectora" title="Protectores"><i class="fa fa-shield" aria-hidden="true"></i></a></li>
           <li class="bien"><a class="map a augmentar ba_color_botiga" href="/map/botiga" title="Botiges"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
-          <li class="bien"><a class="map a augmentar_mes ba_color_rest" href="/map/rest" title="Botiges"><i class="fa fa-cutlery" aria-hidden="true"></i></a></li>
+          <li class="bien"><a class="map a augmentar_mes ba_color_rest" href="/map/rest" title="Restaurants pet friendly"><i class="fa fa-cutlery" aria-hidden="true"></i></a></li>
 
           @if (!Auth::guest())
             <li class="bien"><a class="map a augmentar ba_color_meus" href="/map/meus/{{ Auth::id() }}" title="Els meus llocs"><i class="fa fa-flag" aria-hidden="true"></i></a></li>
@@ -285,6 +285,19 @@
          }
          estrellitas += '</div>';
 
+         <?php $faved=false; ?>
+           @foreach($favsdone as $favdone)
+             @if (id==$favdone->id_point)
+               <?php $faved=true; ?> @break
+             @endif
+           @endforeach
+
+        @if($faved)
+          point_fav_or_faved=('<i id="map_fav_'+id+'" class="fa fa-heart map_fav" onclick="fav('+id+')" aria-hidden="true"></i>');
+        @else
+          point_fav_or_faved=('<i id="map_faved_'+id+'" class="fa fa-heart map_faved" onclick="faved('+id+')" aria-hidden="true"></i>');
+        @endif
+
           // Contingut de l'infowindow
           var pointInfo = ''+
           '<div id="media">'+
@@ -294,6 +307,7 @@
             '<div class="media-body">'+
               '<a class="lletra enlace" id="enlace" href="/point/'+id+'"><h4 class="media-heading nom">'+nom+'</h4></a>'+
               estrellitas+'<p id="nums" class="lletra">'+valoracio+'</p>'+
+              point_fav_or_faved+
             '</div>'+
           '</div>';
 
@@ -358,6 +372,71 @@
 
       }
 
+
+      function fav(id) {
+        var heart = $("#map_fav_"+id);
+        if (heart.hasClass('map_fav')) {
+          heart.removeClass('map_fav').addClass('map_faved');
+          $.ajax({
+                type: 'GET',
+                url: '/map/favpoint/'+id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        } else {
+          heart.removeClass('map_faved').addClass('map_fav');
+          $.ajax({
+                type: 'GET',
+                url: '/map/dropfavpoint/'+id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        }
+
+      };
+
+
+      function faved(id) {
+        var heart = $("#map_faved_"+id);
+        if (heart.hasClass('map_fav')) {
+          heart.removeClass('map_fav').addClass('map_faved');
+          $.ajax({
+                type: 'GET',
+                url: '/map/favpoint/'+id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        } else {
+          heart.removeClass('map_faved').addClass('map_fav');
+          $.ajax({
+                type: 'GET',
+                url: '/map/dropfavpoint/'+id,
+                success: function(data){
+                    console.log('success', data);
+                },
+                error: function(data){
+                    console.log('error', data);
+                    alert("Ups! Alguna cosa ha fallat, prova-ho més endavant.");
+                }
+                });
+        }
+
+      };
 
 
       </script>
