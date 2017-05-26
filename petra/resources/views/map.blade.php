@@ -284,19 +284,20 @@
            }
          }
          estrellitas += '</div>';
+         var faved = false;
 
-         <?php $faved=false; ?>
-           @foreach($favsdone as $favdone)
-             @if (id==$favdone->id_point)
-               <?php $faved=true; ?> @break
-             @endif
-           @endforeach
+         for (var i = 0; i < favsdone.length; i++) {
+           if (id == favsdone[i].id_point){
+             faved = true;
+             break;
+           }
+         }
+         if (faved == true){
+            var point_fav_or_faved = '<i id="map_faved_'+id+'" class="fa fa-heart map_faved" onclick="faved('+id+')" aria-hidden="true"></i>';
+         }else{
+           var point_fav_or_faved = '<i id="map_fav_'+id+'" class="fa fa-heart map_fav" onclick="fav('+id+')" aria-hidden="true"></i>';
+         }
 
-        @if($faved)
-          point_fav_or_faved=('<i id="map_fav_'+id+'" class="fa fa-heart map_fav" onclick="fav('+id+')" aria-hidden="true"></i>');
-        @else
-          point_fav_or_faved=('<i id="map_faved_'+id+'" class="fa fa-heart map_faved" onclick="faved('+id+')" aria-hidden="true"></i>');
-        @endif
 
           // Contingut de l'infowindow
           var pointInfo = ''+

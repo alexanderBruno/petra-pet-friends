@@ -55,7 +55,7 @@
                       <div class="form-group">
                         <label>Tipus de lloc:</label>
                         <select name="editpoint_type_point" class="form-control">
-                          <option value="NULL" <?php if ($point->type_point=="NULL") echo "selected"; ?>>Escull un</option>
+                          <option value="NULL" <?php if ($point->type_point=="NULL") echo "selected"; ?>>Escull un tipus de lloc</option>
                           <option value="vet" <?php if ($point->type_point=="vet") echo "selected"; ?>>Veterinari</option>
                           <option value="pipican" <?php if ($point->type_point=="pipican") echo "selected"; ?>>Pipican</option>
                           <option value="hotel_can" <?php if ($point->type_point=="hotel_can") echo "selected"; ?>>Hotel pet-friendly</option>

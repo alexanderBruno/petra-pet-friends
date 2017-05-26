@@ -26,6 +26,7 @@
     </script>
     <script>
       var points = {!! json_encode($all->toArray()) !!};
+      var favsdone = {!! json_encode($favsdone->toArray()) !!};
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>

@@ -16,6 +16,7 @@ class MapController extends Controller
     $services = DB::table('services_list')->get();
     $markers = DB::table('markers_list')->get();
     $favsdone = DB::table('favpoints_list')->where('id_user', Auth::id())->get();
+    $favsdone->toJson();
 
     return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers, 'favsdone' => $favsdone]);
   }
@@ -34,6 +35,7 @@ class MapController extends Controller
     $services = DB::table('services_list')->get();
     $markers = DB::table('markers_list')->get();
     $favsdone = DB::table('favpoints_list')->where('id_user', Auth::id())->get();
+    $favsdone->toJson();
 
     return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers, 'favsdone' => $favsdone]);
   }
@@ -45,7 +47,7 @@ class MapController extends Controller
         ['id_user', '=', $id],
         ])->get();
       $all->toJson();
-      if(empty(get_object_vars($all))){
+      if($all->isEmpty()){
         return redirect()->action('MapController@mostra')->with('mesage', 'noPoints');
       }
     }else{
@@ -54,6 +56,7 @@ class MapController extends Controller
     $services = DB::table('services_list')->get();
     $markers = DB::table('markers_list')->get();
     $favsdone = DB::table('favpoints_list')->where('id_user', Auth::id())->get();
+    $favsdone->toJson();
 
     return view('map', ['all' => $all, 'services' => $services, 'markers' => $markers, 'favsdone' => $favsdone]);
   }
@@ -82,7 +85,7 @@ class MapController extends Controller
 
       //Must: point_name, latitude, longitude
       //May: point_description, point_photo, point_serveis, type_point
-      if (strlen($request->input('point_name')) > 1 and strlen($request->input('latitude')) >= 6 and strlen($request->input('longitude')) >= 6){
+      if (strlen($request->input('point_name')) >= 1 and strlen($request->input('latitude')) >= 6 and strlen($request->input('longitude')) >= 6){
 
         $flag = NULL;
         if (strlen($request->input('type_point')) > 1 and $request->input('type_point') != 'NULL'){

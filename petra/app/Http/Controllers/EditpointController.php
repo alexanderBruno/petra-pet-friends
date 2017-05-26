@@ -76,14 +76,16 @@ class EditpointController extends Controller
         if ($request->input('editpoint_lon')) {
           DB::table('points')->where('id', $id)->update(['longitude' => $request->input('editpoint_lon')]);
         }
-        if ($request->input('editpoint_type_point')) {
+        if (strlen($request->input('editpoint_type_point')) > 1 and $request->input('editpoint_type_point') != 'NULL') {
           DB::table('points')->where('id', $id)->update(['type_point' => $request->input('editpoint_type_point')]);
           $flag = DB::table('markers_list')
             ->select('marker_img')
             ->where('marker_code', $request->input('editpoint_type_point'))
-            ->get();
-          $flag = $flag[0]->marker_img;
-          DB::table('points')->where('id', $id)->update(['flag' => $flag]);
+            ->first();
+          DB::table('points')->where('id', $id)->update(['flag' => $flag->marker_img]);
+        }else{
+          DB::table('points')->where('id', $id)->update(['type_point' => $request->input('editpoint_type_point')]);
+          DB::table('points')->where('id', $id)->update(['flag' => NULL]);
         }
         if ($request->input('editpoint_published')) {
           DB::table('points')->where('id', $id)->update(['published' => $request->input('editpoint_published')]);
