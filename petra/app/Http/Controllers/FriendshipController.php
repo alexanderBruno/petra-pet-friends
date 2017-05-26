@@ -33,7 +33,7 @@ class FriendshipController extends Controller
                 $join->on('users.id', '=', 'friendships.sender_id');
             })
             ->select('friendships.sender_id', 'friendships.recipient_id', 'users.id', 'users.name', 'users.avatar')
-            ->where('friendships.status', 0)->where('users.id', '<>', Auth::id())
+            ->where('friendships.status', 0)->where('users.id', '<>', Auth::id())->where('friendships.recipient_id', '=', Auth::id())
             ->orderBy('users.name')
             ->get();
 
@@ -42,7 +42,7 @@ class FriendshipController extends Controller
                 $join->on('users.id', '=', 'friendships.recipient_id');
             })
             ->select('friendships.sender_id', 'friendships.recipient_id', 'users.id', 'users.name', 'users.avatar')
-            ->where('friendships.status', 0)->where('users.id', '<>', Auth::id())
+            ->where('friendships.status', 0)->where('users.id', '<>', Auth::id())->where('friendships.sender_id', '=', Auth::id())
             ->orderBy('users.name')
             ->get();
 
